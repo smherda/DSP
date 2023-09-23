@@ -1,0 +1,1795 @@
+
+
+<!DOCTYPE html>
+
+
+<html >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DTSA 5509: Supervised Learning of Olympic Athletes &#8212; My Data Science Portfolio</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/clipboard.min.js"></script>
+    <script src="../../../_static/copybutton.js"></script>
+    <script src="../../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../../_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Notebooks/DTSA5509/OlympicAthletes/OlympicAthletes';</script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="DTSA 5510: Unsupervised Algorithms of Airbnbs in New York" href="../../DTSA5510/Airbnb/Airbnb.html" />
+    <link rel="prev" title="Welcome to My Portfolio" href="../../../intro.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="None"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../../../intro.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../_static/logo.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../../../_static/logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../../intro.html">
+                    Welcome to My Portfolio
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">DTSA 5509: Supervised Learning of Olympic Athletes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../DTSA5510/Airbnb/Airbnb.html">DTSA 5510: Unsupervised Algorithms of Airbnbs in New York</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../DTSA5511/DisasterTweets/DisasterTweets.html">DTSA 5511: NLP Disaster Tweets Kaggle Mini-Project</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../DTSA5511/CancerImages/CancerImages.html">DTSA 5511: CNN Cancer Detection Mini-Project</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../DTSA5511/Monet/Monet.html">DTSA 5511: GANs for Monet Paintings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../DTSA5511/Shakespeare/Shakespeare.html">DTSA 5511: Deep Learning of Shakespeare Quotes</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/smherda/DSP" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/smherda/DSP/issues/new?title=Issue%20on%20page%20%2FNotebooks/DTSA5509/OlympicAthletes/OlympicAthletes.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../../_sources/Notebooks/DTSA5509/OlympicAthletes/OlympicAthletes.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>DTSA 5509: Supervised Learning of Olympic Athletes</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction-to-machine-learning-supervised-learning">Introduction to Machine Learning Supervised Learning</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topic">Topic</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-information">Data Information</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#import-libraries">Import Libraries</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hide-warnings">Hide Warnings</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#read-files-from-csv">Read Files from CSV</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#space-and-size">Space and Size</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluate-the-data-types-and-column-names">Evaluate the data types and column names.</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-preprocessing-and-cleaning">Data Preprocessing and Cleaning</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#removal-of-features">Removal of Features</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#replace-column-values">Replace Column Values</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#removal-of-rows-with-na-values">Removal of Rows with NA Values</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-post-processing">Data Post-Processing</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#about-duplicates">About Duplicates</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Space and Size</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#discussions">Discussions</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exploratory-data-analysis-eda">Exploratory Data Analysis (EDA)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#purpose">Purpose</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#histogram">Histogram</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#correlation-matrix">Correlation Matrix</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#difficulties">Difficulties</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary-discussion-and-findings">Summary, Discussion, and Findings</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusions">Conclusions</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#results">Results</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#feature-selection">Feature Selection</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Histogram</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#notes">Notes</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multiple-ols-models-with-cross-validation">Multiple OLS Models with Cross Validation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#colinearity">Colinearity</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#feature-engineering">Feature Engineering</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-regression-fit">Linear Regression Fit</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Summary</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#training-to-improve-process">Training to Improve Process</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#model-comparison">Model Comparison</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#discussion-and-conclusion">Discussion and Conclusion</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#lessons-learned">Lessons Learned</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mistakes">Mistakes</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#future-improvement-opportunities">Future Improvement Opportunities</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#apa-citations">APA Citations</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <div class="tex2jax_ignore mathjax_ignore section" id="dtsa-5509-supervised-learning-of-olympic-athletes">
+<h1>DTSA 5509: Supervised Learning of Olympic Athletes<a class="headerlink" href="#dtsa-5509-supervised-learning-of-olympic-athletes" title="Permalink to this headline">#</a></h1>
+<div class="section" id="introduction-to-machine-learning-supervised-learning">
+<h2>Introduction to Machine Learning Supervised Learning<a class="headerlink" href="#introduction-to-machine-learning-supervised-learning" title="Permalink to this headline">#</a></h2>
+</div>
+<div class="section" id="topic">
+<h2>Topic<a class="headerlink" href="#topic" title="Permalink to this headline">#</a></h2>
+<p>The following project is about the analysis of Olympic athletes when it comes to age, height, weight, medals won, and the year participated in. The data is first cleaned and reviewed for Exploratory Data Analysis or EDA. After visually inspecting the data and checking the resulting values, the fact on whether a subgroup is necessary will be chosen due to the smoothness of data within this data frame. In the next step, multiple models which are used such as the Linear Regression, Ridge, Lasso, and Random Forest Regressor to see if there is a correlation between the age, height, and weight for medals won. The goal is to determine whether or not these physical attributes have a contribution when it comes to winning a medal. After, a linear regression is applied to see if there have been changes over the years for these features since the Olympic’s inception. The reason this information is valuable is because coaches and athletes might want to know if there is a certain advantage when it comes to these features and whether to pursue a particular sport. Weight is also a feature that can be slightly modified and unveiled correlations can be incredibly useful for Olympic participants.</p>
+</div>
+<div class="section" id="data-information">
+<h2>Data Information<a class="headerlink" href="#data-information" title="Permalink to this headline">#</a></h2>
+<div class="section" id="summary">
+<h3>Summary<a class="headerlink" href="#summary" title="Permalink to this headline">#</a></h3>
+<p>The following paper will analyze a public dataset from Kaggle which holds information about all athletes that have attended from 1896 up until 2016. [1] For those that are from the US, the data is in metric units and the height is represented in centimeters and the weight is in kilograms. [1] The data provided from the site was labeled, “120 years of Olympic history: athletes and results” and is stored in a CSV file called “athlete_events”. [1] The citation for the data provided can be found at the end of this report under the APA Citations.</p>
+</div>
+<div class="section" id="import-libraries">
+<h3>Import Libraries<a class="headerlink" href="#import-libraries" title="Permalink to this headline">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">warnings</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">statsmodels.api</span> <span class="k">as</span> <span class="nn">sm</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">cross_val_score</span>
+<span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LinearRegression</span>
+<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">LabelEncoder</span>
+<span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LinearRegression</span><span class="p">,</span> <span class="n">Ridge</span><span class="p">,</span> <span class="n">Lasso</span>
+<span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="kn">import</span> <span class="n">RandomForestRegressor</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="hide-warnings">
+<h3>Hide Warnings<a class="headerlink" href="#hide-warnings" title="Permalink to this headline">#</a></h3>
+<p>Hide unneccessary warnings before running rest of code.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s1">&#39;ignore&#39;</span><span class="p">,</span> <span class="n">category</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">common</span><span class="o">.</span><span class="n">SettingWithCopyWarning</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="read-files-from-csv">
+<h3>Read Files from CSV<a class="headerlink" href="#read-files-from-csv" title="Permalink to this headline">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_csv</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;./athlete_events.csv&#39;</span><span class="p">)</span>
+
+<span class="c1"># Save to Separate Data Frame</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">df_csv</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="space-and-size">
+<h3>Space and Size<a class="headerlink" href="#space-and-size" title="Permalink to this headline">#</a></h3>
+<p>The space and size for the data frame is shown below. Output is the memory, column size, and row size.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Function for Checking Memory and Size</span>
+<span class="k">def</span> <span class="nf">MemCheck</span><span class="p">(</span><span class="n">df</span><span class="p">):</span>
+    <span class="c1"># Get Data Frame Space</span>
+    <span class="n">df_mem</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">memory_usage</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Memory:&quot;</span><span class="p">,</span> <span class="n">df_mem</span><span class="p">,</span> <span class="s2">&quot;bytes&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Get Row and Column Count</span>
+    <span class="n">num_row</span><span class="p">,</span> <span class="n">num_col</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">shape</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Rows:&quot;</span><span class="p">,</span> <span class="n">num_row</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Columns:&quot;</span><span class="p">,</span> <span class="n">num_col</span><span class="p">)</span>
+    
+<span class="n">MemCheck</span><span class="p">(</span><span class="n">df_csv</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Memory: 32534048 bytes
+Rows: 271116
+Columns: 15
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="evaluate-the-data-types-and-column-names">
+<h3>Evaluate the data types and column names.<a class="headerlink" href="#evaluate-the-data-types-and-column-names" title="Permalink to this headline">#</a></h3>
+<p>The columns are shown below with the associate data types between the chevrons or the “&lt;” and “&gt;” symbols. There are objects or also called strings, integers (int), and floats.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get Data Types</span>
+<span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&#39;&quot;</span> <span class="o">+</span> <span class="n">col</span> <span class="o">+</span> <span class="s2">&quot;&#39;: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">dtype</span><span class="p">)))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;ID&#39;: &lt;class &#39;numpy.dtype[int64]&#39;&gt;
+&#39;Name&#39;: &lt;class &#39;numpy.dtype[object_]&#39;&gt;
+&#39;Sex&#39;: &lt;class &#39;numpy.dtype[object_]&#39;&gt;
+&#39;Age&#39;: &lt;class &#39;numpy.dtype[float64]&#39;&gt;
+&#39;Height&#39;: &lt;class &#39;numpy.dtype[float64]&#39;&gt;
+&#39;Weight&#39;: &lt;class &#39;numpy.dtype[float64]&#39;&gt;
+&#39;Team&#39;: &lt;class &#39;numpy.dtype[object_]&#39;&gt;
+&#39;NOC&#39;: &lt;class &#39;numpy.dtype[object_]&#39;&gt;
+&#39;Games&#39;: &lt;class &#39;numpy.dtype[object_]&#39;&gt;
+&#39;Year&#39;: &lt;class &#39;numpy.dtype[int64]&#39;&gt;
+&#39;Season&#39;: &lt;class &#39;numpy.dtype[object_]&#39;&gt;
+&#39;City&#39;: &lt;class &#39;numpy.dtype[object_]&#39;&gt;
+&#39;Sport&#39;: &lt;class &#39;numpy.dtype[object_]&#39;&gt;
+&#39;Event&#39;: &lt;class &#39;numpy.dtype[object_]&#39;&gt;
+&#39;Medal&#39;: &lt;class &#39;numpy.dtype[object_]&#39;&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Review</span>
+<span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Sex</th>
+      <th>Age</th>
+      <th>Height</th>
+      <th>Weight</th>
+      <th>Team</th>
+      <th>NOC</th>
+      <th>Games</th>
+      <th>Year</th>
+      <th>Season</th>
+      <th>City</th>
+      <th>Sport</th>
+      <th>Event</th>
+      <th>Medal</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>A Dijiang</td>
+      <td>M</td>
+      <td>24.0</td>
+      <td>180.0</td>
+      <td>80.0</td>
+      <td>China</td>
+      <td>CHN</td>
+      <td>1992 Summer</td>
+      <td>1992</td>
+      <td>Summer</td>
+      <td>Barcelona</td>
+      <td>Basketball</td>
+      <td>Basketball Men's Basketball</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>A Lamusi</td>
+      <td>M</td>
+      <td>23.0</td>
+      <td>170.0</td>
+      <td>60.0</td>
+      <td>China</td>
+      <td>CHN</td>
+      <td>2012 Summer</td>
+      <td>2012</td>
+      <td>Summer</td>
+      <td>London</td>
+      <td>Judo</td>
+      <td>Judo Men's Extra-Lightweight</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>Gunnar Nielsen Aaby</td>
+      <td>M</td>
+      <td>24.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Denmark</td>
+      <td>DEN</td>
+      <td>1920 Summer</td>
+      <td>1920</td>
+      <td>Summer</td>
+      <td>Antwerpen</td>
+      <td>Football</td>
+      <td>Football Men's Football</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4</td>
+      <td>Edgar Lindenau Aabye</td>
+      <td>M</td>
+      <td>34.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Denmark/Sweden</td>
+      <td>DEN</td>
+      <td>1900 Summer</td>
+      <td>1900</td>
+      <td>Summer</td>
+      <td>Paris</td>
+      <td>Tug-Of-War</td>
+      <td>Tug-Of-War Men's Tug-Of-War</td>
+      <td>Gold</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5</td>
+      <td>Christine Jacoba Aaftink</td>
+      <td>F</td>
+      <td>21.0</td>
+      <td>185.0</td>
+      <td>82.0</td>
+      <td>Netherlands</td>
+      <td>NED</td>
+      <td>1988 Winter</td>
+      <td>1988</td>
+      <td>Winter</td>
+      <td>Calgary</td>
+      <td>Speed Skating</td>
+      <td>Speed Skating Women's 500 metres</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</div>
+</div>
+<div class="section" id="data-preprocessing-and-cleaning">
+<h2>Data Preprocessing and Cleaning<a class="headerlink" href="#data-preprocessing-and-cleaning" title="Permalink to this headline">#</a></h2>
+<div class="section" id="removal-of-features">
+<h3>Removal of Features<a class="headerlink" href="#removal-of-features" title="Permalink to this headline">#</a></h3>
+<p>For this analysis, all features other than ‘Age’, ‘Height’, ‘Weight’, ‘Year’, ‘Event’, ‘Medal’ will be removed. Other columns do not add any used information to the data frame and will be potentially inconvenient during analysis.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="p">[[</span><span class="s1">&#39;Age&#39;</span><span class="p">,</span> <span class="s1">&#39;Height&#39;</span><span class="p">,</span> <span class="s1">&#39;Weight&#39;</span><span class="p">,</span> <span class="s1">&#39;Year&#39;</span><span class="p">,</span> <span class="s1">&#39;Event&#39;</span><span class="p">,</span> <span class="s1">&#39;Medal&#39;</span><span class="p">]]</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="replace-column-values">
+<h3>Replace Column Values<a class="headerlink" href="#replace-column-values" title="Permalink to this headline">#</a></h3>
+<p>Those that entered the Olympics, but did not receive a medal are given a NA value for their ‘Medal” column. Thus, this needs to be rectified by replacing the values with a ‘None’ string.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Fill in Empty Medal Values with &#39;None&#39;</span>
+<span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Medal&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isna</span><span class="p">(),</span> <span class="s1">&#39;Medal&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;None&#39;</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="removal-of-rows-with-na-values">
+<h3>Removal of Rows with NA Values<a class="headerlink" href="#removal-of-rows-with-na-values" title="Permalink to this headline">#</a></h3>
+<p>The other columns except for ‘Event’ should be filled with a ‘0’ value since the information from the rest of the row can be used for regression purposes. Since the ‘Event’ can’t be imputed or infered, these rows will be dropped if there are NAs values for this column.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Fill in NA Values with Zero</span>
+<span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;Age&#39;</span><span class="p">,</span> <span class="s1">&#39;Height&#39;</span><span class="p">,</span> <span class="s1">&#39;Weight&#39;</span><span class="p">,</span> <span class="s1">&#39;Year&#39;</span><span class="p">]:</span> 
+    <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">isna</span><span class="p">(),</span> <span class="n">col</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Check that the data table has had these changes applied.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Check for missing values in each column</span>
+<span class="n">col_na</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">isna</span><span class="p">()</span><span class="o">.</span><span class="n">any</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">col_na</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Age       False
+Height    False
+Weight    False
+Year      False
+Event     False
+Medal     False
+dtype: bool
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Medal&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;None&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Age</th>
+      <th>Height</th>
+      <th>Weight</th>
+      <th>Year</th>
+      <th>Event</th>
+      <th>Medal</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>24.0</td>
+      <td>180.0</td>
+      <td>80.0</td>
+      <td>1992</td>
+      <td>Basketball Men's Basketball</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>23.0</td>
+      <td>170.0</td>
+      <td>60.0</td>
+      <td>2012</td>
+      <td>Judo Men's Extra-Lightweight</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>24.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1920</td>
+      <td>Football Men's Football</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>21.0</td>
+      <td>185.0</td>
+      <td>82.0</td>
+      <td>1988</td>
+      <td>Speed Skating Women's 500 metres</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>21.0</td>
+      <td>185.0</td>
+      <td>82.0</td>
+      <td>1988</td>
+      <td>Speed Skating Women's 1,000 metres</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>25.0</td>
+      <td>185.0</td>
+      <td>82.0</td>
+      <td>1992</td>
+      <td>Speed Skating Women's 500 metres</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>25.0</td>
+      <td>185.0</td>
+      <td>82.0</td>
+      <td>1992</td>
+      <td>Speed Skating Women's 1,000 metres</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>27.0</td>
+      <td>185.0</td>
+      <td>82.0</td>
+      <td>1994</td>
+      <td>Speed Skating Women's 500 metres</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>27.0</td>
+      <td>185.0</td>
+      <td>82.0</td>
+      <td>1994</td>
+      <td>Speed Skating Women's 1,000 metres</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>31.0</td>
+      <td>188.0</td>
+      <td>75.0</td>
+      <td>1992</td>
+      <td>Cross Country Skiing Men's 10 kilometres</td>
+      <td>None</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</div>
+<div class="section" id="data-post-processing">
+<h3>Data Post-Processing<a class="headerlink" href="#data-post-processing" title="Permalink to this headline">#</a></h3>
+<p>Below is a snapshot of the new cleaned data.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Age</th>
+      <th>Height</th>
+      <th>Weight</th>
+      <th>Year</th>
+      <th>Event</th>
+      <th>Medal</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>24.0</td>
+      <td>180.0</td>
+      <td>80.0</td>
+      <td>1992</td>
+      <td>Basketball Men's Basketball</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>23.0</td>
+      <td>170.0</td>
+      <td>60.0</td>
+      <td>2012</td>
+      <td>Judo Men's Extra-Lightweight</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>24.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1920</td>
+      <td>Football Men's Football</td>
+      <td>None</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>34.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1900</td>
+      <td>Tug-Of-War Men's Tug-Of-War</td>
+      <td>Gold</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>21.0</td>
+      <td>185.0</td>
+      <td>82.0</td>
+      <td>1988</td>
+      <td>Speed Skating Women's 500 metres</td>
+      <td>None</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</div>
+<div class="section" id="about-duplicates">
+<h3>About Duplicates<a class="headerlink" href="#about-duplicates" title="Permalink to this headline">#</a></h3>
+<p>Since the data doesn’t remove athletes who have competed multiple times in the Olympics and removed the ‘Name’ columns prior, there might be replicates of the same ‘Height’ and ‘Weight’. However, these are left intentionally since the goal is to determine the best height and weight for an Olympian within an ‘Event’ to qualify for the desired medal regardless of repetition.</p>
+</div>
+<div class="section" id="id1">
+<h3>Space and Size<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h3>
+<p>The space and size for the data frame after preprocesesing is shown below.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">MemCheck</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Memory: 13013696 bytes
+Rows: 271116
+Columns: 6
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="discussions">
+<h3>Discussions<a class="headerlink" href="#discussions" title="Permalink to this headline">#</a></h3>
+<p>The ‘Age’, ‘Height’, ‘Weight’, ‘Year’, and ‘Medal’ columns were modified to have respective values and rows were checked for NAs. Since the data came with data types already assigned to it, there wasn’t a need to change this aspect of the data frame. Data munging also wasn’t necessary since the CSV file was imported nicely into the data frame. Since a large portion of the data was already pretreated, either the Kaggle user was thorough with the data scraping or the process of obtaining an athelete’s data is very precise at the source.</p>
+</div>
+</div>
+<div class="section" id="exploratory-data-analysis-eda">
+<h2>Exploratory Data Analysis (EDA)<a class="headerlink" href="#exploratory-data-analysis-eda" title="Permalink to this headline">#</a></h2>
+<div class="section" id="purpose">
+<h3>Purpose<a class="headerlink" href="#purpose" title="Permalink to this headline">#</a></h3>
+<p>Due to the sheer amount of size of the data, EDA was necessary. First, an analysis of the ‘Age’, ‘Weight’, and ‘Height’ were visually inspected through histograms and box plots. After, a correlation matrix was taken to see if there was any correlation between the features.</p>
+</div>
+<div class="section" id="histogram">
+<h3>Histogram<a class="headerlink" href="#histogram" title="Permalink to this headline">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Function for Generating Histograms and Boxes</span>
+<span class="k">def</span> <span class="nf">histBox</span><span class="p">(</span><span class="n">dfIn</span><span class="p">):</span>
+
+    <span class="c1"># Remove Data with 0&#39;s that Were Imputed Earlier</span>
+    <span class="n">df_hist</span> <span class="o">=</span> <span class="n">df_box</span> <span class="o">=</span> <span class="n">dfIn</span><span class="p">[</span><span class="n">dfIn</span><span class="p">[</span><span class="n">col</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">]</span>
+
+    <span class="c1"># Generate Histogram</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">df_hist</span><span class="p">[</span><span class="n">col</span><span class="p">],</span> <span class="n">bins</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="n">col</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Frequency&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Histogram of </span><span class="si">{</span><span class="n">col</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+    <span class="c1"># Add to Subplot</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+
+    <span class="c1"># Generate Box Plot</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">df_box</span><span class="p">[</span><span class="n">col</span><span class="p">])</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="n">col</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Box Plot of </span><span class="si">{</span><span class="n">col</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+    <span class="c1"># Remove Box Plot Axis Label</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">([])</span>
+
+    <span class="c1"># Show Figure</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+    <span class="c1"># Get the histogram values</span>
+    <span class="n">hist_val</span><span class="p">,</span> <span class="n">hist_edg</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">histogram</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">])</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Histogram Values:&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">hist_val</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Histogram Edges:&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">hist_edg</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">()</span>
+
+    <span class="c1"># Print Values</span>
+    <span class="n">box_val</span> <span class="o">=</span> <span class="n">df_box</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span><span class="o">.</span><span class="n">loc</span><span class="p">[[</span><span class="s1">&#39;min&#39;</span><span class="p">,</span> <span class="s1">&#39;25%&#39;</span><span class="p">,</span> <span class="s1">&#39;50%&#39;</span><span class="p">,</span> <span class="s1">&#39;75%&#39;</span><span class="p">,</span> <span class="s1">&#39;max&#39;</span><span class="p">]]</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Box Values: &#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">box_val</span><span class="p">[</span><span class="n">col</span><span class="p">])</span>
+
+<span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;Age&#39;</span><span class="p">,</span> <span class="s1">&#39;Weight&#39;</span><span class="p">,</span> <span class="s1">&#39;Height&#39;</span><span class="p">]:</span>
+    <span class="n">histBox</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../_images/351d9f5f6599cfbbdbb5f2ca83584edd9a20d6db00cd72fb65b8a26de9aebc7c.png" src="../../../_images/351d9f5f6599cfbbdbb5f2ca83584edd9a20d6db00cd72fb65b8a26de9aebc7c.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Histogram Values:
+[  9474  32303 177744  41279   7738   1833    531    203      6      5]
+
+Histogram Edges:
+[ 0.   9.7 19.4 29.1 38.8 48.5 58.2 67.9 77.6 87.3 97. ]
+
+Box Values: 
+min    10.0
+25%    21.0
+50%    24.0
+75%    28.0
+max    97.0
+Name: Age, dtype: float64
+</pre></div>
+</div>
+<img alt="../../../_images/3740eca0e39561c92f6a6fe8b34842adec964d6d8455f5c56cae81c0f02bf387.png" src="../../../_images/3740eca0e39561c92f6a6fe8b34842adec964d6d8455f5c56cae81c0f02bf387.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Histogram Values:
+[ 62875   2018  71748 106234  24900   2696    557     77      8      3]
+
+Histogram Edges:
+[  0.   21.4  42.8  64.2  85.6 107.  128.4 149.8 171.2 192.6 214. ]
+
+Box Values: 
+min     25.0
+25%     60.0
+50%     70.0
+75%     79.0
+max    214.0
+Name: Weight, dtype: float64
+</pre></div>
+</div>
+<img alt="../../../_images/b06dba0118c04ba48cf2fd4b95958492461ce2676d99006f49af8b5ded4f4232.png" src="../../../_images/b06dba0118c04ba48cf2fd4b95958492461ce2676d99006f49af8b5ded4f4232.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Histogram Values:
+[ 60171      0      0      0      0     41  10835 136089  63009    971]
+
+Histogram Edges:
+[  0.   22.6  45.2  67.8  90.4 113.  135.6 158.2 180.8 203.4 226. ]
+
+Box Values: 
+min    127.0
+25%    168.0
+50%    175.0
+75%    183.0
+max    226.0
+Name: Height, dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="correlation-matrix">
+<h3>Correlation Matrix<a class="headerlink" href="#correlation-matrix" title="Permalink to this headline">#</a></h3>
+<p>The correlation matrix is used to determine if there is any potential colinearity that might interfere with the model’s output.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get Correlation Matrix</span>
+<span class="n">corr_mat</span> <span class="o">=</span> <span class="n">df</span><span class="p">[[</span><span class="s1">&#39;Age&#39;</span><span class="p">,</span> <span class="s1">&#39;Height&#39;</span><span class="p">,</span> <span class="s1">&#39;Weight&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">corr</span><span class="p">()</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span><span class="n">corr_mat</span><span class="p">,</span> <span class="n">annot</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Correlation Matrix&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../_images/bedb433b3bc1d4e585d2010daf1090439e88f36aa0fe8f73a121530321d35a9b.png" src="../../../_images/bedb433b3bc1d4e585d2010daf1090439e88f36aa0fe8f73a121530321d35a9b.png" />
+</div>
+</div>
+</div>
+<div class="section" id="difficulties">
+<h3>Difficulties<a class="headerlink" href="#difficulties" title="Permalink to this headline">#</a></h3>
+<p>Due to the eccentricities of the sports, the box plots shows a significant spread when it came to outliers indicating that some sports might have preferences for certain body types. Since the sports varied widely from gymnastics to swimming to golf, the decision to pick a specific sport for analysis was done after the EDA.</p>
+</div>
+<div class="section" id="summary-discussion-and-findings">
+<h3>Summary, Discussion, and Findings<a class="headerlink" href="#summary-discussion-and-findings" title="Permalink to this headline">#</a></h3>
+<p>Surprisingly, across all Olympians the strongest correlation was between height and weight. When it came to age, there was hardly a correlation between those other two features. The average height, weight, and age depicted in the histograms and box plots were as expected with figures hovering around 24 years old, 70 kilograms, and 175 centimeters. Surprisingly, the height had a stronger spread than the weight meaning that statistically, an athlete was more likely to be more similar in weight than height.</p>
+</div>
+<div class="section" id="conclusions">
+<h3>Conclusions<a class="headerlink" href="#conclusions" title="Permalink to this headline">#</a></h3>
+<p>Due to the spread and variance for each of these values prior to analysis into how this would tie into winning a gold medal, an event was decided to be specifically chosen to reduce the influence of the different sports on each other.</p>
+</div>
+</div>
+<div class="section" id="results">
+<h2>Results<a class="headerlink" href="#results" title="Permalink to this headline">#</a></h2>
+<div class="section" id="feature-selection">
+<h3>Feature Selection<a class="headerlink" href="#feature-selection" title="Permalink to this headline">#</a></h3>
+<p>Since there was such a large distribution of ‘Height’ and ‘Weight’, the ‘Event’ column was reviewed to see if narrowing this down would help with eliminating the subgroups within the EDA producted. The ‘Event’ column was examined by the amount of participants that were the column and the top 10 with the largest amount of participants were examined.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get Counts Per &#39;Event&#39;</span>
+<span class="n">count</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Event&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
+
+<span class="c1"># Review Top 10 Highest Count</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">count</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">20</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Football Men&#39;s Football                   5733
+Ice Hockey Men&#39;s Ice Hockey               4762
+Hockey Men&#39;s Hockey                       3958
+Water Polo Men&#39;s Water Polo               3358
+Basketball Men&#39;s Basketball               3280
+Cycling Men&#39;s Road Race, Individual       2947
+Gymnastics Men&#39;s Individual All-Around    2500
+Rowing Men&#39;s Coxed Eights                 2423
+Gymnastics Men&#39;s Team All-Around          2411
+Handball Men&#39;s Handball                   2264
+Athletics Men&#39;s Marathon                  2093
+Gymnastics Men&#39;s Parallel Bars            2049
+Gymnastics Men&#39;s Horizontal Bar           2041
+Gymnastics Men&#39;s Pommelled Horse          2031
+Gymnastics Men&#39;s Rings                    2020
+Athletics Men&#39;s 100 metres                1936
+Athletics Men&#39;s 4 x 100 metres Relay      1910
+Gymnastics Men&#39;s Floor Exercise           1880
+Gymnastics Men&#39;s Horse Vault              1868
+Volleyball Men&#39;s Volleyball               1861
+Name: Event, dtype: int64
+</pre></div>
+</div>
+</div>
+</div>
+<p>After examining the data, the following considerations were taken into account when selecting the event. First, “What event is least likely to have changed over the past 120 years?” to prevent an unwanted deviations and second, “What are individual sports?” to ensure that each individual was treated as an isolated contributor to the data set. Thus, the event chosen was “Athletics Men’s Marathon”. The length of the marathon has remained consistent since 1924, from when the mileage was changed from 26 miles to 26.2 miles [2], and there aren’t any extra equiment that might have been modified by engineers throughout the decades. As for the mileage change, this is assumed not to significantly impact the final results.</p>
+</div>
+<div class="section" id="id2">
+<h3>Histogram<a class="headerlink" href="#id2" title="Permalink to this headline">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Assign Event</span>
+<span class="n">df_med</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Event&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;Athletics Men&#39;s Marathon&quot;</span><span class="p">]</span>
+
+<span class="c1"># Obtain histograms and Box Plots</span>
+<span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;Age&#39;</span><span class="p">,</span> <span class="s1">&#39;Weight&#39;</span><span class="p">,</span> <span class="s1">&#39;Height&#39;</span><span class="p">]:</span>
+    <span class="n">histBox</span><span class="p">(</span><span class="n">df_narr</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="o">~</span>\<span class="n">AppData</span>\<span class="n">Local</span>\<span class="n">Temp</span>\<span class="n">ipykernel_2592</span>\<span class="mf">2636939246.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="c1"># Obtain histograms and Box Plots</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;Age&#39;</span><span class="p">,</span> <span class="s1">&#39;Weight&#39;</span><span class="p">,</span> <span class="s1">&#39;Height&#39;</span><span class="p">]:</span>
+<span class="ne">----&gt; </span><span class="mi">6</span>     <span class="n">histBox</span><span class="p">(</span><span class="n">df_narr</span><span class="p">)</span>
+
+<span class="ne">NameError</span>: name &#39;df_narr&#39; is not defined
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="notes">
+<h3>Notes<a class="headerlink" href="#notes" title="Permalink to this headline">#</a></h3>
+<p>Compared to the previous data frame, the one that only observes marathon runners has a changed average when it comes to height, weight, and age. Instead of the average participant being 24 years old, 70 kilograms, and 175 centimeters, the average runner is a bit older, lighter, and shorter being 28 years old, 59 kilograms, and 170 centimeters. A visual comparison shows that the amount of outliers within the data set are less in previously shown.</p>
+</div>
+<div class="section" id="multiple-ols-models-with-cross-validation">
+<h3>Multiple OLS Models with Cross Validation<a class="headerlink" href="#multiple-ols-models-with-cross-validation" title="Permalink to this headline">#</a></h3>
+<p>Multi-linear OLS models such as the Linear Regression, Ridge, Lasso, and Random Forest Regressor were taken with cross validation to verify whether the models could be trusted below.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define OLS Function</span>
+
+<span class="k">def</span> <span class="nf">OLSFun</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">XIn</span><span class="p">,</span> <span class="n">yIn</span><span class="p">):</span>
+
+    <span class="c1"># Create Label Encoder</span>
+    <span class="n">label_encoder</span> <span class="o">=</span> <span class="n">LabelEncoder</span><span class="p">()</span>
+
+    <span class="c1"># Encode the &#39;Medal&#39; column</span>
+    <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Medal&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">label_encoder</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Medal&#39;</span><span class="p">])</span>
+
+    <span class="c1"># Add Constant Column</span>
+    <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Constant&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+
+    <span class="c1"># Place into X and y OLS Variables</span>
+    <span class="n">X</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">XIn</span><span class="p">]</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">yIn</span><span class="p">]</span>
+
+    <span class="c1"># Fit the OLS model</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">X</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+
+    <span class="c1"># Create  Instance</span>
+    <span class="n">model_comp</span> <span class="o">=</span> <span class="n">mod</span>
+    
+    <span class="c1"># Cross Validation</span>
+    <span class="n">scores</span> <span class="o">=</span> <span class="n">cross_val_score</span><span class="p">(</span><span class="n">model_comp</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">scoring</span><span class="o">=</span><span class="s1">&#39;r2&#39;</span><span class="p">)</span>
+
+    <span class="c1"># Print Out Results</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">summary</span><span class="p">())</span>
+    <span class="nb">print</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Cross-Validation Scores:&#39;</span><span class="p">,</span> <span class="n">scores</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Average R-squared:&#39;</span><span class="p">,</span> <span class="n">scores</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>
+    <span class="nb">print</span><span class="p">()</span>
+
+<span class="c1"># Run Function</span>
+<span class="k">for</span> <span class="n">mod</span> <span class="ow">in</span> <span class="p">[</span><span class="n">LinearRegression</span><span class="p">(),</span> <span class="n">Ridge</span><span class="p">(),</span> <span class="n">Lasso</span><span class="p">(),</span> <span class="n">RandomForestRegressor</span><span class="p">()]:</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">OLSFun</span><span class="p">(</span><span class="n">df_narr</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;Constant&#39;</span><span class="p">,</span> <span class="s1">&#39;Height&#39;</span><span class="p">,</span> <span class="s1">&#39;Weight&#39;</span><span class="p">,</span> <span class="s1">&#39;Age&#39;</span><span class="p">],</span> <span class="s1">&#39;Medal&#39;</span><span class="p">)</span>
+    <span class="k">except</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Unable to produce model:&quot;</span><span class="p">,</span> <span class="n">mod</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:                  Medal   R-squared:                       0.020
+Model:                            OLS   Adj. R-squared:                 -0.022
+Method:                 Least Squares   F-statistic:                    0.4794
+Date:                Sun, 25 Jun 2023   Prob (F-statistic):              0.698
+Time:                        18:39:26   Log-Likelihood:                -86.662
+No. Observations:                  73   AIC:                             181.3
+Df Residuals:                      69   BIC:                             190.5
+Df Model:                           3                                         
+Covariance Type:            nonrobust                                         
+==============================================================================
+                 coef    std err          t      P&gt;|t|      [0.025      0.975]
+------------------------------------------------------------------------------
+Constant      -1.7715      2.599     -0.682      0.498      -6.956       3.413
+Height         0.0185      0.017      1.065      0.291      -0.016       0.053
+Weight        -0.0092      0.012     -0.763      0.448      -0.033       0.015
+Age            0.0036      0.022      0.166      0.868      -0.040       0.047
+==============================================================================
+Omnibus:                       46.880   Durbin-Watson:                   1.711
+Prob(Omnibus):                  0.000   Jarque-Bera (JB):                5.804
+Skew:                           0.065   Prob(JB):                       0.0549
+Kurtosis:                       1.625   Cond. No.                     5.00e+03
+==============================================================================
+
+Notes:
+[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
+[2] The condition number is large,  5e+03. This might indicate that there are
+strong multicollinearity or other numerical problems.
+
+Cross-Validation Scores: [-1.18292774 -0.33403174 -0.24490858 -0.10626493 -0.13558613]
+Average R-squared: -0.4007438249931587
+
+                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:                  Medal   R-squared:                       0.020
+Model:                            OLS   Adj. R-squared:                 -0.022
+Method:                 Least Squares   F-statistic:                    0.4794
+Date:                Sun, 25 Jun 2023   Prob (F-statistic):              0.698
+Time:                        18:39:26   Log-Likelihood:                -86.662
+No. Observations:                  73   AIC:                             181.3
+Df Residuals:                      69   BIC:                             190.5
+Df Model:                           3                                         
+Covariance Type:            nonrobust                                         
+==============================================================================
+                 coef    std err          t      P&gt;|t|      [0.025      0.975]
+------------------------------------------------------------------------------
+Constant      -1.7715      2.599     -0.682      0.498      -6.956       3.413
+Height         0.0185      0.017      1.065      0.291      -0.016       0.053
+Weight        -0.0092      0.012     -0.763      0.448      -0.033       0.015
+Age            0.0036      0.022      0.166      0.868      -0.040       0.047
+==============================================================================
+Omnibus:                       46.880   Durbin-Watson:                   1.711
+Prob(Omnibus):                  0.000   Jarque-Bera (JB):                5.804
+Skew:                           0.065   Prob(JB):                       0.0549
+Kurtosis:                       1.625   Cond. No.                     5.00e+03
+==============================================================================
+
+Notes:
+[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
+[2] The condition number is large,  5e+03. This might indicate that there are
+strong multicollinearity or other numerical problems.
+
+Cross-Validation Scores: [-1.18033688 -0.33373815 -0.24482747 -0.10628386 -0.13539092]
+Average R-squared: -0.4001154542050319
+
+                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:                  Medal   R-squared:                       0.020
+Model:                            OLS   Adj. R-squared:                 -0.022
+Method:                 Least Squares   F-statistic:                    0.4794
+Date:                Sun, 25 Jun 2023   Prob (F-statistic):              0.698
+Time:                        18:39:26   Log-Likelihood:                -86.662
+No. Observations:                  73   AIC:                             181.3
+Df Residuals:                      69   BIC:                             190.5
+Df Model:                           3                                         
+Covariance Type:            nonrobust                                         
+==============================================================================
+                 coef    std err          t      P&gt;|t|      [0.025      0.975]
+------------------------------------------------------------------------------
+Constant      -1.7715      2.599     -0.682      0.498      -6.956       3.413
+Height         0.0185      0.017      1.065      0.291      -0.016       0.053
+Weight        -0.0092      0.012     -0.763      0.448      -0.033       0.015
+Age            0.0036      0.022      0.166      0.868      -0.040       0.047
+==============================================================================
+Omnibus:                       46.880   Durbin-Watson:                   1.711
+Prob(Omnibus):                  0.000   Jarque-Bera (JB):                5.804
+Skew:                           0.065   Prob(JB):                       0.0549
+Kurtosis:                       1.625   Cond. No.                     5.00e+03
+==============================================================================
+
+Notes:
+[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
+[2] The condition number is large,  5e+03. This might indicate that there are
+strong multicollinearity or other numerical problems.
+
+Cross-Validation Scores: [-0.09375    -0.0742776  -0.13280893 -0.14479525 -0.00220856]
+Average R-squared: -0.08956806814686225
+
+                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:                  Medal   R-squared:                       0.020
+Model:                            OLS   Adj. R-squared:                 -0.022
+Method:                 Least Squares   F-statistic:                    0.4794
+Date:                Sun, 25 Jun 2023   Prob (F-statistic):              0.698
+Time:                        18:39:27   Log-Likelihood:                -86.662
+No. Observations:                  73   AIC:                             181.3
+Df Residuals:                      69   BIC:                             190.5
+Df Model:                           3                                         
+Covariance Type:            nonrobust                                         
+==============================================================================
+                 coef    std err          t      P&gt;|t|      [0.025      0.975]
+------------------------------------------------------------------------------
+Constant      -1.7715      2.599     -0.682      0.498      -6.956       3.413
+Height         0.0185      0.017      1.065      0.291      -0.016       0.053
+Weight        -0.0092      0.012     -0.763      0.448      -0.033       0.015
+Age            0.0036      0.022      0.166      0.868      -0.040       0.047
+==============================================================================
+Omnibus:                       46.880   Durbin-Watson:                   1.711
+Prob(Omnibus):                  0.000   Jarque-Bera (JB):                5.804
+Skew:                           0.065   Prob(JB):                       0.0549
+Kurtosis:                       1.625   Cond. No.                     5.00e+03
+==============================================================================
+
+Notes:
+[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
+[2] The condition number is large,  5e+03. This might indicate that there are
+strong multicollinearity or other numerical problems.
+
+Cross-Validation Scores: [-1.23585937 -0.28116438 -0.24818269 -0.44599677 -0.414952  ]
+Average R-squared: -0.5252310450125768
+</pre></div>
+</div>
+</div>
+</div>
+<p>All of the models have negative average R squared values. This is showing that a model cannot be draw when it comes to evaluating the ‘Age’, ‘Height’, and ‘Weight’ to determine whether a marathon runner gets a gold medal from the Olympic contestents. The cross validation numbers also showed negative values for all of the models. The data has been preprocessed, so there is potentially some unforseeable issue affecting the results. The standard errors imply that there might be a high amount of covariance and thus colinearity needs to be checked again.</p>
+</div>
+<div class="section" id="colinearity">
+<h3>Colinearity<a class="headerlink" href="#colinearity" title="Permalink to this headline">#</a></h3>
+<p>Here the colinearity between ‘Age’, ‘Height’, and ‘Weight’ are reviewed again.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get Correlation Matrix</span>
+<span class="n">corr_mat</span> <span class="o">=</span> <span class="n">df_narr</span><span class="p">[[</span><span class="s1">&#39;Age&#39;</span><span class="p">,</span> <span class="s1">&#39;Height&#39;</span><span class="p">,</span> <span class="s1">&#39;Weight&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">corr</span><span class="p">()</span>
+
+<span class="c1"># Print Correlation Matrix</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Event: </span><span class="si">{</span><span class="n">col</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">corr_mat</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Event: Height
+             Age    Height    Weight
+Age     1.000000  0.358058  0.333728
+Height  0.358058  1.000000  0.945962
+Weight  0.333728  0.945962  1.000000
+</pre></div>
+</div>
+</div>
+</div>
+<p>It appears that there is a strong colinearity between ‘Height’ and ‘Weight’. Compared to the previous data frame which included all athletes, the age factor plays a stronger role in being strongly linked to height and weight in this selected data.</p>
+</div>
+<div class="section" id="feature-engineering">
+<h3>Feature Engineering<a class="headerlink" href="#feature-engineering" title="Permalink to this headline">#</a></h3>
+<p>To combat the covariance, the height and weight are combined into a ‘BMI’ column and the function is run again to see if there are different results.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Feature Engineering</span>
+<span class="n">df_narr</span><span class="p">[</span><span class="s1">&#39;BMI&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_narr</span><span class="p">[</span><span class="s1">&#39;Weight&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="n">df_narr</span><span class="p">[</span><span class="s1">&#39;Height&#39;</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span>
+
+<span class="c1"># Run Function</span>
+<span class="k">for</span> <span class="n">mod</span> <span class="ow">in</span> <span class="p">[</span><span class="n">LinearRegression</span><span class="p">(),</span> <span class="n">Ridge</span><span class="p">(),</span> <span class="n">Lasso</span><span class="p">(),</span> <span class="n">RandomForestRegressor</span><span class="p">()]:</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">OLSFun</span><span class="p">(</span><span class="n">df_narr</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;Constant&#39;</span><span class="p">,</span> <span class="s1">&#39;BMI&#39;</span><span class="p">,</span> <span class="s1">&#39;Age&#39;</span><span class="p">],</span> <span class="s1">&#39;Medal&#39;</span><span class="p">)</span>
+    <span class="k">except</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Unable to produce model:&quot;</span><span class="p">,</span> <span class="n">mod</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:                  Medal   R-squared:                       0.010
+Model:                            OLS   Adj. R-squared:                 -0.018
+Method:                 Least Squares   F-statistic:                    0.3587
+Date:                Sun, 25 Jun 2023   Prob (F-statistic):              0.700
+Time:                        18:40:18   Log-Likelihood:                -87.043
+No. Observations:                  73   AIC:                             180.1
+Df Residuals:                      70   BIC:                             187.0
+Df Model:                           2                                         
+Covariance Type:            nonrobust                                         
+==============================================================================
+                 coef    std err          t      P&gt;|t|      [0.025      0.975]
+------------------------------------------------------------------------------
+Constant       1.2305      0.976      1.260      0.212      -0.717       3.178
+BMI         -255.7971    364.134     -0.702      0.485    -982.039     470.445
+Age            0.0086      0.021      0.411      0.682      -0.033       0.050
+==============================================================================
+Omnibus:                       54.574   Durbin-Watson:                   1.740
+Prob(Omnibus):                  0.000   Jarque-Bera (JB):                6.087
+Skew:                           0.085   Prob(JB):                       0.0477
+Kurtosis:                       1.596   Cond. No.                     1.09e+05
+==============================================================================
+
+Notes:
+[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
+[2] The condition number is large, 1.09e+05. This might indicate that there are
+strong multicollinearity or other numerical problems.
+
+Cross-Validation Scores: [-1.37919407 -0.22835151 -0.19506692 -0.13209133 -0.1269281 ]
+Average R-squared: -0.41232638822989187
+
+                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:                  Medal   R-squared:                       0.010
+Model:                            OLS   Adj. R-squared:                 -0.018
+Method:                 Least Squares   F-statistic:                    0.3587
+Date:                Sun, 25 Jun 2023   Prob (F-statistic):              0.700
+Time:                        18:40:18   Log-Likelihood:                -87.043
+No. Observations:                  73   AIC:                             180.1
+Df Residuals:                      70   BIC:                             187.0
+Df Model:                           2                                         
+Covariance Type:            nonrobust                                         
+==============================================================================
+                 coef    std err          t      P&gt;|t|      [0.025      0.975]
+------------------------------------------------------------------------------
+Constant       1.2305      0.976      1.260      0.212      -0.717       3.178
+BMI         -255.7971    364.134     -0.702      0.485    -982.039     470.445
+Age            0.0086      0.021      0.411      0.682      -0.033       0.050
+==============================================================================
+Omnibus:                       54.574   Durbin-Watson:                   1.740
+Prob(Omnibus):                  0.000   Jarque-Bera (JB):                6.087
+Skew:                           0.085   Prob(JB):                       0.0477
+Kurtosis:                       1.596   Cond. No.                     1.09e+05
+==============================================================================
+
+Notes:
+[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
+[2] The condition number is large, 1.09e+05. This might indicate that there are
+strong multicollinearity or other numerical problems.
+
+Cross-Validation Scores: [-0.12935603 -0.1368334  -0.13343135 -0.13417648 -0.14159895]
+Average R-squared: -0.13507924295374146
+
+                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:                  Medal   R-squared:                       0.010
+Model:                            OLS   Adj. R-squared:                 -0.018
+Method:                 Least Squares   F-statistic:                    0.3587
+Date:                Sun, 25 Jun 2023   Prob (F-statistic):              0.700
+Time:                        18:40:18   Log-Likelihood:                -87.043
+No. Observations:                  73   AIC:                             180.1
+Df Residuals:                      70   BIC:                             187.0
+Df Model:                           2                                         
+Covariance Type:            nonrobust                                         
+==============================================================================
+                 coef    std err          t      P&gt;|t|      [0.025      0.975]
+------------------------------------------------------------------------------
+Constant       1.2305      0.976      1.260      0.212      -0.717       3.178
+BMI         -255.7971    364.134     -0.702      0.485    -982.039     470.445
+Age            0.0086      0.021      0.411      0.682      -0.033       0.050
+==============================================================================
+Omnibus:                       54.574   Durbin-Watson:                   1.740
+Prob(Omnibus):                  0.000   Jarque-Bera (JB):                6.087
+Skew:                           0.085   Prob(JB):                       0.0477
+Kurtosis:                       1.596   Cond. No.                     1.09e+05
+==============================================================================
+
+Notes:
+[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
+[2] The condition number is large, 1.09e+05. This might indicate that there are
+strong multicollinearity or other numerical problems.
+
+Cross-Validation Scores: [-0.09375    -0.0742776  -0.13280893 -0.14479525 -0.00220856]
+Average R-squared: -0.08956806814686225
+
+                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:                  Medal   R-squared:                       0.010
+Model:                            OLS   Adj. R-squared:                 -0.018
+Method:                 Least Squares   F-statistic:                    0.3587
+Date:                Sun, 25 Jun 2023   Prob (F-statistic):              0.700
+Time:                        18:40:18   Log-Likelihood:                -87.043
+No. Observations:                  73   AIC:                             180.1
+Df Residuals:                      70   BIC:                             187.0
+Df Model:                           2                                         
+Covariance Type:            nonrobust                                         
+==============================================================================
+                 coef    std err          t      P&gt;|t|      [0.025      0.975]
+------------------------------------------------------------------------------
+Constant       1.2305      0.976      1.260      0.212      -0.717       3.178
+BMI         -255.7971    364.134     -0.702      0.485    -982.039     470.445
+Age            0.0086      0.021      0.411      0.682      -0.033       0.050
+==============================================================================
+Omnibus:                       54.574   Durbin-Watson:                   1.740
+Prob(Omnibus):                  0.000   Jarque-Bera (JB):                6.087
+Skew:                           0.085   Prob(JB):                       0.0477
+Kurtosis:                       1.596   Cond. No.                     1.09e+05
+==============================================================================
+
+Notes:
+[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
+[2] The condition number is large, 1.09e+05. This might indicate that there are
+strong multicollinearity or other numerical problems.
+
+Cross-Validation Scores: [-1.95023437 -0.34426712 -0.67848077 -0.3182129  -0.5303344 ]
+Average R-squared: -0.7643059141488491
+</pre></div>
+</div>
+</div>
+</div>
+<p>For the R squared values, the scores did not improve much which suggests that more preprocessing or more evaluation of the data is needed. All values were negative and despite the Lasso value having the best R squared value, the model was still deemed inaccurate.</p>
+</div>
+<div class="section" id="linear-regression-fit">
+<h3>Linear Regression Fit<a class="headerlink" href="#linear-regression-fit" title="Permalink to this headline">#</a></h3>
+<p>To see if there was a linear trend throughout the years since the Olympics within the event, the ‘Age’, ‘Height’, and ‘Weight’ for medal winners was plotted.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Declare Function for Plots</span>
+<span class="k">def</span> <span class="nf">RegPlot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">ylabel</span><span class="p">):</span>
+    <span class="n">sns</span><span class="o">.</span><span class="n">regplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">y</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="n">ylabel</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="c1"># Declare Col String</span>
+<span class="n">col</span> <span class="o">=</span> <span class="s1">&#39;Year&#39;</span>
+
+<span class="c1"># Aggregate By Date</span>
+<span class="n">df_gold</span> <span class="o">=</span> <span class="n">df_med</span><span class="p">[</span><span class="n">df_med</span><span class="p">[</span><span class="s1">&#39;Medal&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Gold&#39;</span><span class="p">]</span>
+<span class="n">df_agg</span> <span class="o">=</span> <span class="n">df_gold</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">col</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+
+<span class="c1"># Plot For Each Feature</span>
+<span class="n">feat</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Height&#39;</span><span class="p">,</span> <span class="s1">&#39;Age&#39;</span><span class="p">,</span> <span class="s1">&#39;Weight&#39;</span><span class="p">]</span>
+
+<span class="n">RegPlot</span><span class="p">(</span><span class="n">df_agg</span><span class="p">[</span><span class="n">df_agg</span><span class="p">[</span><span class="s1">&#39;Height&#39;</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">][</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">df_agg</span><span class="p">[</span><span class="n">df_agg</span><span class="p">[</span><span class="s1">&#39;Height&#39;</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">][</span><span class="s1">&#39;Height&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="s1">&#39;Height&#39;</span><span class="p">)</span>
+<span class="n">RegPlot</span><span class="p">(</span><span class="n">df_agg</span><span class="p">[</span><span class="n">df_agg</span><span class="p">[</span><span class="s1">&#39;Age&#39;</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">][</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">df_agg</span><span class="p">[</span><span class="n">df_agg</span><span class="p">[</span><span class="s1">&#39;Age&#39;</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">][</span><span class="s1">&#39;Age&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="s1">&#39;Age&#39;</span><span class="p">)</span>
+<span class="n">RegPlot</span><span class="p">(</span><span class="n">df_agg</span><span class="p">[</span><span class="n">df_agg</span><span class="p">[</span><span class="s1">&#39;Weight&#39;</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">][</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">df_agg</span><span class="p">[</span><span class="n">df_agg</span><span class="p">[</span><span class="s1">&#39;Weight&#39;</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">][</span><span class="s1">&#39;Weight&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="s1">&#39;Weight&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../_images/8377f527b1dcab9356cccf38c816300f4d2a87b5a1a6777f75fa624c9564de2c.png" src="../../../_images/8377f527b1dcab9356cccf38c816300f4d2a87b5a1a6777f75fa624c9564de2c.png" />
+<img alt="../../../_images/af587101a9dfff44ee3b4d103f9eb15b7b14411414f4050cf9be31b2846c39bc.png" src="../../../_images/af587101a9dfff44ee3b4d103f9eb15b7b14411414f4050cf9be31b2846c39bc.png" />
+<img alt="../../../_images/b108ad254d0020ffd3431af16567fb1dd11143f0553a771f17e9ecac14931e04.png" src="../../../_images/b108ad254d0020ffd3431af16567fb1dd11143f0553a771f17e9ecac14931e04.png" />
+</div>
+</div>
+<p>The data shows that surprisingly, the heigth, weight, and age for the winners tended not to fluctuate, save for some outliers.</p>
+</div>
+<div class="section" id="id3">
+<h3>Summary<a class="headerlink" href="#id3" title="Permalink to this headline">#</a></h3>
+<p>There is a larger variance when it comes to comparing the general Olympic athlete to that of a marathon runner when it comes to age, height, and weight. Olympic athletes are on average 24 years old, 70 kilograms, and 175 centimeters while the average marathon runner is 28 years old, 59 kilograms, and 170 centimeters. There was a high correlation between height and weight that interferred with the results of the model. Despite inputting the features for height, weight, and age while taking into account the year, there was no connection between those values and winning a medal. The Random Forest model was able to draw the best model, but had a R squared value of 0.01 which meant that the model wasn’t accurate. Seeing that none of the models were able to draw a reasonable inference from the height, weight, and age categories either the data needs to be preprocessed more or other models looked into.</p>
+<p>For both the general and specific case, there was a correlation between height and weight that resulted in covariance problems that interfered with generating a model.</p>
+</div>
+<div class="section" id="training-to-improve-process">
+<h3>Training to Improve Process<a class="headerlink" href="#training-to-improve-process" title="Permalink to this headline">#</a></h3>
+<p>For future models, the subgroup for the marathon runners should be divided even further into decades to see if there are trends there. Historical facts about the sport’s event should be reviewed too as well as other features.</p>
+</div>
+<div class="section" id="model-comparison">
+<h3>Model Comparison<a class="headerlink" href="#model-comparison" title="Permalink to this headline">#</a></h3>
+<p>The Random Forest model compared to all the others was deemed the best fit due to the R squared value. However, the fit was also significantly low for a model in general and thus more data anlysis should be done prior to creating these models.</p>
+</div>
+</div>
+<div class="section" id="discussion-and-conclusion">
+<h2>Discussion and Conclusion<a class="headerlink" href="#discussion-and-conclusion" title="Permalink to this headline">#</a></h2>
+<div class="section" id="lessons-learned">
+<h3>Lessons Learned<a class="headerlink" href="#lessons-learned" title="Permalink to this headline">#</a></h3>
+<p>For this, the model was too large and varied when first evaluating and reviewing the EDA. This took a considerable amount of time not shown in the paper with multiple models being generated. First, a subgroup should be chosen to save on time. Once a reliable model has been established, expanding outwards is recommended.</p>
+</div>
+<div class="section" id="mistakes">
+<h3>Mistakes<a class="headerlink" href="#mistakes" title="Permalink to this headline">#</a></h3>
+<p>Height and weight are strongly correlated to each other and should be combined with feature engineering. There are outliers due to the Olympics history that needs to be taken into account. When it comes to applying models to the Olympians, the data should be preprocessed more than what was shown in this paper.</p>
+</div>
+<div class="section" id="future-improvement-opportunities">
+<h3>Future Improvement Opportunities<a class="headerlink" href="#future-improvement-opportunities" title="Permalink to this headline">#</a></h3>
+<p>For those that wish to continue, the recommendation is to chose multiple sports and compare these factors. Combine the height and weight column into a single one, keep other columns that might prove to be necessary, and narrow down a group to run analysis on.</p>
+</div>
+</div>
+<div class="section" id="apa-citations">
+<h2>APA Citations<a class="headerlink" href="#apa-citations" title="Permalink to this headline">#</a></h2>
+<p>[1] Rgriffin. (2018, June 15). 120 years of Olympic history: Athletes and results. Kaggle. <a class="reference external" href="https://www.kaggle.com/datasets/heesoo37/120-years-of-olympic-history-athletes-and-results">https://www.kaggle.com/datasets/heesoo37/120-years-of-olympic-history-athletes-and-results</a></p>
+<p>[2] Marathon home. TimetoRun Marathon. (n.d.). <a class="reference external" href="https://www.time-to-run.com/marathon/articles/history#:~:text=For%20the%201908%20London%20Olympic%20games%20marathon%20the,first%20to%20hold%20the%20now%20official%20marathon%20distance">https://www.time-to-run.com/marathon/articles/history#:~:text=For the 1908 London Olympic games marathon the,first to hold the now official marathon distance</a>.</p>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./Notebooks\DTSA5509\OlympicAthletes"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../../../intro.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Welcome to My Portfolio</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../../DTSA5510/Airbnb/Airbnb.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">DTSA 5510: Unsupervised Algorithms of Airbnbs in New York</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction-to-machine-learning-supervised-learning">Introduction to Machine Learning Supervised Learning</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topic">Topic</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-information">Data Information</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#import-libraries">Import Libraries</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hide-warnings">Hide Warnings</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#read-files-from-csv">Read Files from CSV</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#space-and-size">Space and Size</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluate-the-data-types-and-column-names">Evaluate the data types and column names.</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-preprocessing-and-cleaning">Data Preprocessing and Cleaning</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#removal-of-features">Removal of Features</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#replace-column-values">Replace Column Values</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#removal-of-rows-with-na-values">Removal of Rows with NA Values</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-post-processing">Data Post-Processing</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#about-duplicates">About Duplicates</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Space and Size</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#discussions">Discussions</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exploratory-data-analysis-eda">Exploratory Data Analysis (EDA)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#purpose">Purpose</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#histogram">Histogram</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#correlation-matrix">Correlation Matrix</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#difficulties">Difficulties</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary-discussion-and-findings">Summary, Discussion, and Findings</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusions">Conclusions</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#results">Results</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#feature-selection">Feature Selection</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Histogram</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#notes">Notes</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multiple-ols-models-with-cross-validation">Multiple OLS Models with Cross Validation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#colinearity">Colinearity</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#feature-engineering">Feature Engineering</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-regression-fit">Linear Regression Fit</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Summary</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#training-to-improve-process">Training to Improve Process</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#model-comparison">Model Comparison</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#discussion-and-conclusion">Discussion and Conclusion</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#lessons-learned">Lessons Learned</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mistakes">Mistakes</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#future-improvement-opportunities">Future Improvement Opportunities</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#apa-citations">APA Citations</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Stacie Herda
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

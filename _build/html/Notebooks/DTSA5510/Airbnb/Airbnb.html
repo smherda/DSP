@@ -1,0 +1,3461 @@
+
+
+<!DOCTYPE html>
+
+
+<html >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DTSA 5510: Unsupervised Algorithms of Airbnbs in New York &#8212; My Data Science Portfolio</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/clipboard.min.js"></script>
+    <script src="../../../_static/copybutton.js"></script>
+    <script src="../../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Notebooks/DTSA5510/Airbnb/Airbnb';</script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="DTSA 5511: NLP Disaster Tweets Kaggle Mini-Project" href="../../DTSA5511/DisasterTweets/DisasterTweets.html" />
+    <link rel="prev" title="DTSA 5509: Supervised Learning of Olympic Athletes" href="../../DTSA5509/OlympicAthletes/OlympicAthletes.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="None"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../../../intro.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../_static/logo.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../../../_static/logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../../intro.html">
+                    Welcome to My Portfolio
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../DTSA5509/OlympicAthletes/OlympicAthletes.html">DTSA 5509: Supervised Learning of Olympic Athletes</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">DTSA 5510: Unsupervised Algorithms of Airbnbs in New York</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../DTSA5511/DisasterTweets/DisasterTweets.html">DTSA 5511: NLP Disaster Tweets Kaggle Mini-Project</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../DTSA5511/CancerImages/CancerImages.html">DTSA 5511: CNN Cancer Detection Mini-Project</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../DTSA5511/Monet/Monet.html">DTSA 5511: GANs for Monet Paintings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../DTSA5511/Shakespeare/Shakespeare.html">DTSA 5511: Deep Learning of Shakespeare Quotes</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/smherda/DSP" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/smherda/DSP/issues/new?title=Issue%20on%20page%20%2FNotebooks/DTSA5510/Airbnb/Airbnb.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../../_sources/Notebooks/DTSA5510/Airbnb/Airbnb.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>DTSA 5510: Unsupervised Algorithms of Airbnbs in New York</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#unsupervised-algorithms-in-machine-learning">Unsupervised Algorithms in Machine Learning</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topic">Topic</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data">Data</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#install-packages">Install Packages</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#import-libraries">Import Libraries</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#read-files-from-csv">Read Files from CSV</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#space-and-size">Space and Size</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluate-the-data-types-and-column-names">Evaluate the data types and column names.</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-preprocessing">Data Preprocessing</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#removal-of-features">Removal of Features</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#removing-null-values">Removing Null Values</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#remove-duplicates">Remove Duplicates</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Space and Size</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exploratory-data-analysis-eda">Exploratory Data Analysis (EDA)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#purpose">Purpose</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#histograms-and-box-plots">Histograms and Box Plots</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gis-visualization">GIS Visualization</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#difficulties">Difficulties</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary-discussion-and-findings">Summary, Discussion, and Findings</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusions">Conclusions</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#results-and-analysis">Results and Analysis</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#approach">Approach</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#eda-pruning">EDA Pruning</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Histograms and Box Plots</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#drop-columns">Drop Columns</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#unsupervised-model-pca">Unsupervised Model: PCA</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#results">Results</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#time-complexity">Time Complexity</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#unsupervised-model-k-means-clustering">Unsupervised Model: K-Means Clustering</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Results</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#k-means-clustering">K Means Clustering</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#supervised-method-linear-model">Supervised Method: Linear Model</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Results</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">Time Complexity</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#optimization-methods">Optimization Methods</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">Summary</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pipeline-design">Pipeline Design</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#discussion-and-conclusion">Discussion and Conclusion</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#lessons-learned">Lessons Learned</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mistakes">Mistakes</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#future-improvement-opportunities">Future Improvement Opportunities</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#apa-citations">APA Citations</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <div class="tex2jax_ignore mathjax_ignore section" id="dtsa-5510-unsupervised-algorithms-of-airbnbs-in-new-york">
+<h1>DTSA 5510: Unsupervised Algorithms of Airbnbs in New York<a class="headerlink" href="#dtsa-5510-unsupervised-algorithms-of-airbnbs-in-new-york" title="Permalink to this headline">#</a></h1>
+<div class="section" id="unsupervised-algorithms-in-machine-learning">
+<h2>Unsupervised Algorithms in Machine Learning<a class="headerlink" href="#unsupervised-algorithms-in-machine-learning" title="Permalink to this headline">#</a></h2>
+</div>
+<div class="section" id="topic">
+<h2>Topic<a class="headerlink" href="#topic" title="Permalink to this headline">#</a></h2>
+<p>Living in New York has infamously been associated with a high cost of living. According to Investopedia, Manhattan, New York ranks as the #1 most expensive city within the United States. [1] The site states that groceries to transportation to housing can rack up a cost and in the five boroughs of New York is almost double the average cost of a home compared to the national average (<span class="math notranslate nohighlight">\(\$\)</span>776, 946 to <span class="math notranslate nohighlight">\(\$\)</span>355, 852). [1] Thus, with those that have their eyes set on going to the “Empire State”, living outside of the city and going to an Airbnb on the weekends would be a more financially friendly option.
+The goal of this report is to use PCA, clustering, and linear regression to evaluate scrapped AirBnB data produced from Kaggle [2]. The PCA will see how much the model can account for variance, the clustering step will see if there are multiple subsections of the data the evaluator needs to be aware of, and the linear regression model will be used taking features and outputting correlations to a desired predictor. This report wil also compare the two unsupervised models to the supervised one.</p>
+</div>
+<div class="section" id="data">
+<h2>Data<a class="headerlink" href="#data" title="Permalink to this headline">#</a></h2>
+<div class="section" id="summary">
+<h3>Summary<a class="headerlink" href="#summary" title="Permalink to this headline">#</a></h3>
+<p>The following paper analyzes a publically available dataset from Kaggle that is a collection of Airbnb statistics during the year of 2019. [2] The file is labeled, “AB_NYC_2019.csv” and the title of this work on the website is “New York City Airbnb Open Data”. [2] More information such as the size and data types are explained further below.</p>
+</div>
+</div>
+<div class="section" id="install-packages">
+<h2>Install Packages<a class="headerlink" href="#install-packages" title="Permalink to this headline">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>folium
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: folium in c:\users\staci\anaconda3\lib\site-packages (0.14.0)
+Requirement already satisfied: branca&gt;=0.6.0 in c:\users\staci\anaconda3\lib\site-packages (from folium) (0.6.0)
+Requirement already satisfied: jinja2&gt;=2.9 in c:\users\staci\anaconda3\lib\site-packages (from folium) (2.11.3)
+Requirement already satisfied: numpy in c:\users\staci\anaconda3\lib\site-packages (from folium) (1.21.6)
+Requirement already satisfied: requests in c:\users\staci\anaconda3\lib\site-packages (from folium) (2.31.0)
+Requirement already satisfied: MarkupSafe&gt;=0.23 in c:\users\staci\anaconda3\lib\site-packages (from jinja2&gt;=2.9-&gt;folium) (1.1.1)
+Requirement already satisfied: charset-normalizer&lt;4,&gt;=2 in c:\users\staci\anaconda3\lib\site-packages (from requests-&gt;folium) (3.2.0)
+Requirement already satisfied: idna&lt;4,&gt;=2.5 in c:\users\staci\anaconda3\lib\site-packages (from requests-&gt;folium) (3.4)
+Requirement already satisfied: urllib3&lt;3,&gt;=1.21.1 in c:\users\staci\anaconda3\lib\site-packages (from requests-&gt;folium) (1.26.15)
+Requirement already satisfied: certifi&gt;=2017.4.17 in c:\users\staci\anaconda3\lib\site-packages (from requests-&gt;folium) (2023.5.7)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="import-libraries">
+<h3>Import Libraries<a class="headerlink" href="#import-libraries" title="Permalink to this headline">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">folium</span>
+<span class="kn">from</span> <span class="nn">sklearn.decomposition</span> <span class="kn">import</span> <span class="n">PCA</span>
+<span class="kn">from</span> <span class="nn">sklearn.cluster</span> <span class="kn">import</span> <span class="n">KMeans</span>
+<span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LinearRegression</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
+<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">StandardScaler</span><span class="p">,</span> <span class="n">OneHotEncoder</span>
+<span class="kn">from</span> <span class="nn">sklearn.compose</span> <span class="kn">import</span> <span class="n">ColumnTransformer</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">mean_squared_error</span><span class="p">,</span> <span class="n">r2_score</span>
+<span class="kn">import</span> <span class="nn">time</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="read-files-from-csv">
+<h3>Read Files from CSV<a class="headerlink" href="#read-files-from-csv" title="Permalink to this headline">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_csv</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;./AB_NYC_2019.csv&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="space-and-size">
+<h3>Space and Size<a class="headerlink" href="#space-and-size" title="Permalink to this headline">#</a></h3>
+<p>The space and size for the data frame before preprocesesing is shown below. Output is the memory, column size, and row size.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Function for Checking Memory and Size</span>
+<span class="k">def</span> <span class="nf">MemCheck</span><span class="p">(</span><span class="n">df</span><span class="p">):</span>
+    <span class="c1"># Get Data Frame Space</span>
+    <span class="n">df_mem</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">memory_usage</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Memory:&quot;</span><span class="p">,</span> <span class="n">df_mem</span><span class="p">,</span> <span class="s2">&quot;bytes&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Get Row and Column Count</span>
+    <span class="n">num_row</span><span class="p">,</span> <span class="n">num_col</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">shape</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Rows:&quot;</span><span class="p">,</span> <span class="n">num_row</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Columns:&quot;</span><span class="p">,</span> <span class="n">num_col</span><span class="p">)</span>
+    
+<span class="n">MemCheck</span><span class="p">(</span><span class="n">df_csv</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Memory: 6258688 bytes
+Rows: 48895
+Columns: 16
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="evaluate-the-data-types-and-column-names">
+<h3>Evaluate the data types and column names.<a class="headerlink" href="#evaluate-the-data-types-and-column-names" title="Permalink to this headline">#</a></h3>
+<p>Below shows the column names and data types associated with each.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Save to Separate Data Frame</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">df_csv</span>
+
+<span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&#39;&quot;</span> <span class="o">+</span> <span class="n">col</span> <span class="o">+</span> <span class="s2">&quot;&#39;: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">dtype</span><span class="p">)))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;id&#39;: &lt;class &#39;numpy.dtype[int64]&#39;&gt;
+&#39;name&#39;: &lt;class &#39;numpy.dtype[object_]&#39;&gt;
+&#39;host_id&#39;: &lt;class &#39;numpy.dtype[int64]&#39;&gt;
+&#39;host_name&#39;: &lt;class &#39;numpy.dtype[object_]&#39;&gt;
+&#39;neighbourhood_group&#39;: &lt;class &#39;numpy.dtype[object_]&#39;&gt;
+&#39;neighbourhood&#39;: &lt;class &#39;numpy.dtype[object_]&#39;&gt;
+&#39;latitude&#39;: &lt;class &#39;numpy.dtype[float64]&#39;&gt;
+&#39;longitude&#39;: &lt;class &#39;numpy.dtype[float64]&#39;&gt;
+&#39;room_type&#39;: &lt;class &#39;numpy.dtype[object_]&#39;&gt;
+&#39;price&#39;: &lt;class &#39;numpy.dtype[int64]&#39;&gt;
+&#39;minimum_nights&#39;: &lt;class &#39;numpy.dtype[int64]&#39;&gt;
+&#39;number_of_reviews&#39;: &lt;class &#39;numpy.dtype[int64]&#39;&gt;
+&#39;last_review&#39;: &lt;class &#39;numpy.dtype[object_]&#39;&gt;
+&#39;reviews_per_month&#39;: &lt;class &#39;numpy.dtype[float64]&#39;&gt;
+&#39;calculated_host_listings_count&#39;: &lt;class &#39;numpy.dtype[int64]&#39;&gt;
+&#39;availability_365&#39;: &lt;class &#39;numpy.dtype[int64]&#39;&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>id</th>
+      <th>name</th>
+      <th>host_id</th>
+      <th>host_name</th>
+      <th>neighbourhood_group</th>
+      <th>neighbourhood</th>
+      <th>latitude</th>
+      <th>longitude</th>
+      <th>room_type</th>
+      <th>price</th>
+      <th>minimum_nights</th>
+      <th>number_of_reviews</th>
+      <th>last_review</th>
+      <th>reviews_per_month</th>
+      <th>calculated_host_listings_count</th>
+      <th>availability_365</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2539</td>
+      <td>Clean &amp; quiet apt home by the park</td>
+      <td>2787</td>
+      <td>John</td>
+      <td>Brooklyn</td>
+      <td>Kensington</td>
+      <td>40.64749</td>
+      <td>-73.97237</td>
+      <td>Private room</td>
+      <td>149</td>
+      <td>1</td>
+      <td>9</td>
+      <td>2018-10-19</td>
+      <td>0.21</td>
+      <td>6</td>
+      <td>365</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2595</td>
+      <td>Skylit Midtown Castle</td>
+      <td>2845</td>
+      <td>Jennifer</td>
+      <td>Manhattan</td>
+      <td>Midtown</td>
+      <td>40.75362</td>
+      <td>-73.98377</td>
+      <td>Entire home/apt</td>
+      <td>225</td>
+      <td>1</td>
+      <td>45</td>
+      <td>2019-05-21</td>
+      <td>0.38</td>
+      <td>2</td>
+      <td>355</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3647</td>
+      <td>THE VILLAGE OF HARLEM....NEW YORK !</td>
+      <td>4632</td>
+      <td>Elisabeth</td>
+      <td>Manhattan</td>
+      <td>Harlem</td>
+      <td>40.80902</td>
+      <td>-73.94190</td>
+      <td>Private room</td>
+      <td>150</td>
+      <td>3</td>
+      <td>0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>1</td>
+      <td>365</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>3831</td>
+      <td>Cozy Entire Floor of Brownstone</td>
+      <td>4869</td>
+      <td>LisaRoxanne</td>
+      <td>Brooklyn</td>
+      <td>Clinton Hill</td>
+      <td>40.68514</td>
+      <td>-73.95976</td>
+      <td>Entire home/apt</td>
+      <td>89</td>
+      <td>1</td>
+      <td>270</td>
+      <td>2019-07-05</td>
+      <td>4.64</td>
+      <td>1</td>
+      <td>194</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5022</td>
+      <td>Entire Apt: Spacious Studio/Loft by central park</td>
+      <td>7192</td>
+      <td>Laura</td>
+      <td>Manhattan</td>
+      <td>East Harlem</td>
+      <td>40.79851</td>
+      <td>-73.94399</td>
+      <td>Entire home/apt</td>
+      <td>80</td>
+      <td>10</td>
+      <td>9</td>
+      <td>2018-11-19</td>
+      <td>0.10</td>
+      <td>1</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</div>
+</div>
+<div class="section" id="data-preprocessing">
+<h2>Data Preprocessing<a class="headerlink" href="#data-preprocessing" title="Permalink to this headline">#</a></h2>
+<div class="section" id="removal-of-features">
+<h3>Removal of Features<a class="headerlink" href="#removal-of-features" title="Permalink to this headline">#</a></h3>
+<p>For this analysis, all features other than ‘name’, ‘neighbourhood_group’, ‘neighbourhood’, ‘latitude’, ‘longitude’, ‘room_type’, ‘price’, ‘minimum_nights’, ‘number_of_reviews’, ‘calculated_host_listings_count’, ‘availability_365’ will be removed. Other columns do not add any used information to the data frame and will be potentially inconvenient during analysis.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># State Columns to Keep</span>
+<span class="n">col</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="s1">&#39;neighbourhood_group&#39;</span><span class="p">,</span> <span class="s1">&#39;neighbourhood&#39;</span><span class="p">,</span> <span class="s1">&#39;latitude&#39;</span><span class="p">,</span> <span class="s1">&#39;longitude&#39;</span><span class="p">,</span> <span class="s1">&#39;room_type&#39;</span><span class="p">,</span> \
+       <span class="s1">&#39;price&#39;</span><span class="p">,</span> <span class="s1">&#39;minimum_nights&#39;</span><span class="p">,</span> <span class="s1">&#39;number_of_reviews&#39;</span><span class="p">,</span> <span class="s1">&#39;calculated_host_listings_count&#39;</span><span class="p">,</span> <span class="s1">&#39;availability_365&#39;</span><span class="p">]</span>
+
+<span class="c1"># Define Features</span>
+<span class="n">num_feat</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;price&#39;</span><span class="p">,</span> <span class="s1">&#39;minimum_nights&#39;</span><span class="p">,</span> <span class="s1">&#39;number_of_reviews&#39;</span><span class="p">,</span> <span class="s1">&#39;calculated_host_listings_count&#39;</span><span class="p">,</span> <span class="s1">&#39;availability_365&#39;</span><span class="p">]</span>
+<span class="n">cat_feat</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;neighbourhood&#39;</span><span class="p">,</span> <span class="s1">&#39;room_type&#39;</span><span class="p">]</span>
+
+<span class="c1"># Save into New Data Frame</span>
+<span class="n">df_rem</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span> <span class="c1"># Review</span>
+<span class="n">df_rem</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>name</th>
+      <th>neighbourhood_group</th>
+      <th>neighbourhood</th>
+      <th>latitude</th>
+      <th>longitude</th>
+      <th>room_type</th>
+      <th>price</th>
+      <th>minimum_nights</th>
+      <th>number_of_reviews</th>
+      <th>calculated_host_listings_count</th>
+      <th>availability_365</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Clean &amp; quiet apt home by the park</td>
+      <td>Brooklyn</td>
+      <td>Kensington</td>
+      <td>40.64749</td>
+      <td>-73.97237</td>
+      <td>Private room</td>
+      <td>149</td>
+      <td>1</td>
+      <td>9</td>
+      <td>6</td>
+      <td>365</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Skylit Midtown Castle</td>
+      <td>Manhattan</td>
+      <td>Midtown</td>
+      <td>40.75362</td>
+      <td>-73.98377</td>
+      <td>Entire home/apt</td>
+      <td>225</td>
+      <td>1</td>
+      <td>45</td>
+      <td>2</td>
+      <td>355</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>THE VILLAGE OF HARLEM....NEW YORK !</td>
+      <td>Manhattan</td>
+      <td>Harlem</td>
+      <td>40.80902</td>
+      <td>-73.94190</td>
+      <td>Private room</td>
+      <td>150</td>
+      <td>3</td>
+      <td>0</td>
+      <td>1</td>
+      <td>365</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Cozy Entire Floor of Brownstone</td>
+      <td>Brooklyn</td>
+      <td>Clinton Hill</td>
+      <td>40.68514</td>
+      <td>-73.95976</td>
+      <td>Entire home/apt</td>
+      <td>89</td>
+      <td>1</td>
+      <td>270</td>
+      <td>1</td>
+      <td>194</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Entire Apt: Spacious Studio/Loft by central park</td>
+      <td>Manhattan</td>
+      <td>East Harlem</td>
+      <td>40.79851</td>
+      <td>-73.94399</td>
+      <td>Entire home/apt</td>
+      <td>80</td>
+      <td>10</td>
+      <td>9</td>
+      <td>1</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</div>
+<div class="section" id="removing-null-values">
+<h3>Removing Null Values<a class="headerlink" href="#removing-null-values" title="Permalink to this headline">#</a></h3>
+<p>The code is shown below removes columns with NA values. Since the amount of rows and thus data which is entered is high, this can be done since the NA rows are assumed to be negligable with such as large data set.|</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_na</span> <span class="o">=</span> <span class="n">df_rem</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="remove-duplicates">
+<h3>Remove Duplicates<a class="headerlink" href="#remove-duplicates" title="Permalink to this headline">#</a></h3>
+<p>If an AirBnB has been entered multiple times, then it will be removed from the data frame with the following code. This is similar to the null values in that there is a large amount of data that can be used for processing and elmiinating the duplicates won’t strongly affect the outcome.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_unique</span> <span class="o">=</span> <span class="n">df_na</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="id1">
+<h3>Space and Size<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h3>
+<p>The space and size for the data frame before and after preprocesesing is shown below.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">MemCheck</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">()</span>
+<span class="n">MemCheck</span><span class="p">(</span><span class="n">df_unique</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Memory: 6258688 bytes
+Rows: 48895
+Columns: 16
+
+Memory: 4692384 bytes
+Rows: 48879
+Columns: 11
+</pre></div>
+</div>
+</div>
+</div>
+<p>After modifications, the size goes from 6258688 bytes to 4302760 bytes and is reduced to 69% of its original size.</p>
+</div>
+</div>
+<div class="section" id="exploratory-data-analysis-eda">
+<h2>Exploratory Data Analysis (EDA)<a class="headerlink" href="#exploratory-data-analysis-eda" title="Permalink to this headline">#</a></h2>
+<div class="section" id="purpose">
+<h3>Purpose<a class="headerlink" href="#purpose" title="Permalink to this headline">#</a></h3>
+<p>The following gives an insight into the data and potential models that should be built.</p>
+</div>
+<div class="section" id="histograms-and-box-plots">
+<h3>Histograms and Box Plots<a class="headerlink" href="#histograms-and-box-plots" title="Permalink to this headline">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">histBox</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">col</span><span class="p">):</span>
+    <span class="c1"># Generate Histogram</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">],</span> <span class="n">bins</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="n">col</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Frequency&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="n">col</span><span class="p">)</span>
+
+    <span class="c1"># Add to Subplot</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+
+    <span class="c1"># Generate Box Plot</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">])</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="n">col</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Box Plot of </span><span class="si">{</span><span class="n">col</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+    <span class="c1"># Remove Box Plot Axis Label</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">([])</span>
+
+    <span class="c1"># Show Figure</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+    <span class="c1"># Get the histogram values</span>
+    <span class="n">hist_val</span><span class="p">,</span> <span class="n">hist_edg</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">histogram</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">])</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Histogram values:&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">hist_val</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Histogram bin edges:&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">hist_edg</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">()</span>
+
+    <span class="c1"># Print Values</span>
+    <span class="n">box_val</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span><span class="o">.</span><span class="n">loc</span><span class="p">[[</span><span class="s1">&#39;min&#39;</span><span class="p">,</span> <span class="s1">&#39;25%&#39;</span><span class="p">,</span> <span class="s1">&#39;50%&#39;</span><span class="p">,</span> <span class="s1">&#39;75%&#39;</span><span class="p">,</span> <span class="s1">&#39;max&#39;</span><span class="p">]]</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Box values: &#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">box_val</span><span class="p">[</span><span class="n">col</span><span class="p">])</span>
+
+<span class="n">histBox</span><span class="p">(</span><span class="n">df_unique</span><span class="p">,</span> <span class="s1">&#39;price&#39;</span><span class="p">)</span>
+<span class="n">histBox</span><span class="p">(</span><span class="n">df_unique</span><span class="p">,</span> <span class="s1">&#39;minimum_nights&#39;</span><span class="p">)</span>
+<span class="n">histBox</span><span class="p">(</span><span class="n">df_unique</span><span class="p">,</span> <span class="s1">&#39;number_of_reviews&#39;</span><span class="p">)</span>
+<span class="n">histBox</span><span class="p">(</span><span class="n">df_unique</span><span class="p">,</span> <span class="s1">&#39;calculated_host_listings_count&#39;</span><span class="p">)</span>
+<span class="n">histBox</span><span class="p">(</span><span class="n">df_unique</span><span class="p">,</span> <span class="s1">&#39;availability_365&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../_images/55e20b74ef11d4edbab290992e587cc1ce3b0fa73f4ca5a7255e69c6974f449a.png" src="../../../_images/55e20b74ef11d4edbab290992e587cc1ce3b0fa73f4ca5a7255e69c6974f449a.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Histogram values:
+[48581   188    57    18     9     8     7     3     2     6]
+
+Histogram bin edges:
+[    0.  1000.  2000.  3000.  4000.  5000.  6000.  7000.  8000.  9000.
+ 10000.]
+
+Box values: 
+min        0.0
+25%       69.0
+50%      106.0
+75%      175.0
+max    10000.0
+Name: price, dtype: float64
+</pre></div>
+</div>
+<img alt="../../../_images/77dece21fd26031a5a9661c861eab60c323a18f2945d863602c60f5a982a5bca.png" src="../../../_images/77dece21fd26031a5a9661c861eab60c323a18f2945d863602c60f5a982a5bca.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Histogram values:
+[48743    76    49     7     0     0     0     3     0     1]
+
+Histogram bin edges:
+[1.0000e+00 1.2590e+02 2.5080e+02 3.7570e+02 5.0060e+02 6.2550e+02
+ 7.5040e+02 8.7530e+02 1.0002e+03 1.1251e+03 1.2500e+03]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Box values: 
+min       1.0
+25%       1.0
+50%       3.0
+75%       5.0
+max    1250.0
+Name: minimum_nights, dtype: float64
+</pre></div>
+</div>
+<img alt="../../../_images/48d02ddee20d85babd76ffae370f7ec5b6d33f6adc0dbe7f820a67a306fbc9a4.png" src="../../../_images/48d02ddee20d85babd76ffae370f7ec5b6d33f6adc0dbe7f820a67a306fbc9a4.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Histogram values:
+[43282  3571  1266   499   143    67    31    12     3     5]
+
+Histogram bin edges:
+[  0.   62.9 125.8 188.7 251.6 314.5 377.4 440.3 503.2 566.1 629. ]
+
+Box values: 
+min      0.0
+25%      1.0
+50%      5.0
+75%     24.0
+max    629.0
+Name: number_of_reviews, dtype: float64
+</pre></div>
+</div>
+<img alt="../../../_images/1cec0cc90f5981fb88793da43ac91978d4f558faa217b363c864ea15e6eecb55.png" src="../../../_images/1cec0cc90f5981fb88793da43ac91978d4f558faa217b363c864ea15e6eecb55.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Histogram values:
+[47175   551   370   224     0     0     0   232     0   327]
+
+Histogram bin edges:
+[  1.   33.6  66.2  98.8 131.4 164.  196.6 229.2 261.8 294.4 327. ]
+
+Box values: 
+min      1.0
+25%      1.0
+50%      1.0
+75%      2.0
+max    327.0
+Name: calculated_host_listings_count, dtype: float64
+</pre></div>
+</div>
+<img alt="../../../_images/703746c999a592c391ba12d3b348421ace8460af1808ea7699a21bf5a1b19ed8.png" src="../../../_images/703746c999a592c391ba12d3b348421ace8460af1808ea7699a21bf5a1b19ed8.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Histogram values:
+[23584  3304  3245  1707  2733  1684  1920  2090  2787  5825]
+
+Histogram bin edges:
+[  0.   36.5  73.  109.5 146.  182.5 219.  255.5 292.  328.5 365. ]
+
+Box values: 
+min      0.0
+25%      0.0
+50%     45.0
+75%    227.0
+max    365.0
+Name: availability_365, dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="gis-visualization">
+<h3>GIS Visualization<a class="headerlink" href="#gis-visualization" title="Permalink to this headline">#</a></h3>
+<p>To further analyze the neighborhoods, a map was created to show the locations of the AirBnBs. Since there are 48895 rows and subsequent AirBnBs, random values were chosen from the</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Group By Neighborhood</span>
+<span class="n">group</span> <span class="o">=</span> <span class="n">df_unique</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;neighbourhood_group&#39;</span><span class="p">)</span>
+<span class="n">df_samp</span> <span class="o">=</span> <span class="n">group</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="mi">15</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now a map with these random values can be used to demonstrate the locations of the AirBnBs within New York.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create a Folium Map</span>
+<span class="nb">map</span> <span class="o">=</span> <span class="n">folium</span><span class="o">.</span><span class="n">Map</span><span class="p">(</span><span class="n">location</span><span class="o">=</span><span class="p">[</span><span class="mf">40.713</span><span class="p">,</span> <span class="o">-</span><span class="mf">74.006</span><span class="p">],</span> <span class="n">zoom_start</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+
+<span class="c1"># Add Markers</span>
+<span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">df_samp</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
+    <span class="n">folium</span><span class="o">.</span><span class="n">Marker</span><span class="p">(</span>
+        <span class="n">location</span><span class="o">=</span><span class="p">[</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;latitude&#39;</span><span class="p">],</span> <span class="n">row</span><span class="p">[</span><span class="s1">&#39;longitude&#39;</span><span class="p">]],</span>
+        <span class="n">popup</span><span class="o">=</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span>
+    <span class="p">)</span><span class="o">.</span><span class="n">add_to</span><span class="p">(</span><span class="nb">map</span><span class="p">)</span>
+
+<span class="c1"># Display</span>
+<span class="nb">map</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div style="width:100%;"><div style="position:relative;width:100%;height:0;padding-bottom:60%;"><span style="color:#565656">Make this Notebook Trusted to load map: File -> Trust Notebook</span><iframe srcdoc="&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    
+    &lt;meta http-equiv=&quot;content-type&quot; content=&quot;text/html; charset=UTF-8&quot; /&gt;
+    
+        &lt;script&gt;
+            L_NO_TOUCH = false;
+            L_DISABLE_3D = false;
+        &lt;/script&gt;
+    
+    &lt;style&gt;html, body {width: 100%;height: 100%;margin: 0;padding: 0;}&lt;/style&gt;
+    &lt;style&gt;#map {position:absolute;top:0;bottom:0;right:0;left:0;}&lt;/style&gt;
+    &lt;script src=&quot;https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js&quot;&gt;&lt;/script&gt;
+    &lt;script src=&quot;https://code.jquery.com/jquery-1.12.4.min.js&quot;&gt;&lt;/script&gt;
+    &lt;script src=&quot;https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js&quot;&gt;&lt;/script&gt;
+    &lt;script src=&quot;https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js&quot;&gt;&lt;/script&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css&quot;/&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css&quot;/&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css&quot;/&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css&quot;/&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css&quot;/&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css&quot;/&gt;
+    
+            &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no&quot; /&gt;
+            &lt;style&gt;
+                #map_d097a2a67f2b63386a29c62a52d4664d {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            &lt;/style&gt;
+        
+&lt;/head&gt;
+&lt;body&gt;
+    
+    
+            &lt;div class=&quot;folium-map&quot; id=&quot;map_d097a2a67f2b63386a29c62a52d4664d&quot; &gt;&lt;/div&gt;
+        
+&lt;/body&gt;
+&lt;script&gt;
+    
+    
+            var map_d097a2a67f2b63386a29c62a52d4664d = L.map(
+                &quot;map_d097a2a67f2b63386a29c62a52d4664d&quot;,
+                {
+                    center: [40.713, -74.006],
+                    crs: L.CRS.EPSG3857,
+                    zoom: 10,
+                    zoomControl: true,
+                    preferCanvas: false,
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_c60d028de1cce3516ad5547db6332687 = L.tileLayer(
+                &quot;https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png&quot;,
+                {&quot;attribution&quot;: &quot;Data by \u0026copy; \u003ca target=\&quot;_blank\&quot; href=\&quot;http://openstreetmap.org\&quot;\u003eOpenStreetMap\u003c/a\u003e, under \u003ca target=\&quot;_blank\&quot; href=\&quot;http://www.openstreetmap.org/copyright\&quot;\u003eODbL\u003c/a\u003e.&quot;, &quot;detectRetina&quot;: false, &quot;maxNativeZoom&quot;: 18, &quot;maxZoom&quot;: 18, &quot;minZoom&quot;: 0, &quot;noWrap&quot;: false, &quot;opacity&quot;: 1, &quot;subdomains&quot;: &quot;abc&quot;, &quot;tms&quot;: false}
+            ).addTo(map_d097a2a67f2b63386a29c62a52d4664d);
+        
+    
+            var marker_351c073be7fc357ca9a4723bdab2bf7d = L.marker(
+                [40.90154, -73.89791],
+                {}
+            ).addTo(map_d097a2a67f2b63386a29c62a52d4664d);
+        
+    
+        var popup_2fb7997f544ad9e4727bf7f9990d5923 = L.popup({&quot;maxWidth&quot;: &quot;100%&quot;});
+
+        
+            
+                var html_f89451cdc921e79645f746e29e79f7fd = $(`&lt;div id=&quot;html_f89451cdc921e79645f746e29e79f7fd&quot; style=&quot;width: 100.0%; height: 100.0%;&quot;&gt;Luxury Apartment Located in Riverdale.&lt;/div&gt;`)[0];
+                popup_2fb7997f544ad9e4727bf7f9990d5923.setContent(html_f89451cdc921e79645f746e29e79f7fd);
+            
+        
+
+        marker_351c073be7fc357ca9a4723bdab2bf7d.bindPopup(popup_2fb7997f544ad9e4727bf7f9990d5923)
+        ;
+
+        
+    
+    
+            var marker_93028dd2e0c54ee99584f1a3e94cd1c9 = L.marker(
+                [40.88393, -73.90639],
+                {}
+            ).addTo(map_d097a2a67f2b63386a29c62a52d4664d);
+        
+    
+        var popup_b5cf4a0df169c57b9b6df1e34eae78d0 = L.popup({&quot;maxWidth&quot;: &quot;100%&quot;});
+
+        
+            
+                var html_87e684d15f22754cdea191f7d3efae61 = $(`&lt;div id=&quot;html_87e684d15f22754cdea191f7d3efae61&quot; style=&quot;width: 100.0%; height: 100.0%;&quot;&gt;Riverdale - Room with Breakfast for Ladies Only&lt;/div&gt;`)[0];
+                popup_b5cf4a0df169c57b9b6df1e34eae78d0.setContent(html_87e684d15f22754cdea191f7d3efae61);
+            
+        
+
+        marker_93028dd2e0c54ee99584f1a3e94cd1c9.bindPopup(popup_b5cf4a0df169c57b9b6df1e34eae78d0)
+        ;
+
+        
+    
+    
+            var marker_4c16a7c01898d7b6dc405abc8e8e9b24 = L.marker(
+                [40.82939, -73.86514],
+                {}
+            ).addTo(map_d097a2a67f2b63386a29c62a52d4664d);
+        
+    
+        var popup_6feab8823d6c3f1fb6f08c2dc45aea5e = L.popup({&quot;maxWidth&quot;: &quot;100%&quot;});
+
+        
+            
+                var html_a79e0d6ce9292d2eacc80bd3ccff3b20 = $(`&lt;div id=&quot;html_a79e0d6ce9292d2eacc80bd3ccff3b20&quot; style=&quot;width: 100.0%; height: 100.0%;&quot;&gt;BEDROOM PRIVATE COMFY NEAR 6 TRAIN NO CURFEW&lt;/div&gt;`)[0];
+                popup_6feab8823d6c3f1fb6f08c2dc45aea5e.setContent(html_a79e0d6ce9292d2eacc80bd3ccff3b20);
+            
+        
+
+        marker_4c16a7c01898d7b6dc405abc8e8e9b24.bindPopup(popup_6feab8823d6c3f1fb6f08c2dc45aea5e)
+        ;
+
+        
+    
+    
+            var marker_05c6947db89e9b2c1def43db0a8ec22d = L.marker(
+                [40.86778, -73.85491],
+                {}
+            ).addTo(map_d097a2a67f2b63386a29c62a52d4664d);
+        
+    
+        var popup_7dd1e239dd07eac84761a9cdd94ef34f = L.popup({&quot;maxWidth&quot;: &quot;100%&quot;});
+
+        
+            
+                var html_415867a71bd8421fca4906789525fc87 = $(`&lt;div id=&quot;html_415867a71bd8421fca4906789525fc87&quot; style=&quot;width: 100.0%; height: 100.0%;&quot;&gt;Hiéroglyphe&lt;/div&gt;`)[0];
+                popup_7dd1e239dd07eac84761a9cdd94ef34f.setContent(html_415867a71bd8421fca4906789525fc87);
+            
+        
+
+        marker_05c6947db89e9b2c1def43db0a8ec22d.bindPopup(popup_7dd1e239dd07eac84761a9cdd94ef34f)
+        ;
+
+        
+    
+    
+            var marker_87f367b41ed067c9bf1fc45dde45b4b8 = L.marker(
+                [40.88253, -73.86951],
+                {}
+            ).addTo(map_d097a2a67f2b63386a29c62a52d4664d);
+        
+    
+        var popup_4ffa80dfa662c7d404ac22d5cdf7a7f2 = L.popup({&quot;maxWidth&quot;: &quot;100%&quot;});
+
+        
+            
+                var html_33ad20f26390b9db1185ae3996fece9c = $(`&lt;div id=&quot;html_33ad20f26390b9db1185ae3996fece9c&quot; style=&quot;width: 100.0%; height: 100.0%;&quot;&gt;*ENJOY NYC*New Renovated Apartment(Private room)&lt;/div&gt;`)[0];
+                popup_4ffa80dfa662c7d404ac22d5cdf7a7f2.setContent(html_33ad20f26390b9db1185ae3996fece9c);
+            
+        
+
+        marker_87f367b41ed067c9bf1fc45dde45b4b8.bindPopup(popup_4ffa80dfa662c7d404ac22d5cdf7a7f2)
+        ;
+
+        
+    
+    
+            var marker_9e8da12ae1a5984ea739dacc9ecbc823 = L.marker(
+                [40.81572, -73.84592],
+                {}
+            ).addTo(map_d097a2a67f2b63386a29c62a52d4664d);
+        
+    
+        var popup_6a654a199f2ee25316b7bb3e432762e7 = L.popup({&quot;maxWidth&quot;: &quot;100%&quot;});
+
+        
+            
+                var html_99041d42a423ffc074f3af4b97178f0b = $(`&lt;div id=&quot;html_99041d42a423ffc074f3af4b97178f0b&quot; style=&quot;width: 100.0%; height: 100.0%;&quot;&gt;NYC Traveler Get Away Private ROOM #3&lt;/div&gt;`)[0];
+                popup_6a654a199f2ee25316b7bb3e432762e7.setContent(html_99041d42a423ffc074f3af4b97178f0b);
+            
+        
+
+        marker_9e8da12ae1a5984ea739dacc9ecbc823.bindPopup(popup_6a654a199f2ee25316b7bb3e432762e7)
+        ;
+
+        
+    
+    
+            var marker_533f0ee3be0b81a51583044a644bc3d0 = L.marker(
+                [40.83717, -73.85738],
+                {}
+            ).addTo(map_d097a2a67f2b63386a29c62a52d4664d);
+        
+    
+        var popup_906f60c8e4a66eafed488f51a2b51ee8 = L.popup({&quot;maxWidth&quot;: &quot;100%&quot;});
+
+        
+            
+                var html_d0843dd9307565ea34e2b18cbc84dce4 = $(`&lt;div id=&quot;html_d0843dd9307565ea34e2b18cbc84dce4&quot; style=&quot;width: 100.0%; height: 100.0%;&quot;&gt;Private area  for comfortable and pleasant stay.&lt;/div&gt;`)[0];
+                popup_906f60c8e4a66eafed488f51a2b51ee8.setContent(html_d0843dd9307565ea34e2b18cbc84dce4);
+            
+        
+
+        marker_533f0ee3be0b81a51583044a644bc3d0.bindPopup(popup_906f60c8e4a66eafed488f51a2b51ee8)
+        ;
+
+        
+    
+    
+            var marker_096f4e9efedce60dd3aea84adcaf8fa9 = L.marker(
+                [40.8787, -73.90098],
+                {}
+            ).addTo(map_d097a2a67f2b63386a29c62a52d4664d);
+        
+    
+        var popup_be201ddde2ed201dc8614a5b1a337007 = L.popup({&quot;maxWidth&quot;: &quot;100%&quot;});
+
+        
+            
+                var html_98419754739c5649cdc814c3f37cf43a = $(`&lt;div id=&quot;html_98419754739c5649cdc814c3f37cf43a&quot; style=&quot;width: 100.0%; height: 100.0%;&quot;&gt;Modern New Condo  20 minutes to upper west side&lt;/div&gt;`)[0];
+                popup_be201ddde2ed201dc8614a5b1a337007.setContent(html_98419754739c5649cdc814c3f37cf43a);
+            
+        
+
+        marker_096f4e9efedce60dd3aea84adcaf8fa9.bindPopup(popup_be201ddde2ed201dc8614a5b1a337007)
+        ;
+
+        
+    
+    
+            var marker_c4e751a0c3a27bec7e3588c89286aaec = L.marker(
+                [40.85419, -73.89827],
+                {}
+            ).addTo(map_d097a2a67f2b63386a29c62a52d4664d);
+        
+    
+        var popup_e4cec37f27ba3f7e598d622e9c195737 = L.popup({&quot;maxWidth&quot;: &quot;100%&quot;});
+
+        
+            
+                var html_d54788c28a0d57a998589de190936c75 = $(`&lt;div id=&quot;html_d54788c28a0d57a998589de190936c75&quot; style=&quot;width: 100.0%; height: 100.0%;&quot;&gt;Habitación comoda&lt;/div&gt;`)[0];
+                popup_e4cec37f27ba3f7e598d622e9c195737.setContent(html_d54788c28a0d57a998589de190936c75);
+            
+        
+
+        marker_c4e751a0c3a27bec7e3588c89286aaec.bindPopup(popup_e4cec37f27ba3f7e598d622e9c195737)
+        ;
+
+        
+    
+    
+            var marker_5f52cb2865b2a522a187c72597562a85 = L.marker(
+                [40.84171, -73.91159],
+                {}
+            ).addTo(map_d097a2a67f2b63386a29c62a52d4664d);
+        
+    
+        var popup_5b17a439241b8191e9293d6185076fe2 = L.popup({&quot;maxWidth&quot;: &quot;100%&quot;});
+
+        
+            
+                var html_5906909b853fa3e603b35efea9acb1cb = $(`&lt;div id=&quot;html_5906909b853fa3e603b35efea9acb1cb&quot; style=&quot;width: 100.0%; height: 100.0%;&quot;&gt;Spacious and close to everything&lt;/div&gt;`)[0];
+                popup_5b17a439241b8191e9293d6185076fe2.setContent(html_5906909b853fa3e603b35efea9acb1cb);
+            
+        
+
+        marker_5f52cb2865b2a522a187c72597562a85.bindPopup(popup_5b17a439241b8191e9293d6185076fe2)
+        ;
+
+        
+    
+    
+            var marker_0cf6424d5cfe263d1a6a3e4c6ef028cc = L.marker(
+                [40.81309, -73.85367],
+                {}
+            ).addTo(map_d097a2a67f2b63386a29c62a52d4664d);
+        
+    
+        var popup_57a5e1c17990b0a72bee8da4d4e9f43e = L.popup({&quot;maxWidth&quot;: &quot;100%&quot;});
+
+        
+            
+                var html_5fb75560f2c5f669a0390e32ac0cdbc9 = $(`&lt;div id=&quot;html_5fb75560f2c5f669a0390e32ac0cdbc9&quot; style=&quot;width: 100.0%; height: 100.0%;&quot;&gt;M2 A cozy well lit room sleeps 2 on  2 single beds&lt;/div&gt;`)[0];
+                popup_57a5e1c17990b0a72bee8da4d4e9f43e.setContent(html_5fb75560f2c5f669a0390e32ac0cdbc9);
+            
+        
+
+        marker_0cf6424d5cfe263d1a6a3e4c6ef028cc.bindPopup(popup_57a5e1c17990b0a72bee8da4d4e9f43e)
+        ;
+
+        
+    
+    
+            var marker_149519bb4baba71de2c21e4c6a4a4185 = L.marker(
+                [40.82888, -73.9045],
+                {}
+            ).addTo(map_d097a2a67f2b63386a29c62a52d4664d);
+        
+    
+        var popup_bcf6f3732ec49dfd1b791162cd52ccf1 = L.popup({&quot;maxWidth&quot;: &quot;100%&quot;});
+
+        
+            
+                var html_78afb3956cfcf802021a3a1c65430c11 = $(`&lt;div id=&quot;html_78afb3956cfcf802021a3a1c65430c11&quot; style=&quot;width: 100.0%; height: 100.0%;&quot;&gt;Home of the Yankees&lt;/div&gt;`)[0];
+                popup_bcf6f3732ec49dfd1b791162cd52ccf1.setContent(html_78afb3956cfcf802021a3a1c65430c11);
+            
+        
+
+        marker_149519bb4baba71de2c21e4c6a4a4185.bindPopup(popup_bcf6f3732ec49dfd1b791162cd52ccf1)
+        ;
+
+        
+    
+    
+            var marker_66a27acb9f97ce554f78fc3dafd82ddc = L.marker(
+                [40.823, -73.90859],
+                {}
+            ).addTo(map_d097a2a67f2b63386a29c62a52d4664d);
+        
+    
+        var popup_4e6f4cd8b616d31a7758dee53fcd6e5b = L.popup({&quot;maxWidth&quot;: &quot;100%&quot;});
+
+        
+            
+                var html_705e5136a21e4340249fa198d6c70606 = $(`&lt;div id=&quot;html_705e5136a21e4340249fa198d6c70606&quot; style=&quot;width: 100.0%; height: 100.0%;&quot;&gt;Forest Houses City Getaway (No Hot Water)&lt;/div&gt;`)[0];
+                popup_4e6f4cd8b616d31a7758dee53fcd6e5b.setContent(html_705e5136a21e4340249fa198d6c70606);
+            
+        
+
+        marker_66a27acb9f97ce554f78fc3dafd82ddc.bindPopup(popup_4e6f4cd8b616d31a7758dee53fcd6e5b)
+        ;
+
+        
+    
+    
+            var marker_a73994f7b0d8dc96981a1dfe6e60c8a3 = L.marker(
+                [40.81795, -73.91178],
+                {}
+            ).addTo(map_d097a2a67f2b63386a29c62a52d4664d);
+        
+    
+        var popup_52074a65cd61b91c200bfc9e47c868ca = L.popup({&quot;maxWidth&quot;: &quot;100%&quot;});
+
+        
+            
+                var html_e97ad08b0bab62c096dcf19db00c93d3 = $(`&lt;div id=&quot;html_e97ad08b0bab62c096dcf19db00c93d3&quot; style=&quot;width: 100.0%; height: 100.0%;&quot;&gt;A lovely place of Zen, sunny, clean &amp; comfortable.&lt;/div&gt;`)[0];
+                popup_52074a65cd61b91c200bfc9e47c868ca.setContent(html_e97ad08b0bab62c096dcf19db00c93d3);
+            
+        
+
+        marker_a73994f7b0d8dc96981a1dfe6e60c8a3.bindPopup(popup_52074a65cd61b91c200bfc9e47c868ca)
+        ;
+
+        
+    
+    
+            var marker_2ee2f1284d3ee4374e426184ec123a4f = L.marker(
+                [40.84964, -73.78717],
+                {}
+            ).addTo(map_d097a2a67f2b63386a29c62a52d4664d);
+        
+    
+        var popup_1a978734c2bac69d0bf94069c7439701 = L.popup({&quot;maxWidth&quot;: &quot;100%&quot;});
+
+        
+            
+                var html_ea89fa736edd96e7e8b0618f707cda14 = $(`&lt;div id=&quot;html_ea89fa736edd96e7e8b0618f707cda14&quot; style=&quot;width: 100.0%; height: 100.0%;&quot;&gt;Quiet house on City Island&lt;/div&gt;`)[0];
+                popup_1a978734c2bac69d0bf94069c7439701.setContent(html_ea89fa736edd96e7e8b0618f707cda14);
+            
+        
+
+        marker_2ee2f1284d3ee4374e426184ec123a4f.bindPopup(popup_1a978734c2bac69d0bf94069c7439701)
+        ;
+
+        
+    
+    
+            var marker_b23fd8564b0364e4ab2762b2aa350e4b = L.marker(
+                [40.70923, -73.9448],
+                {}
+            ).addTo(map_d097a2a67f2b63386a29c62a52d4664d);
+        
+    
+        var popup_76b5e5e3023959a8b1243adef38eeccb = L.popup({&quot;maxWidth&quot;: &quot;100%&quot;});
+
+        
+            
+                var html_f1683c696b20d6a7935e32f284b410e9 = $(`&lt;div id=&quot;html_f1683c696b20d6a7935e32f284b410e9&quot; style=&quot;width: 100.0%; height: 100.0%;&quot;&gt;Cozy and spacious loft in Williamsburg/Bushwick&lt;/div&gt;`)[0];
+                popup_76b5e5e3023959a8b1243adef38eeccb.setContent(html_f1683c696b20d6a7935e32f284b410e9);
+            
+        
+
+        marker_b23fd8564b0364e4ab2762b2aa350e4b.bindPopup(popup_76b5e5e3023959a8b1243adef38eeccb)
+        ;
+
+        
+    
+    
+            var marker_f9df5c3d69583ffa7b7d72222b8b7161 = L.marker(
+                [40.67792, -73.98035],
+                {}
+            ).addTo(map_d097a2a67f2b63386a29c62a52d4664d);
+        
+    
+        var popup_2e1fd5bc374462b8bc558dbba0d4976a = L.popup({&quot;maxWidth&quot;: &quot;100%&quot;});
+
+        
+            
+                var html_60b35901f9175d5f1900674336a594c4 = $(`&lt;div id=&quot;html_60b35901f9175d5f1900674336a594c4&quot; style=&quot;width: 100.0%; height: 100.0%;&quot;&gt;park slope duplex with yard&lt;/div&gt;`)[0];
+                popup_2e1fd5bc374462b8bc558dbba0d4976a.setContent(html_60b35901f9175d5f1900674336a594c4);
+            
+        
+
+        marker_f9df5c3d69583ffa7b7d72222b8b7161.bindPopup(popup_2e1fd5bc374462b8bc558dbba0d4976a)
+        ;
+
+        
+    
+    
+            var marker_d0c3c128d4c734d01f4f76709083798e = L.marker(
+                [40.69651, -73.94763],
+                {}
+            ).addTo(map_d097a2a67f2b63386a29c62a52d4664d);
+        
+    
+        var popup_899582e1b66b3ab67387794f55f8970a = L.popup({&quot;maxWidth&quot;: &quot;100%&quot;});
+
+        
+            
+                var html_b39573ea509fe9087c5e1e0e4e879396 = $(`&lt;div id=&quot;html_b39573ea509fe9087c5e1e0e4e879396&quot; style=&quot;width: 100.0%; height: 100.0%;&quot;&gt;Cozy private room!&lt;/div&gt;`)[0];
+                popup_899582e1b66b3ab67387794f55f8970a.setContent(html_b39573ea509fe9087c5e1e0e4e879396);
+            
+        
+
+        marker_d0c3c128d4c734d01f4f76709083798e.bindPopup(popup_899582e1b66b3ab67387794f55f8970a)
+        ;
+
+        
+    
+    
+            var marker_8027f5b0e86dee8b94c790a46281949b = L.marker(
+                [40.6876, -73.92691],
+                {}
+            ).addTo(map_d097a2a67f2b63386a29c62a52d4664d);
+        
+    
+        var popup_f11c4ae13065408208f5142cea50466d = L.popup({&quot;maxWidth&quot;: &quot;100%&quot;});
+
+        
+            
+                var html_37500b046fed08ae13d64b7adc12eb7f = $(`&lt;div id=&quot;html_37500b046fed08ae13d64b7adc12eb7f&quot; style=&quot;width: 100.0%; height: 100.0%;&quot;&gt;Relaxed, artist-inspired duplex in Bed Stuy&lt;/div&gt;`)[0];
+                popup_f11c4ae13065408208f5142cea50466d.setContent(html_37500b046fed08ae13d64b7adc12eb7f);
+            
+        
+
+        marker_8027f5b0e86dee8b94c790a46281949b.bindPopup(popup_f11c4ae13065408208f5142cea50466d)
+        ;
+
+        
+    
+    
+            var marker_38928e62a3bf3b16603684594f300deb = L.marker(
+                [40.63863, -73.93826],
+                {}
+            ).addTo(map_d097a2a67f2b63386a29c62a52d4664d);
+        
+    
+        var popup_0dfaf61c6d83daf945ff78344592add1 = L.popup({&quot;maxWidth&quot;: &quot;100%&quot;});
+
+        
+            
+                var html_aeb4d7ee4d0934d9bae82a67eb24da57 = $(`&lt;div id=&quot;html_aeb4d7ee4d0934d9bae82a67eb24da57&quot; style=&quot;width: 100.0%; height: 100.0%;&quot;&gt;1940&#x27;s Historic Brooklyn Townhome&lt;/div&gt;`)[0];
+                popup_0dfaf61c6d83daf945ff78344592add1.setContent(html_aeb4d7ee4d0934d9bae82a67eb24da57);
+            
+        
+
+        marker_38928e62a3bf3b16603684594f300deb.bindPopup(popup_0dfaf61c6d83daf945ff78344592add1)
+        ;
+
+        
+    
+    
+            var marker_a36fb7dba3bea76ecf029fc7986fca1b = L.marker(
+                [40.72188, -73.94355],
+                {}
+            ).addTo(map_d097a2a67f2b63386a29c62a52d4664d);
+        
+    
+        var popup_7d607bd8b03f94b7e9060023022cf50b = L.popup({&quot;maxWidth&quot;: &quot;100%&quot;});
+
+        
+            
+                var html_d502642192b864cdc4c3601d98626823 = $(`&lt;div id=&quot;html_d502642192b864cdc4c3601d98626823&quot; style=&quot;width: 100.0%; height: 100.0%;&quot;&gt;Sunny Studio in Greenpoint - Private Bath/Kitchen&lt;/div&gt;`)[0];
+                popup_7d607bd8b03f94b7e9060023022cf50b.setContent(html_d502642192b864cdc4c3601d98626823);
+            
+        
+
+        marker_a36fb7dba3bea76ecf029fc7986fca1b.bindPopup(popup_7d607bd8b03f94b7e9060023022cf50b)
+        ;
+
+        
+    
+    
+            var marker_7f89b2a0f9bc24c8e74ff266af0dbb4f = L.marker(
+                [40.66439, -73.98904],
+                {}
+            ).addTo(map_d097a2a67f2b63386a29c62a52d4664d);
+        
+    
+        var popup_ba3fcb78ebe20e471f25c0ddd7a13e53 = L.popup({&quot;maxWidth&quot;: &quot;100%&quot;});
+
+        
+            
+                var html_a6eae9f14f98e5bc51ee396c4d9f7a78 = $(`&lt;div id=&quot;html_a6eae9f14f98e5bc51ee396c4d9f7a78&quot; style=&quot;width: 100.0%; height: 100.0%;&quot;&gt;Entire Brooklyn Home with a Friendly Cat&lt;/div&gt;`)[0];
+                popup_ba3fcb78ebe20e471f25c0ddd7a13e53.setContent(html_a6eae9f14f98e5bc51ee396c4d9f7a78);
+            
+        
+
+        marker_7f89b2a0f9bc24c8e74ff266af0dbb4f.bindPopup(popup_ba3fcb78ebe20e471f25c0ddd7a13e53)
+        ;
+
+        
+    
+    
+            var marker_d01ad4aef250f4efd0d27a38c0a739cf = L.marker(
+                [40.68475, -73.93589],
+                {}
+            ).addTo(map_d097a2a67f2b63386a29c62a52d4664d);
+        
+    
+        var popup_2e26a1ef43dce31bb245b623279ad006 = L.popup({&quot;maxWidth&quot;: &quot;100%&quot;});
+
+        
+            
+                var html_8611413523d8fb2d133c188259d52816 = $(`&lt;div id=&quot;html_8611413523d8fb2d133c188259d52816&quot; style=&quot;width: 100.0%; height: 100.0%;&quot;&gt;Private room in Bushwick.&lt;/div&gt;`)[0];
+                popup_2e26a1ef43dce31bb245b623279ad006.setContent(html_8611413523d8fb2d133c188259d52816);
+            
+        
+
+        marker_d01ad4aef250f4efd0d27a38c0a739cf.bindPopup(popup_2e26a1ef43dce31bb245b623279ad006)
+        ;
+
+        
+    
+    
+            var marker_49eb74abdbb924aa779cfa53db51503e = L.marker(
+                [40.73683, -73.9543],
+                {}
+            ).addTo(map_d097a2a67f2b63386a29c62a52d4664d);
+        
+    
+        var popup_a823ebf4c8f36b842608fe5952b318b1 = L.popup({&quot;maxWidth&quot;: &quot;100%&quot;});
+
+        
+            
+                var html_a19ab8c98cde93561edac874e78eeea2 = $(`&lt;div id=&quot;html_a19ab8c98cde93561edac874e78eeea2&quot; style=&quot;width: 100.0%; height: 100.0%;&quot;&gt;Loft Suite @ The Box House Hotel&lt;/div&gt;`)[0];
+                popup_a823ebf4c8f36b842608fe5952b318b1.setContent(html_a19ab8c98cde93561edac874e78eeea2);
+            
+        
+
+        marker_49eb74abdbb924aa779cfa53db51503e.bindPopup(popup_a823ebf4c8f36b842608fe5952b318b1)
+        ;
+
+        
+    
+    
+            var marker_c624351e65745e37c525b8c33a561a12 = L.marker(
+                [40.70312, -73.91933],
+                {}
+            ).addTo(map_d097a2a67f2b63386a29c62a52d4664d);
+        
+    
+        var popup_febad6096d9fc3dc298a9e5a85c49c2b = L.popup({&quot;maxWidth&quot;: &quot;100%&quot;});
+
+        
+            
+                var html_a4024eae85c382fc3fc5cba562ace0cb = $(`&lt;div id=&quot;html_a4024eae85c382fc3fc5cba562ace0cb&quot; style=&quot;width: 100.0%; height: 100.0%;&quot;&gt;Cozy and Colorful Room next the Dekalb L Stop&lt;/div&gt;`)[0];
+                popup_febad6096d9fc3dc298a9e5a85c49c2b.setContent(html_a4024eae85c382fc3fc5cba562ace0cb);
+            
+        
+
+        marker_c624351e65745e37c525b8c33a561a12.bindPopup(popup_febad6096d9fc3dc298a9e5a85c49c2b)
+        ;
+
+        
+    
+    
+            var marker_415bf17c76f68547aaf2f6d2797a91f7 = L.marker(
+                [40.73129, -73.95845],
+                {}
+            ).addTo(map_d097a2a67f2b63386a29c62a52d4664d);
+        
+    
+        var popup_f76f0c7e893430800aca8868fb4b9173 = L.popup({&quot;maxWidth&quot;: &quot;100%&quot;});
+
+        
+            
+                var html_0721d767d81128a5dc766e1f2febcb5d = $(`&lt;div id=&quot;html_0721d767d81128a5dc766e1f2febcb5d&quot; style=&quot;width: 100.0%; height: 100.0%;&quot;&gt;Beautiful 1 bedroom apartment in Greenpoint, BK&lt;/div&gt;`)[0];
+                popup_f76f0c7e893430800aca8868fb4b9173.setContent(html_0721d767d81128a5dc766e1f2febcb5d);
+            
+        
+
+        marker_415bf17c76f68547aaf2f6d2797a91f7.bindPopup(popup_f76f0c7e893430800aca8868fb4b9173)
+        ;
+
+        
+    
+    
+            var marker_d9802b4c3b9cb1cf56bebcfb0acc7b73 = L.marker(
+                [40.70973, -73.96405],
+                {}
+            ).addTo(map_d097a2a67f2b63386a29c62a52d4664d);
+        
+    
+        var popup_fa1b84819f745c2b14d94c239595699c = L.popup({&quot;maxWidth&quot;: &quot;100%&quot;});
+
+        
+            
+                var html_c85d6342b95352a5e3f706b72b64c53b = $(`&lt;div id=&quot;html_c85d6342b95352a5e3f706b72b64c53b&quot; style=&quot;width: 100.0%; height: 100.0%;&quot;&gt;Private furnished bedroom in Williamsburg&lt;/div&gt;`)[0];
+                popup_fa1b84819f745c2b14d94c239595699c.setContent(html_c85d6342b95352a5e3f706b72b64c53b);
+            
+        
+
+        marker_d9802b4c3b9cb1cf56bebcfb0acc7b73.bindPopup(popup_fa1b84819f745c2b14d94c239595699c)
+        ;
+
+        
+    
+    
+            var marker_caa3fb79256a75b415e2d7871559cb81 = L.marker(
+                [40.69492, -73.95839],
+                {}
+            ).addTo(map_d097a2a67f2b63386a29c62a52d4664d);
+        
+    
+        var popup_f0a746ecf66f8373052db6d49e8d34f5 = L.popup({&quot;maxWidth&quot;: &quot;100%&quot;});
+
+        
+            
+                var html_fffcfd639bf66f132fb2e1e1c2fff832 = $(`&lt;div id=&quot;html_fffcfd639bf66f132fb2e1e1c2fff832&quot; style=&quot;width: 100.0%; height: 100.0%;&quot;&gt;Chic apartment in Brooklyn with stunning view&lt;/div&gt;`)[0];
+                popup_f0a746ecf66f8373052db6d49e8d34f5.setContent(html_fffcfd639bf66f132fb2e1e1c2fff832);
+            
+        
+
+        marker_caa3fb79256a75b415e2d7871559cb81.bindPopup(popup_f0a746ecf66f8373052db6d49e8d34f5)
+        ;
+
+        
+    
+    
+            var marker_d8a882ada22ca1b318b8fe93b0394206 = L.marker(
+                [40.66631, -73.94764],
+                {}
+            ).addTo(map_d097a2a67f2b63386a29c62a52d4664d);
+        
+    
+        var popup_2c70eb68f73cbb2143c00a52372e2d03 = L.popup({&quot;maxWidth&quot;: &quot;100%&quot;});
+
+        
+            
+                var html_06c9ff69c5f8e540ae07754695c21f69 = $(`&lt;div id=&quot;html_06c9ff69c5f8e540ae07754695c21f69&quot; style=&quot;width: 100.0%; height: 100.0%;&quot;&gt;Sunny  Space in Crown Heights&lt;/div&gt;`)[0];
+                popup_2c70eb68f73cbb2143c00a52372e2d03.setContent(html_06c9ff69c5f8e540ae07754695c21f69);
+            
+        
+
+        marker_d8a882ada22ca1b318b8fe93b0394206.bindPopup(popup_2c70eb68f73cbb2143c00a52372e2d03)
+        ;
+
+        
+    
+    
+            var marker_8d6686098d87944ed3dadab2e79bd120 = L.marker(
+                [40.6929, -73.96657],
+                {}
+            ).addTo(map_d097a2a67f2b63386a29c62a52d4664d);
+        
+    
+        var popup_d9028313b5309e020d025b870cb08bb8 = L.popup({&quot;maxWidth&quot;: &quot;100%&quot;});
+
+        
+            
+                var html_8c5b7799d7d35467f510fa593e9a24a6 = $(`&lt;div id=&quot;html_8c5b7799d7d35467f510fa593e9a24a6&quot; style=&quot;width: 100.0%; height: 100.0%;&quot;&gt;The Justice Tower 1&lt;/div&gt;`)[0];
+                popup_d9028313b5309e020d025b870cb08bb8.setContent(html_8c5b7799d7d35467f510fa593e9a24a6);
+            
+        
+
+        marker_8d6686098d87944ed3dadab2e79bd120.bindPopup(popup_d9028313b5309e020d025b870cb08bb8)
+        ;
+
+        
+    
+    
+            var marker_c876d55f4f89e6de0dd7019e68f42a3e = L.marker(
+                [40.72681, -73.98534],
+                {}
+            ).addTo(map_d097a2a67f2b63386a29c62a52d4664d);
+        
+    
+        var popup_bb151e488caa0f8d3888aa216ed2f863 = L.popup({&quot;maxWidth&quot;: &quot;100%&quot;});
+
+        
+            
+                var html_f2c5efd7611a9fea964961cc4225632b = $(`&lt;div id=&quot;html_f2c5efd7611a9fea964961cc4225632b&quot; style=&quot;width: 100.0%; height: 100.0%;&quot;&gt;East Village Loft with Piano &amp; Patio&lt;/div&gt;`)[0];
+                popup_bb151e488caa0f8d3888aa216ed2f863.setContent(html_f2c5efd7611a9fea964961cc4225632b);
+            
+        
+
+        marker_c876d55f4f89e6de0dd7019e68f42a3e.bindPopup(popup_bb151e488caa0f8d3888aa216ed2f863)
+        ;
+
+        
+    
+    
+            var marker_8b0b7b80fb8b626e4c26ee84bdade6d3 = L.marker(
+                [40.74358, -74.00027],
+                {}
+            ).addTo(map_d097a2a67f2b63386a29c62a52d4664d);
+        
+    
+        var popup_9acbc17972d4b6f70de70a61e9c68411 = L.popup({&quot;maxWidth&quot;: &quot;100%&quot;});
+
+        
+            
+                var html_8ac90126fc58d8e480b3d5c1636e579d = $(`&lt;div id=&quot;html_8ac90126fc58d8e480b3d5c1636e579d&quot; style=&quot;width: 100.0%; height: 100.0%;&quot;&gt;Huge Chelsea Loft&lt;/div&gt;`)[0];
+                popup_9acbc17972d4b6f70de70a61e9c68411.setContent(html_8ac90126fc58d8e480b3d5c1636e579d);
+            
+        
+
+        marker_8b0b7b80fb8b626e4c26ee84bdade6d3.bindPopup(popup_9acbc17972d4b6f70de70a61e9c68411)
+        ;
+
+        
+    
+    
+            var marker_7f978a27bba4b0d37a45feb21bc30658 = L.marker(
+                [40.74913, -73.99513],
+                {}
+            ).addTo(map_d097a2a67f2b63386a29c62a52d4664d);
+        
+    
+        var popup_2b0989ecf3cc887378799dab82e7172b = L.popup({&quot;maxWidth&quot;: &quot;100%&quot;});
+
+        
+            
+                var html_07f81dd62ae16294e15a54081208d649 = $(`&lt;div id=&quot;html_07f81dd62ae16294e15a54081208d649&quot; style=&quot;width: 100.0%; height: 100.0%;&quot;&gt;Midtown Boutique Hotel - Cozy Single&lt;/div&gt;`)[0];
+                popup_2b0989ecf3cc887378799dab82e7172b.setContent(html_07f81dd62ae16294e15a54081208d649);
+            
+        
+
+        marker_7f978a27bba4b0d37a45feb21bc30658.bindPopup(popup_2b0989ecf3cc887378799dab82e7172b)
+        ;
+
+        
+    
+    
+            var marker_61a5189aa130cb44b26dd424679799ae = L.marker(
+                [40.79228, -73.97414],
+                {}
+            ).addTo(map_d097a2a67f2b63386a29c62a52d4664d);
+        
+    
+        var popup_fa0e420353b394066f7e74cbb8d7670c = L.popup({&quot;maxWidth&quot;: &quot;100%&quot;});
+
+        
+            
+                var html_cf3ed06018c4a94c3fd6ee742ffe9600 = $(`&lt;div id=&quot;html_cf3ed06018c4a94c3fd6ee742ffe9600&quot; style=&quot;width: 100.0%; height: 100.0%;&quot;&gt;Spacious and light-filled Manhattan apartment&lt;/div&gt;`)[0];
+                popup_fa0e420353b394066f7e74cbb8d7670c.setContent(html_cf3ed06018c4a94c3fd6ee742ffe9600);
+            
+        
+
+        marker_61a5189aa130cb44b26dd424679799ae.bindPopup(popup_fa0e420353b394066f7e74cbb8d7670c)
+        ;
+
+        
+    
+    
+            var marker_2d01ee750689e98b008eb63df24006dc = L.marker(
+                [40.77467, -73.95405],
+                {}
+            ).addTo(map_d097a2a67f2b63386a29c62a52d4664d);
+        
+    
+        var popup_867a4a8c069a691f8b0d2532d130a9cf = L.popup({&quot;maxWidth&quot;: &quot;100%&quot;});
+
+        
+            
+                var html_190d8d058208d4b6cbff15577c200565 = $(`&lt;div id=&quot;html_190d8d058208d4b6cbff15577c200565&quot; style=&quot;width: 100.0%; height: 100.0%;&quot;&gt;NYC Sweetheart Studio - Upper East&lt;/div&gt;`)[0];
+                popup_867a4a8c069a691f8b0d2532d130a9cf.setContent(html_190d8d058208d4b6cbff15577c200565);
+            
+        
+
+        marker_2d01ee750689e98b008eb63df24006dc.bindPopup(popup_867a4a8c069a691f8b0d2532d130a9cf)
+        ;
+
+        
+    
+    
+            var marker_4fd9b69cca6acfb24771c24255c9dfa3 = L.marker(
+                [40.71258, -73.9901],
+                {}
+            ).addTo(map_d097a2a67f2b63386a29c62a52d4664d);
+        
+    
+        var popup_9de0d2d898a833dfa7c5375df2cfbb91 = L.popup({&quot;maxWidth&quot;: &quot;100%&quot;});
+
+        
+            
+                var html_0e195a63f9ce54db97538320638aa28e = $(`&lt;div id=&quot;html_0e195a63f9ce54db97538320638aa28e&quot; style=&quot;width: 100.0%; height: 100.0%;&quot;&gt;3 br 80s light loft in Lower East Side / Chinatown&lt;/div&gt;`)[0];
+                popup_9de0d2d898a833dfa7c5375df2cfbb91.setContent(html_0e195a63f9ce54db97538320638aa28e);
+            
+        
+
+        marker_4fd9b69cca6acfb24771c24255c9dfa3.bindPopup(popup_9de0d2d898a833dfa7c5375df2cfbb91)
+        ;
+
+        
+    
+    
+            var marker_bb1fb1670551b5169c8fa47116755334 = L.marker(
+                [40.74476, -73.97622],
+                {}
+            ).addTo(map_d097a2a67f2b63386a29c62a52d4664d);
+        
+    
+        var popup_feec5a503037c6b2aa28bd52eafd9b67 = L.popup({&quot;maxWidth&quot;: &quot;100%&quot;});
+
+        
+            
+                var html_bdb3bed46077a9585d23178a98011be6 = $(`&lt;div id=&quot;html_bdb3bed46077a9585d23178a98011be6&quot; style=&quot;width: 100.0%; height: 100.0%;&quot;&gt;Greatest view in nyc , biggest room also!&lt;/div&gt;`)[0];
+                popup_feec5a503037c6b2aa28bd52eafd9b67.setContent(html_bdb3bed46077a9585d23178a98011be6);
+            
+        
+
+        marker_bb1fb1670551b5169c8fa47116755334.bindPopup(popup_feec5a503037c6b2aa28bd52eafd9b67)
+        ;
+
+        
+    
+    
+            var marker_83a976beb3c5d94c7855fc3df1471457 = L.marker(
+                [40.75568, -73.96474],
+                {}
+            ).addTo(map_d097a2a67f2b63386a29c62a52d4664d);
+        
+    
+        var popup_e712de3ebee9e8e7067dae6fc5686677 = L.popup({&quot;maxWidth&quot;: &quot;100%&quot;});
+
+        
+            
+                var html_1bf55e7d5039e3602d168ba694233768 = $(`&lt;div id=&quot;html_1bf55e7d5039e3602d168ba694233768&quot; style=&quot;width: 100.0%; height: 100.0%;&quot;&gt;The Bridge View- Sutton Place&lt;/div&gt;`)[0];
+                popup_e712de3ebee9e8e7067dae6fc5686677.setContent(html_1bf55e7d5039e3602d168ba694233768);
+            
+        
+
+        marker_83a976beb3c5d94c7855fc3df1471457.bindPopup(popup_e712de3ebee9e8e7067dae6fc5686677)
+        ;
+
+        
+    
+    
+            var marker_6cfd4ccb7982131621de3ea75baae36e = L.marker(
+                [40.74765, -74.0042],
+                {}
+            ).addTo(map_d097a2a67f2b63386a29c62a52d4664d);
+        
+    
+        var popup_d57e5a2f3da97277fab93fe3aaff8d8e = L.popup({&quot;maxWidth&quot;: &quot;100%&quot;});
+
+        
+            
+                var html_78a42544291d00e3de084beafbda7373 = $(`&lt;div id=&quot;html_78a42544291d00e3de084beafbda7373&quot; style=&quot;width: 100.0%; height: 100.0%;&quot;&gt;West Chelsea Apt! AMAZING Location!&lt;/div&gt;`)[0];
+                popup_d57e5a2f3da97277fab93fe3aaff8d8e.setContent(html_78a42544291d00e3de084beafbda7373);
+            
+        
+
+        marker_6cfd4ccb7982131621de3ea75baae36e.bindPopup(popup_d57e5a2f3da97277fab93fe3aaff8d8e)
+        ;
+
+        
+    
+    
+            var marker_579dcbd8d1a1da529d23a6465baa833a = L.marker(
+                [40.75393, -73.96646],
+                {}
+            ).addTo(map_d097a2a67f2b63386a29c62a52d4664d);
+        
+    
+        var popup_730b93a5f95ffeba51ba779409c24379 = L.popup({&quot;maxWidth&quot;: &quot;100%&quot;});
+
+        
+            
+                var html_652f1bb71173d6a7d14e9de23f84ea2e = $(`&lt;div id=&quot;html_652f1bb71173d6a7d14e9de23f84ea2e&quot; style=&quot;width: 100.0%; height: 100.0%;&quot;&gt;*NO GUEST SERVICE FEE* Beekman Tower Two Bedroom  #3&lt;/div&gt;`)[0];
+                popup_730b93a5f95ffeba51ba779409c24379.setContent(html_652f1bb71173d6a7d14e9de23f84ea2e);
+            
+        
+
+        marker_579dcbd8d1a1da529d23a6465baa833a.bindPopup(popup_730b93a5f95ffeba51ba779409c24379)
+        ;
+
+        
+    
+    
+            var marker_36273294e9c74e5c57e3935399e627a0 = L.marker(
+                [40.74253, -73.98006],
+                {}
+            ).addTo(map_d097a2a67f2b63386a29c62a52d4664d);
+        
+    
+        var popup_8746abb74b985db72b4e08677d75ecc5 = L.popup({&quot;maxWidth&quot;: &quot;100%&quot;});
+
+        
+            
+                var html_7ba95c6adc18b8876626154e937b86cb = $(`&lt;div id=&quot;html_7ba95c6adc18b8876626154e937b86cb&quot; style=&quot;width: 100.0%; height: 100.0%;&quot;&gt;Small Room in Beautiful Apartment/Building&lt;/div&gt;`)[0];
+                popup_8746abb74b985db72b4e08677d75ecc5.setContent(html_7ba95c6adc18b8876626154e937b86cb);
+            
+        
+
+        marker_36273294e9c74e5c57e3935399e627a0.bindPopup(popup_8746abb74b985db72b4e08677d75ecc5)
+        ;
+
+        
+    
+    
+            var marker_844be9906b8f5ba3de7104a9e2830c75 = L.marker(
+                [40.75399, -73.99764],
+                {}
+            ).addTo(map_d097a2a67f2b63386a29c62a52d4664d);
+        
+    
+        var popup_92a09748c85b31d56379bc6ecaabe42b = L.popup({&quot;maxWidth&quot;: &quot;100%&quot;});
+
+        
+            
+                var html_c2039c3fa1e6052d08b0c6af02bba5b2 = $(`&lt;div id=&quot;html_c2039c3fa1e6052d08b0c6af02bba5b2&quot; style=&quot;width: 100.0%; height: 100.0%;&quot;&gt;Luxury Apartment in Midtown West&lt;/div&gt;`)[0];
+                popup_92a09748c85b31d56379bc6ecaabe42b.setContent(html_c2039c3fa1e6052d08b0c6af02bba5b2);
+            
+        
+
+        marker_844be9906b8f5ba3de7104a9e2830c75.bindPopup(popup_92a09748c85b31d56379bc6ecaabe42b)
+        ;
+
+        
+    
+    
+            var marker_57d2682e6c2d215e0d21999fa2efb016 = L.marker(
+                [40.80997, -73.93992],
+                {}
+            ).addTo(map_d097a2a67f2b63386a29c62a52d4664d);
+        
+    
+        var popup_096163de17c7fc4486220c4bf1df1145 = L.popup({&quot;maxWidth&quot;: &quot;100%&quot;});
+
+        
+            
+                var html_f6a59314e5e4c108497687d0f3762e4d = $(`&lt;div id=&quot;html_f6a59314e5e4c108497687d0f3762e4d&quot; style=&quot;width: 100.0%; height: 100.0%;&quot;&gt;Bright, cozy private room in Harlem&lt;/div&gt;`)[0];
+                popup_096163de17c7fc4486220c4bf1df1145.setContent(html_f6a59314e5e4c108497687d0f3762e4d);
+            
+        
+
+        marker_57d2682e6c2d215e0d21999fa2efb016.bindPopup(popup_096163de17c7fc4486220c4bf1df1145)
+        ;
+
+        
+    
+    
+            var marker_cda6a3ec596773ec18cfd19eb2ff6d10 = L.marker(
+                [40.82761, -73.9375],
+                {}
+            ).addTo(map_d097a2a67f2b63386a29c62a52d4664d);
+        
+    
+        var popup_d8bab5f7137b7500e439f902a64e0e45 = L.popup({&quot;maxWidth&quot;: &quot;100%&quot;});
+
+        
+            
+                var html_371d0410495ea26b7bc26dc9cafb607b = $(`&lt;div id=&quot;html_371d0410495ea26b7bc26dc9cafb607b&quot; style=&quot;width: 100.0%; height: 100.0%;&quot;&gt;Clean, quite, and near a lot of transportation&lt;/div&gt;`)[0];
+                popup_d8bab5f7137b7500e439f902a64e0e45.setContent(html_371d0410495ea26b7bc26dc9cafb607b);
+            
+        
+
+        marker_cda6a3ec596773ec18cfd19eb2ff6d10.bindPopup(popup_d8bab5f7137b7500e439f902a64e0e45)
+        ;
+
+        
+    
+    
+            var marker_f1d93734191006e5f05d33d53a0ef18d = L.marker(
+                [40.73207, -74.00322],
+                {}
+            ).addTo(map_d097a2a67f2b63386a29c62a52d4664d);
+        
+    
+        var popup_39087acd3fd5e4f1ed7cec9ac4a84e1b = L.popup({&quot;maxWidth&quot;: &quot;100%&quot;});
+
+        
+            
+                var html_6d6729fe9b34ef3ec48acda291d7a8a4 = $(`&lt;div id=&quot;html_6d6729fe9b34ef3ec48acda291d7a8a4&quot; style=&quot;width: 100.0%; height: 100.0%;&quot;&gt;Cozy, quiet, one-bedroom West Village apartment&lt;/div&gt;`)[0];
+                popup_39087acd3fd5e4f1ed7cec9ac4a84e1b.setContent(html_6d6729fe9b34ef3ec48acda291d7a8a4);
+            
+        
+
+        marker_f1d93734191006e5f05d33d53a0ef18d.bindPopup(popup_39087acd3fd5e4f1ed7cec9ac4a84e1b)
+        ;
+
+        
+    
+    
+            var marker_c05ca9f858c3053c7dc1f610454f16e2 = L.marker(
+                [40.74024, -73.83105],
+                {}
+            ).addTo(map_d097a2a67f2b63386a29c62a52d4664d);
+        
+    
+        var popup_a2e601a8780df5f1aeaf1272f5b102b7 = L.popup({&quot;maxWidth&quot;: &quot;100%&quot;});
+
+        
+            
+                var html_424883428a57b774a432987aafdef9fc = $(`&lt;div id=&quot;html_424883428a57b774a432987aafdef9fc&quot; style=&quot;width: 100.0%; height: 100.0%;&quot;&gt;Lovely Studio in Flushing/kew Garde&lt;/div&gt;`)[0];
+                popup_a2e601a8780df5f1aeaf1272f5b102b7.setContent(html_424883428a57b774a432987aafdef9fc);
+            
+        
+
+        marker_c05ca9f858c3053c7dc1f610454f16e2.bindPopup(popup_a2e601a8780df5f1aeaf1272f5b102b7)
+        ;
+
+        
+    
+    
+            var marker_8356e1229a15f57e831f828fb735516d = L.marker(
+                [40.72318, -73.85621],
+                {}
+            ).addTo(map_d097a2a67f2b63386a29c62a52d4664d);
+        
+    
+        var popup_77cf1326afabf3387da125690772addb = L.popup({&quot;maxWidth&quot;: &quot;100%&quot;});
+
+        
+            
+                var html_e16a5c07e965bc0d1fcaeea7f7304900 = $(`&lt;div id=&quot;html_e16a5c07e965bc0d1fcaeea7f7304900&quot; style=&quot;width: 100.0%; height: 100.0%;&quot;&gt;Cosy Studio in Rego Park&lt;/div&gt;`)[0];
+                popup_77cf1326afabf3387da125690772addb.setContent(html_e16a5c07e965bc0d1fcaeea7f7304900);
+            
+        
+
+        marker_8356e1229a15f57e831f828fb735516d.bindPopup(popup_77cf1326afabf3387da125690772addb)
+        ;
+
+        
+    
+    
+            var marker_0ac04e3f64105e00c394608d9c63506a = L.marker(
+                [40.70639, -73.90058],
+                {}
+            ).addTo(map_d097a2a67f2b63386a29c62a52d4664d);
+        
+    
+        var popup_820dea168648d19c84f5f5029a25bc68 = L.popup({&quot;maxWidth&quot;: &quot;100%&quot;});
+
+        
+            
+                var html_0e74b893a3ad1ccd9a85ae031247bf7b = $(`&lt;div id=&quot;html_0e74b893a3ad1ccd9a85ae031247bf7b&quot; style=&quot;width: 100.0%; height: 100.0%;&quot;&gt;Elegant spacious private room&lt;/div&gt;`)[0];
+                popup_820dea168648d19c84f5f5029a25bc68.setContent(html_0e74b893a3ad1ccd9a85ae031247bf7b);
+            
+        
+
+        marker_0ac04e3f64105e00c394608d9c63506a.bindPopup(popup_820dea168648d19c84f5f5029a25bc68)
+        ;
+
+        
+    
+    
+            var marker_d490e239070287a95f614e30255e736f = L.marker(
+                [40.74278, -73.88069],
+                {}
+            ).addTo(map_d097a2a67f2b63386a29c62a52d4664d);
+        
+    
+        var popup_8d3dfe75f3a0c27abd209c5ed9d2a180 = L.popup({&quot;maxWidth&quot;: &quot;100%&quot;});
+
+        
+            
+                var html_3b6041fa3984810084143cd3bf086a72 = $(`&lt;div id=&quot;html_3b6041fa3984810084143cd3bf086a72&quot; style=&quot;width: 100.0%; height: 100.0%;&quot;&gt;Quite spotless private room in Queens&lt;/div&gt;`)[0];
+                popup_8d3dfe75f3a0c27abd209c5ed9d2a180.setContent(html_3b6041fa3984810084143cd3bf086a72);
+            
+        
+
+        marker_d490e239070287a95f614e30255e736f.bindPopup(popup_8d3dfe75f3a0c27abd209c5ed9d2a180)
+        ;
+
+        
+    
+    
+            var marker_93fc1a2aebf36d88c6f14e1993e65be4 = L.marker(
+                [40.73799, -73.92749],
+                {}
+            ).addTo(map_d097a2a67f2b63386a29c62a52d4664d);
+        
+    
+        var popup_2da9cb658007a053841a427e0cf2b6d5 = L.popup({&quot;maxWidth&quot;: &quot;100%&quot;});
+
+        
+            
+                var html_18ea059f6ad1fb353604e6485162cd86 = $(`&lt;div id=&quot;html_18ea059f6ad1fb353604e6485162cd86&quot; style=&quot;width: 100.0%; height: 100.0%;&quot;&gt;Nice &amp; Lovely room in LIC.5 stops to Times Square&lt;/div&gt;`)[0];
+                popup_2da9cb658007a053841a427e0cf2b6d5.setContent(html_18ea059f6ad1fb353604e6485162cd86);
+            
+        
+
+        marker_93fc1a2aebf36d88c6f14e1993e65be4.bindPopup(popup_2da9cb658007a053841a427e0cf2b6d5)
+        ;
+
+        
+    
+    
+            var marker_b1b54678be90e65a0c945dbd7f704404 = L.marker(
+                [40.74245, -73.92587],
+                {}
+            ).addTo(map_d097a2a67f2b63386a29c62a52d4664d);
+        
+    
+        var popup_706fc859fc7668531e5ddceaf451ab99 = L.popup({&quot;maxWidth&quot;: &quot;100%&quot;});
+
+        
+            
+                var html_b7672d2ee73ea57f7725a7faebb8f667 = $(`&lt;div id=&quot;html_b7672d2ee73ea57f7725a7faebb8f667&quot; style=&quot;width: 100.0%; height: 100.0%;&quot;&gt;Cute, clean and sunny one bedroom with character&lt;/div&gt;`)[0];
+                popup_706fc859fc7668531e5ddceaf451ab99.setContent(html_b7672d2ee73ea57f7725a7faebb8f667);
+            
+        
+
+        marker_b1b54678be90e65a0c945dbd7f704404.bindPopup(popup_706fc859fc7668531e5ddceaf451ab99)
+        ;
+
+        
+    
+    
+            var marker_6b8cf79223c53af218aa52e599c116c8 = L.marker(
+                [40.67405, -73.85402],
+                {}
+            ).addTo(map_d097a2a67f2b63386a29c62a52d4664d);
+        
+    
+        var popup_5e04966b8fa9b740c1d1b08218325d40 = L.popup({&quot;maxWidth&quot;: &quot;100%&quot;});
+
+        
+            
+                var html_a0843ade2fdb5c39ca257bf3a6c76476 = $(`&lt;div id=&quot;html_a0843ade2fdb5c39ca257bf3a6c76476&quot; style=&quot;width: 100.0%; height: 100.0%;&quot;&gt;Ozone Park Tudor Village&lt;/div&gt;`)[0];
+                popup_5e04966b8fa9b740c1d1b08218325d40.setContent(html_a0843ade2fdb5c39ca257bf3a6c76476);
+            
+        
+
+        marker_6b8cf79223c53af218aa52e599c116c8.bindPopup(popup_5e04966b8fa9b740c1d1b08218325d40)
+        ;
+
+        
+    
+    
+            var marker_49d0637f1cc8b4965d57254fe5a52570 = L.marker(
+                [40.74267, -73.8996],
+                {}
+            ).addTo(map_d097a2a67f2b63386a29c62a52d4664d);
+        
+    
+        var popup_5a1b5692f2d2ff6d778eb97750aef573 = L.popup({&quot;maxWidth&quot;: &quot;100%&quot;});
+
+        
+            
+                var html_71035e3f11a73803df4a8d8e880dadb8 = $(`&lt;div id=&quot;html_71035e3f11a73803df4a8d8e880dadb8&quot; style=&quot;width: 100.0%; height: 100.0%;&quot;&gt;Brand New Fully Remodeled Modern House&lt;/div&gt;`)[0];
+                popup_5a1b5692f2d2ff6d778eb97750aef573.setContent(html_71035e3f11a73803df4a8d8e880dadb8);
+            
+        
+
+        marker_49d0637f1cc8b4965d57254fe5a52570.bindPopup(popup_5a1b5692f2d2ff6d778eb97750aef573)
+        ;
+
+        
+    
+    
+            var marker_da80a2f6b24eff2167199153c9ea697e = L.marker(
+                [40.76386, -73.91475],
+                {}
+            ).addTo(map_d097a2a67f2b63386a29c62a52d4664d);
+        
+    
+        var popup_fb47d06ca9b2d309f786ca3a50ec9255 = L.popup({&quot;maxWidth&quot;: &quot;100%&quot;});
+
+        
+            
+                var html_c93e7fce228e4bbc01bd00c84469fcdd = $(`&lt;div id=&quot;html_c93e7fce228e4bbc01bd00c84469fcdd&quot; style=&quot;width: 100.0%; height: 100.0%;&quot;&gt;Private Bedroom in Beautiful Astoria Apt&lt;/div&gt;`)[0];
+                popup_fb47d06ca9b2d309f786ca3a50ec9255.setContent(html_c93e7fce228e4bbc01bd00c84469fcdd);
+            
+        
+
+        marker_da80a2f6b24eff2167199153c9ea697e.bindPopup(popup_fb47d06ca9b2d309f786ca3a50ec9255)
+        ;
+
+        
+    
+    
+            var marker_4aa7500e2058f7bf6f36c4fa880a1e7e = L.marker(
+                [40.59802, -73.75497],
+                {}
+            ).addTo(map_d097a2a67f2b63386a29c62a52d4664d);
+        
+    
+        var popup_3934f7c0db866ab25a08235883a2d3d5 = L.popup({&quot;maxWidth&quot;: &quot;100%&quot;});
+
+        
+            
+                var html_d781f1d84833f0f37692977305a22453 = $(`&lt;div id=&quot;html_d781f1d84833f0f37692977305a22453&quot; style=&quot;width: 100.0%; height: 100.0%;&quot;&gt;Relaxing private bedroom&lt;/div&gt;`)[0];
+                popup_3934f7c0db866ab25a08235883a2d3d5.setContent(html_d781f1d84833f0f37692977305a22453);
+            
+        
+
+        marker_4aa7500e2058f7bf6f36c4fa880a1e7e.bindPopup(popup_3934f7c0db866ab25a08235883a2d3d5)
+        ;
+
+        
+    
+    
+            var marker_1074eeb878bbaec030c0337c9ac560df = L.marker(
+                [40.76501, -73.92502],
+                {}
+            ).addTo(map_d097a2a67f2b63386a29c62a52d4664d);
+        
+    
+        var popup_d280fb66ec924422f8f58cbc24304c3d = L.popup({&quot;maxWidth&quot;: &quot;100%&quot;});
+
+        
+            
+                var html_8044845f978c1c54e1b2271859ccbe53 = $(`&lt;div id=&quot;html_8044845f978c1c54e1b2271859ccbe53&quot; style=&quot;width: 100.0%; height: 100.0%;&quot;&gt;Quarto privado em Astória.&lt;/div&gt;`)[0];
+                popup_d280fb66ec924422f8f58cbc24304c3d.setContent(html_8044845f978c1c54e1b2271859ccbe53);
+            
+        
+
+        marker_1074eeb878bbaec030c0337c9ac560df.bindPopup(popup_d280fb66ec924422f8f58cbc24304c3d)
+        ;
+
+        
+    
+    
+            var marker_52ab125391a9b11204d5369a4dbb99f0 = L.marker(
+                [40.59692, -73.7602],
+                {}
+            ).addTo(map_d097a2a67f2b63386a29c62a52d4664d);
+        
+    
+        var popup_7c89a9f36e25a0de7b0bf1671e42d5e1 = L.popup({&quot;maxWidth&quot;: &quot;100%&quot;});
+
+        
+            
+                var html_3c700bf13d4d7bded3b3c568adef0981 = $(`&lt;div id=&quot;html_3c700bf13d4d7bded3b3c568adef0981&quot; style=&quot;width: 100.0%; height: 100.0%;&quot;&gt;Amazin 1BD in Queens, JFK, St John&#x27;s Hosp, Kitchen&lt;/div&gt;`)[0];
+                popup_7c89a9f36e25a0de7b0bf1671e42d5e1.setContent(html_3c700bf13d4d7bded3b3c568adef0981);
+            
+        
+
+        marker_52ab125391a9b11204d5369a4dbb99f0.bindPopup(popup_7c89a9f36e25a0de7b0bf1671e42d5e1)
+        ;
+
+        
+    
+    
+            var marker_34cf43e9d7591e19b807e2e293c50265 = L.marker(
+                [40.76506, -73.82757],
+                {}
+            ).addTo(map_d097a2a67f2b63386a29c62a52d4664d);
+        
+    
+        var popup_1ac2aa66ff3d95bfc446a88ec7a56610 = L.popup({&quot;maxWidth&quot;: &quot;100%&quot;});
+
+        
+            
+                var html_4858230593a5c77d8964bcf59ba2d8af = $(`&lt;div id=&quot;html_4858230593a5c77d8964bcf59ba2d8af&quot; style=&quot;width: 100.0%; height: 100.0%;&quot;&gt;家庭式雙人房K&lt;/div&gt;`)[0];
+                popup_1ac2aa66ff3d95bfc446a88ec7a56610.setContent(html_4858230593a5c77d8964bcf59ba2d8af);
+            
+        
+
+        marker_34cf43e9d7591e19b807e2e293c50265.bindPopup(popup_1ac2aa66ff3d95bfc446a88ec7a56610)
+        ;
+
+        
+    
+    
+            var marker_e8e29541ac4f0bc2b15712088c0c7e44 = L.marker(
+                [40.70382, -73.73955],
+                {}
+            ).addTo(map_d097a2a67f2b63386a29c62a52d4664d);
+        
+    
+        var popup_662a6c7802903eee59203963de44a852 = L.popup({&quot;maxWidth&quot;: &quot;100%&quot;});
+
+        
+            
+                var html_77c809c15b0bc10ed6fd4b3d7df37341 = $(`&lt;div id=&quot;html_77c809c15b0bc10ed6fd4b3d7df37341&quot; style=&quot;width: 100.0%; height: 100.0%;&quot;&gt;Renovated, Residential Space&lt;/div&gt;`)[0];
+                popup_662a6c7802903eee59203963de44a852.setContent(html_77c809c15b0bc10ed6fd4b3d7df37341);
+            
+        
+
+        marker_e8e29541ac4f0bc2b15712088c0c7e44.bindPopup(popup_662a6c7802903eee59203963de44a852)
+        ;
+
+        
+    
+    
+            var marker_a35f494dd51faa9efbc21ddfdfd6567c = L.marker(
+                [40.68501, -73.79162],
+                {}
+            ).addTo(map_d097a2a67f2b63386a29c62a52d4664d);
+        
+    
+        var popup_0f51757df018388ed384cc220b141f4f = L.popup({&quot;maxWidth&quot;: &quot;100%&quot;});
+
+        
+            
+                var html_19def3fff6c2fc9b8d4f35217217b5b7 = $(`&lt;div id=&quot;html_19def3fff6c2fc9b8d4f35217217b5b7&quot; style=&quot;width: 100.0%; height: 100.0%;&quot;&gt;RESIDENCE NEAR JFK (TB3)&lt;/div&gt;`)[0];
+                popup_0f51757df018388ed384cc220b141f4f.setContent(html_19def3fff6c2fc9b8d4f35217217b5b7);
+            
+        
+
+        marker_a35f494dd51faa9efbc21ddfdfd6567c.bindPopup(popup_0f51757df018388ed384cc220b141f4f)
+        ;
+
+        
+    
+    
+            var marker_e98c2614f3a281cb3391ce0681882797 = L.marker(
+                [40.6427, -74.08001],
+                {}
+            ).addTo(map_d097a2a67f2b63386a29c62a52d4664d);
+        
+    
+        var popup_65bae2d57c831f9d968dd30e42d82ff7 = L.popup({&quot;maxWidth&quot;: &quot;100%&quot;});
+
+        
+            
+                var html_4fb28ff9dcc54392ae7a92b6c465249a = $(`&lt;div id=&quot;html_4fb28ff9dcc54392ae7a92b6c465249a&quot; style=&quot;width: 100.0%; height: 100.0%;&quot;&gt;New York City near Staten Is. Ferry&lt;/div&gt;`)[0];
+                popup_65bae2d57c831f9d968dd30e42d82ff7.setContent(html_4fb28ff9dcc54392ae7a92b6c465249a);
+            
+        
+
+        marker_e98c2614f3a281cb3391ce0681882797.bindPopup(popup_65bae2d57c831f9d968dd30e42d82ff7)
+        ;
+
+        
+    
+    
+            var marker_0821261203669d46f1c52d96be9344c5 = L.marker(
+                [40.63518, -74.07956],
+                {}
+            ).addTo(map_d097a2a67f2b63386a29c62a52d4664d);
+        
+    
+        var popup_e8c1e3cb9d4cfc8dba86143cdac5f0b9 = L.popup({&quot;maxWidth&quot;: &quot;100%&quot;});
+
+        
+            
+                var html_caa25e9ff760a900820d5b483f17982f = $(`&lt;div id=&quot;html_caa25e9ff760a900820d5b483f17982f&quot; style=&quot;width: 100.0%; height: 100.0%;&quot;&gt;@Ferry,2Bedroom/4bed.Private,Renovated/Stylish...&lt;/div&gt;`)[0];
+                popup_e8c1e3cb9d4cfc8dba86143cdac5f0b9.setContent(html_caa25e9ff760a900820d5b483f17982f);
+            
+        
+
+        marker_0821261203669d46f1c52d96be9344c5.bindPopup(popup_e8c1e3cb9d4cfc8dba86143cdac5f0b9)
+        ;
+
+        
+    
+    
+            var marker_ee7100101d038694059a53fbe4b87d37 = L.marker(
+                [40.6279, -74.08202],
+                {}
+            ).addTo(map_d097a2a67f2b63386a29c62a52d4664d);
+        
+    
+        var popup_2d8dd33ebf11c82751cb1ab415a8d241 = L.popup({&quot;maxWidth&quot;: &quot;100%&quot;});
+
+        
+            
+                var html_f38fd73d7cb6f25621397c37c5aa7100 = $(`&lt;div id=&quot;html_f38fd73d7cb6f25621397c37c5aa7100&quot; style=&quot;width: 100.0%; height: 100.0%;&quot;&gt;Elegant &amp; Luxurious, Clean &amp; Cheerful entire house&lt;/div&gt;`)[0];
+                popup_2d8dd33ebf11c82751cb1ab415a8d241.setContent(html_f38fd73d7cb6f25621397c37c5aa7100);
+            
+        
+
+        marker_ee7100101d038694059a53fbe4b87d37.bindPopup(popup_2d8dd33ebf11c82751cb1ab415a8d241)
+        ;
+
+        
+    
+    
+            var marker_f142b97b57184dab35dc9fa22d537904 = L.marker(
+                [40.62692, -74.1299],
+                {}
+            ).addTo(map_d097a2a67f2b63386a29c62a52d4664d);
+        
+    
+        var popup_af220d2e5cec11e6f635c16d88774965 = L.popup({&quot;maxWidth&quot;: &quot;100%&quot;});
+
+        
+            
+                var html_9da911ece36aadb1f98bf296cff84fc0 = $(`&lt;div id=&quot;html_9da911ece36aadb1f98bf296cff84fc0&quot; style=&quot;width: 100.0%; height: 100.0%;&quot;&gt;Newly Renovated 3BR Apt,Minutes away from SI Ferry&lt;/div&gt;`)[0];
+                popup_af220d2e5cec11e6f635c16d88774965.setContent(html_9da911ece36aadb1f98bf296cff84fc0);
+            
+        
+
+        marker_f142b97b57184dab35dc9fa22d537904.bindPopup(popup_af220d2e5cec11e6f635c16d88774965)
+        ;
+
+        
+    
+    
+            var marker_1e1a26bc75f05886cfdd1c851d18eb6e = L.marker(
+                [40.64262, -74.08066],
+                {}
+            ).addTo(map_d097a2a67f2b63386a29c62a52d4664d);
+        
+    
+        var popup_17850b924bee4e6598b257f8545e30c1 = L.popup({&quot;maxWidth&quot;: &quot;100%&quot;});
+
+        
+            
+                var html_5ffc567d17a64e26af455cfce67fcd59 = $(`&lt;div id=&quot;html_5ffc567d17a64e26af455cfce67fcd59&quot; style=&quot;width: 100.0%; height: 100.0%;&quot;&gt;Enjoy Manhattan without paying Manhattan prices&lt;/div&gt;`)[0];
+                popup_17850b924bee4e6598b257f8545e30c1.setContent(html_5ffc567d17a64e26af455cfce67fcd59);
+            
+        
+
+        marker_1e1a26bc75f05886cfdd1c851d18eb6e.bindPopup(popup_17850b924bee4e6598b257f8545e30c1)
+        ;
+
+        
+    
+    
+            var marker_da5623f8c51a7c63f50becdf137e911e = L.marker(
+                [40.60618, -74.08712],
+                {}
+            ).addTo(map_d097a2a67f2b63386a29c62a52d4664d);
+        
+    
+        var popup_83d2fb22f585644f185262a901c2e09d = L.popup({&quot;maxWidth&quot;: &quot;100%&quot;});
+
+        
+            
+                var html_934412ce77613281d9fe173e2f875a1f = $(`&lt;div id=&quot;html_934412ce77613281d9fe173e2f875a1f&quot; style=&quot;width: 100.0%; height: 100.0%;&quot;&gt;Cozy And Quiet Single Room  (003) A/c in sunmmer&lt;/div&gt;`)[0];
+                popup_83d2fb22f585644f185262a901c2e09d.setContent(html_934412ce77613281d9fe173e2f875a1f);
+            
+        
+
+        marker_da5623f8c51a7c63f50becdf137e911e.bindPopup(popup_83d2fb22f585644f185262a901c2e09d)
+        ;
+
+        
+    
+    
+            var marker_0817b28858a128dbb6886049ae66c3c3 = L.marker(
+                [40.61438, -74.0664],
+                {}
+            ).addTo(map_d097a2a67f2b63386a29c62a52d4664d);
+        
+    
+        var popup_bc948e98aab050ddc5288a166ef912dc = L.popup({&quot;maxWidth&quot;: &quot;100%&quot;});
+
+        
+            
+                var html_d562bf411ff6f7ef86d1625484ce5129 = $(`&lt;div id=&quot;html_d562bf411ff6f7ef86d1625484ce5129&quot; style=&quot;width: 100.0%; height: 100.0%;&quot;&gt;Staten Island - Free Wifi, Parking Space, Near NYC&lt;/div&gt;`)[0];
+                popup_bc948e98aab050ddc5288a166ef912dc.setContent(html_d562bf411ff6f7ef86d1625484ce5129);
+            
+        
+
+        marker_0817b28858a128dbb6886049ae66c3c3.bindPopup(popup_bc948e98aab050ddc5288a166ef912dc)
+        ;
+
+        
+    
+    
+            var marker_4cbd11a0cd4fa4d9bf83472a36745e99 = L.marker(
+                [40.61603, -74.08666],
+                {}
+            ).addTo(map_d097a2a67f2b63386a29c62a52d4664d);
+        
+    
+        var popup_f67a75a1b4dfbdf16603cdc2e6c095d3 = L.popup({&quot;maxWidth&quot;: &quot;100%&quot;});
+
+        
+            
+                var html_fd60ca25af120d884295995425c515e6 = $(`&lt;div id=&quot;html_fd60ca25af120d884295995425c515e6&quot; style=&quot;width: 100.0%; height: 100.0%;&quot;&gt;Cozy Studio with Private Entrance&lt;/div&gt;`)[0];
+                popup_f67a75a1b4dfbdf16603cdc2e6c095d3.setContent(html_fd60ca25af120d884295995425c515e6);
+            
+        
+
+        marker_4cbd11a0cd4fa4d9bf83472a36745e99.bindPopup(popup_f67a75a1b4dfbdf16603cdc2e6c095d3)
+        ;
+
+        
+    
+    
+            var marker_d83a2bcc6bd7190cd5aa1172acc9a746 = L.marker(
+                [40.60697, -74.08765],
+                {}
+            ).addTo(map_d097a2a67f2b63386a29c62a52d4664d);
+        
+    
+        var popup_10242e673d4bad831d37e98bb4fc1f29 = L.popup({&quot;maxWidth&quot;: &quot;100%&quot;});
+
+        
+            
+                var html_a7b61831623f7f0c3c4a9ee846ed76a4 = $(`&lt;div id=&quot;html_a7b61831623f7f0c3c4a9ee846ed76a4&quot; style=&quot;width: 100.0%; height: 100.0%;&quot;&gt;Captains Cabin 002/Apmnt like&lt;/div&gt;`)[0];
+                popup_10242e673d4bad831d37e98bb4fc1f29.setContent(html_a7b61831623f7f0c3c4a9ee846ed76a4);
+            
+        
+
+        marker_d83a2bcc6bd7190cd5aa1172acc9a746.bindPopup(popup_10242e673d4bad831d37e98bb4fc1f29)
+        ;
+
+        
+    
+    
+            var marker_6d6b20230c82a60e835977021e3e92d1 = L.marker(
+                [40.63834, -74.08291],
+                {}
+            ).addTo(map_d097a2a67f2b63386a29c62a52d4664d);
+        
+    
+        var popup_cc5d745caa12dd61e6d3fc0278a53e5a = L.popup({&quot;maxWidth&quot;: &quot;100%&quot;});
+
+        
+            
+                var html_8759bbd2343a6d2cb7486563846c0354 = $(`&lt;div id=&quot;html_8759bbd2343a6d2cb7486563846c0354&quot; style=&quot;width: 100.0%; height: 100.0%;&quot;&gt;Cherry Hill House - Plum Room&lt;/div&gt;`)[0];
+                popup_cc5d745caa12dd61e6d3fc0278a53e5a.setContent(html_8759bbd2343a6d2cb7486563846c0354);
+            
+        
+
+        marker_6d6b20230c82a60e835977021e3e92d1.bindPopup(popup_cc5d745caa12dd61e6d3fc0278a53e5a)
+        ;
+
+        
+    
+    
+            var marker_732060314c4f88e4a01d7e0728ff712f = L.marker(
+                [40.59757, -74.08434],
+                {}
+            ).addTo(map_d097a2a67f2b63386a29c62a52d4664d);
+        
+    
+        var popup_6a554aeebabeab1da2b8a08ee84cd08f = L.popup({&quot;maxWidth&quot;: &quot;100%&quot;});
+
+        
+            
+                var html_240f85b09d4ef563649ebe5fb4a36d72 = $(`&lt;div id=&quot;html_240f85b09d4ef563649ebe5fb4a36d72&quot; style=&quot;width: 100.0%; height: 100.0%;&quot;&gt;Inexpensive Private Room with NYC / SIUH Access #1&lt;/div&gt;`)[0];
+                popup_6a554aeebabeab1da2b8a08ee84cd08f.setContent(html_240f85b09d4ef563649ebe5fb4a36d72);
+            
+        
+
+        marker_732060314c4f88e4a01d7e0728ff712f.bindPopup(popup_6a554aeebabeab1da2b8a08ee84cd08f)
+        ;
+
+        
+    
+    
+            var marker_a6fce82823049eef69668cfca0cb3aad = L.marker(
+                [40.56933, -74.09493],
+                {}
+            ).addTo(map_d097a2a67f2b63386a29c62a52d4664d);
+        
+    
+        var popup_845c335a3e927c6684386c3cb66d9a14 = L.popup({&quot;maxWidth&quot;: &quot;100%&quot;});
+
+        
+            
+                var html_6604f7c371f2a80d1b9533a0f5ed27ed = $(`&lt;div id=&quot;html_6604f7c371f2a80d1b9533a0f5ed27ed&quot; style=&quot;width: 100.0%; height: 100.0%;&quot;&gt;Quiet room near beach in residential area.&lt;/div&gt;`)[0];
+                popup_845c335a3e927c6684386c3cb66d9a14.setContent(html_6604f7c371f2a80d1b9533a0f5ed27ed);
+            
+        
+
+        marker_a6fce82823049eef69668cfca0cb3aad.bindPopup(popup_845c335a3e927c6684386c3cb66d9a14)
+        ;
+
+        
+    
+    
+            var marker_afd79d100daa0a33313145f35c853368 = L.marker(
+                [40.60585, -74.13331],
+                {}
+            ).addTo(map_d097a2a67f2b63386a29c62a52d4664d);
+        
+    
+        var popup_d3a1ff0985c9995b0c80c5920e669ed4 = L.popup({&quot;maxWidth&quot;: &quot;100%&quot;});
+
+        
+            
+                var html_fd472c48561a40bbe60d98706d5be225 = $(`&lt;div id=&quot;html_fd472c48561a40bbe60d98706d5be225&quot; style=&quot;width: 100.0%; height: 100.0%;&quot;&gt;Comfy &amp; Quiet 1 Bedroom&lt;/div&gt;`)[0];
+                popup_d3a1ff0985c9995b0c80c5920e669ed4.setContent(html_fd472c48561a40bbe60d98706d5be225);
+            
+        
+
+        marker_afd79d100daa0a33313145f35c853368.bindPopup(popup_d3a1ff0985c9995b0c80c5920e669ed4)
+        ;
+
+        
+    
+    
+            var marker_5401f6f72f3608a6d38a0724d1eb1d81 = L.marker(
+                [40.58647, -74.15954],
+                {}
+            ).addTo(map_d097a2a67f2b63386a29c62a52d4664d);
+        
+    
+        var popup_1fd678d9f5f943c7d8b11b1eed32b1bb = L.popup({&quot;maxWidth&quot;: &quot;100%&quot;});
+
+        
+            
+                var html_1b1cab2a28d0c5e5152b0e22d6620594 = $(`&lt;div id=&quot;html_1b1cab2a28d0c5e5152b0e22d6620594&quot; style=&quot;width: 100.0%; height: 100.0%;&quot;&gt;&quot;Dave&#x27;s Island Suite&quot;&lt;/div&gt;`)[0];
+                popup_1fd678d9f5f943c7d8b11b1eed32b1bb.setContent(html_1b1cab2a28d0c5e5152b0e22d6620594);
+            
+        
+
+        marker_5401f6f72f3608a6d38a0724d1eb1d81.bindPopup(popup_1fd678d9f5f943c7d8b11b1eed32b1bb)
+        ;
+
+        
+    
+    
+            var marker_764b624ca065c149c9f46a164b489052 = L.marker(
+                [40.54312, -74.17388],
+                {}
+            ).addTo(map_d097a2a67f2b63386a29c62a52d4664d);
+        
+    
+        var popup_5851dd6ef14d222199e2ce42669a4455 = L.popup({&quot;maxWidth&quot;: &quot;100%&quot;});
+
+        
+            
+                var html_bc1ea36cee9c916a6dc49f4e11c82bce = $(`&lt;div id=&quot;html_bc1ea36cee9c916a6dc49f4e11c82bce&quot; style=&quot;width: 100.0%; height: 100.0%;&quot;&gt;Bright 2- Room apartment in a house next to train.&lt;/div&gt;`)[0];
+                popup_5851dd6ef14d222199e2ce42669a4455.setContent(html_bc1ea36cee9c916a6dc49f4e11c82bce);
+            
+        
+
+        marker_764b624ca065c149c9f46a164b489052.bindPopup(popup_5851dd6ef14d222199e2ce42669a4455)
+        ;
+
+        
+    
+&lt;/script&gt;
+&lt;/html&gt;" style="position:absolute;width:100%;height:100%;left:0;top:0;border:none !important;" allowfullscreen webkitallowfullscreen mozallowfullscreen></iframe></div></div></div></div>
+</div>
+</div>
+<div class="section" id="difficulties">
+<h3>Difficulties<a class="headerlink" href="#difficulties" title="Permalink to this headline">#</a></h3>
+<p>Since there were a large amount of outlier in the ‘price’, ‘minimum_nights’, ‘number_of_reviews’, ‘calculated_host_listings_count’, ‘availability_365’ columns, these need to be removed. The check that the non-unique rows were kept, the ‘name’ column needed to be added. When generating the map originally, this made the Jupyter notebook freeze. This was resolved by choosing random values from each neighborhood.</p>
+</div>
+<div class="section" id="summary-discussion-and-findings">
+<h3>Summary, Discussion, and Findings<a class="headerlink" href="#summary-discussion-and-findings" title="Permalink to this headline">#</a></h3>
+<p>The price, the minimum number of nights, the number of reviews, and the calculated host listings were surpisingly similar in their lack of variance. There are a significant amount of outliers that will be dealt with before handlign the model. When it came to the availability throughout the year, there was a large spread around the median of 45 days on overage.</p>
+</div>
+<div class="section" id="conclusions">
+<h3>Conclusions<a class="headerlink" href="#conclusions" title="Permalink to this headline">#</a></h3>
+<p>This points to most AirBnB owners being uniform in amount of people reviewing them, the list hosting, and the minimum of nights that are set for these properties. When it comes to long-term stays, there is a larger range potentially due to the property’s specific idiosyncracies.</p>
+</div>
+</div>
+<div class="section" id="results-and-analysis">
+<h2>Results and Analysis<a class="headerlink" href="#results-and-analysis" title="Permalink to this headline">#</a></h2>
+<div class="section" id="approach">
+<h3>Approach<a class="headerlink" href="#approach" title="Permalink to this headline">#</a></h3>
+<p>The data will be pruned and adjusted based on the EDA results. This means removing the outliers from the remaining columns. For the modeling, first, the PCA was reveiwed to see how much was attributed to variance. Next, clustering was done to see if there were any subgroups within the data set. Finally, a linear model was created to see if there was a correlation between what the model predicted the price to be and the actual price.</p>
+</div>
+<div class="section" id="eda-pruning">
+<h3>EDA Pruning<a class="headerlink" href="#eda-pruning" title="Permalink to this headline">#</a></h3>
+<p>Because the EDA showed a significant amount of outliers and the need for the removal of the availability column, the data will be pre-processed again before creating the models according to information from the histograms.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_unique</span> <span class="o">=</span> <span class="n">df_unique</span><span class="p">[</span><span class="n">df_unique</span><span class="p">[</span><span class="s1">&#39;price&#39;</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="mi">200</span><span class="p">]</span>
+<span class="n">df_unique</span> <span class="o">=</span> <span class="n">df_unique</span><span class="p">[</span><span class="n">df_unique</span><span class="p">[</span><span class="s1">&#39;minimum_nights&#39;</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="mi">13</span><span class="p">]</span>
+<span class="n">df_unique</span> <span class="o">=</span> <span class="n">df_unique</span><span class="p">[</span><span class="n">df_unique</span><span class="p">[</span><span class="s1">&#39;number_of_reviews&#39;</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="mi">6</span><span class="p">]</span>
+<span class="n">df_unique</span> <span class="o">=</span> <span class="n">df_unique</span><span class="p">[</span><span class="n">df_unique</span><span class="p">[</span><span class="s1">&#39;calculated_host_listings_count&#39;</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="mi">4</span><span class="p">]</span>
+<span class="n">df_unique</span> <span class="o">=</span> <span class="n">df_unique</span><span class="p">[</span><span class="n">df_unique</span><span class="p">[</span><span class="s1">&#39;availability_365&#39;</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="mf">36.5</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="id2">
+<h3>Histograms and Box Plots<a class="headerlink" href="#id2" title="Permalink to this headline">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">histBox</span><span class="p">(</span><span class="n">df_unique</span><span class="p">,</span> <span class="s1">&#39;price&#39;</span><span class="p">)</span>
+<span class="n">histBox</span><span class="p">(</span><span class="n">df_unique</span><span class="p">,</span> <span class="s1">&#39;minimum_nights&#39;</span><span class="p">)</span>
+<span class="n">histBox</span><span class="p">(</span><span class="n">df_unique</span><span class="p">,</span> <span class="s1">&#39;number_of_reviews&#39;</span><span class="p">)</span>
+<span class="n">histBox</span><span class="p">(</span><span class="n">df_unique</span><span class="p">,</span> <span class="s1">&#39;calculated_host_listings_count&#39;</span><span class="p">)</span>
+<span class="n">histBox</span><span class="p">(</span><span class="n">df_unique</span><span class="p">,</span> <span class="s1">&#39;availability_365&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../_images/93f32257cf537701bda4a931f824714c9cbb5d3c92b920f82c92d02558075c0e.png" src="../../../_images/93f32257cf537701bda4a931f824714c9cbb5d3c92b920f82c92d02558075c0e.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Histogram values:
+[  14  504 2016 2164 1770 1426 1191 1199  642 1114]
+
+Histogram bin edges:
+[  0.  20.  40.  60.  80. 100. 120. 140. 160. 180. 200.]
+
+Box values: 
+min      0.00
+25%     60.00
+50%     94.00
+75%    137.25
+max    200.00
+Name: price, dtype: float64
+</pre></div>
+</div>
+<img alt="../../../_images/6ac81d0f85ddcceeea34387dccdb116a6887d89797a64aa952c374e509cca2f0.png" src="../../../_images/6ac81d0f85ddcceeea34387dccdb116a6887d89797a64aa952c374e509cca2f0.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Histogram values:
+[6274 2106 1025 1099  282  920   31  223   10   70]
+
+Histogram bin edges:
+[ 1.   2.2  3.4  4.6  5.8  7.   8.2  9.4 10.6 11.8 13. ]
+
+Box values: 
+min     1.0
+25%     1.0
+50%     2.0
+75%     4.0
+max    13.0
+Name: minimum_nights, dtype: float64
+</pre></div>
+</div>
+<img alt="../../../_images/2958d61c2370d7f40869ce7762d5c73afd816cb719f634d944b5b79bf3bd7ac2.png" src="../../../_images/2958d61c2370d7f40869ce7762d5c73afd816cb719f634d944b5b79bf3bd7ac2.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Histogram values:
+[4068 2636    0 1781    0 1247  950    0  731  627]
+
+Histogram bin edges:
+[0.  0.6 1.2 1.8 2.4 3.  3.6 4.2 4.8 5.4 6. ]
+
+Box values: 
+min    0.0
+25%    0.0
+50%    1.0
+75%    3.0
+max    6.0
+Name: number_of_reviews, dtype: float64
+</pre></div>
+</div>
+<img alt="../../../_images/9ea2d62b32b9908c0b708e3758d7b954c2ef171cd7a9883d2885db4ff7e5118a.png" src="../../../_images/9ea2d62b32b9908c0b708e3758d7b954c2ef171cd7a9883d2885db4ff7e5118a.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Histogram values:
+[10492     0     0  1183     0     0   296     0     0    69]
+
+Histogram bin edges:
+[1.  1.3 1.6 1.9 2.2 2.5 2.8 3.1 3.4 3.7 4. ]
+
+Box values: 
+min    1.0
+25%    1.0
+50%    1.0
+75%    1.0
+max    4.0
+Name: calculated_host_listings_count, dtype: float64
+</pre></div>
+</div>
+<img alt="../../../_images/45273cb52add838d76f37f9f56e0a712ff7e2d16b7f9f48f24f149abeb7e5e2d.png" src="../../../_images/45273cb52add838d76f37f9f56e0a712ff7e2d16b7f9f48f24f149abeb7e5e2d.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Histogram values:
+[10541   347   181   221   141   137   141    79   108   144]
+
+Histogram bin edges:
+[ 0.   3.6  7.2 10.8 14.4 18.  21.6 25.2 28.8 32.4 36. ]
+
+Box values: 
+min     0.0
+25%     0.0
+50%     0.0
+75%     0.0
+max    36.0
+Name: availability_365, dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="drop-columns">
+<h3>Drop Columns<a class="headerlink" href="#drop-columns" title="Permalink to this headline">#</a></h3>
+<p>After this the ‘availability_365’ and ‘calculated_host_listings_count’ were removed. After the filtering, both columns showed themselves to be constants with outliers.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Drop specific columns</span>
+<span class="n">df_mod</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s1">&#39;availability_365&#39;</span><span class="p">,</span> <span class="s1">&#39;calculated_host_listings_count&#39;</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">df_mod</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>id</th>
+      <th>name</th>
+      <th>host_id</th>
+      <th>host_name</th>
+      <th>neighbourhood_group</th>
+      <th>neighbourhood</th>
+      <th>latitude</th>
+      <th>longitude</th>
+      <th>room_type</th>
+      <th>price</th>
+      <th>minimum_nights</th>
+      <th>number_of_reviews</th>
+      <th>last_review</th>
+      <th>reviews_per_month</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2539</td>
+      <td>Clean &amp; quiet apt home by the park</td>
+      <td>2787</td>
+      <td>John</td>
+      <td>Brooklyn</td>
+      <td>Kensington</td>
+      <td>40.64749</td>
+      <td>-73.97237</td>
+      <td>Private room</td>
+      <td>149</td>
+      <td>1</td>
+      <td>9</td>
+      <td>2018-10-19</td>
+      <td>0.21</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2595</td>
+      <td>Skylit Midtown Castle</td>
+      <td>2845</td>
+      <td>Jennifer</td>
+      <td>Manhattan</td>
+      <td>Midtown</td>
+      <td>40.75362</td>
+      <td>-73.98377</td>
+      <td>Entire home/apt</td>
+      <td>225</td>
+      <td>1</td>
+      <td>45</td>
+      <td>2019-05-21</td>
+      <td>0.38</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3647</td>
+      <td>THE VILLAGE OF HARLEM....NEW YORK !</td>
+      <td>4632</td>
+      <td>Elisabeth</td>
+      <td>Manhattan</td>
+      <td>Harlem</td>
+      <td>40.80902</td>
+      <td>-73.94190</td>
+      <td>Private room</td>
+      <td>150</td>
+      <td>3</td>
+      <td>0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>3831</td>
+      <td>Cozy Entire Floor of Brownstone</td>
+      <td>4869</td>
+      <td>LisaRoxanne</td>
+      <td>Brooklyn</td>
+      <td>Clinton Hill</td>
+      <td>40.68514</td>
+      <td>-73.95976</td>
+      <td>Entire home/apt</td>
+      <td>89</td>
+      <td>1</td>
+      <td>270</td>
+      <td>2019-07-05</td>
+      <td>4.64</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5022</td>
+      <td>Entire Apt: Spacious Studio/Loft by central park</td>
+      <td>7192</td>
+      <td>Laura</td>
+      <td>Manhattan</td>
+      <td>East Harlem</td>
+      <td>40.79851</td>
+      <td>-73.94399</td>
+      <td>Entire home/apt</td>
+      <td>80</td>
+      <td>10</td>
+      <td>9</td>
+      <td>2018-11-19</td>
+      <td>0.10</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</div>
+<div class="section" id="unsupervised-model-pca">
+<h3>Unsupervised Model: PCA<a class="headerlink" href="#unsupervised-model-pca" title="Permalink to this headline">#</a></h3>
+<p>First, a PCA was run to determine how many components account for the variance in this model. A one-hot encoder is used to transform the categorical features for concatenation. Next, a standard scalar processed the features which was then utilized in PCA with a set amount of compontents. The variance ratio was output with different components input into the function.</p>
+</div>
+<div class="section" id="results">
+<h3>Results<a class="headerlink" href="#results" title="Permalink to this headline">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Function for PCA</span>
+<span class="k">def</span> <span class="nf">RunPCA</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">cat_feat</span><span class="p">,</span> <span class="n">num_feat</span><span class="p">,</span> <span class="n">n_comp</span><span class="p">):</span>
+    <span class="c1"># One-hot Encoding</span>
+    <span class="n">enc1</span> <span class="o">=</span> <span class="n">OneHotEncoder</span><span class="p">()</span>
+    <span class="n">enc_feat</span> <span class="o">=</span> <span class="n">enc1</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">cat_feat</span><span class="p">])</span>
+
+    <span class="c1"># Combine encoded categorical features and numerical features</span>
+    <span class="n">proc_feat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">enc_feat</span><span class="o">.</span><span class="n">toarray</span><span class="p">(),</span> <span class="n">df</span><span class="p">[</span><span class="n">num_feat</span><span class="p">]),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="c1"># Scaler for Process Features</span>
+    <span class="n">sca1</span> <span class="o">=</span> <span class="n">StandardScaler</span><span class="p">()</span>
+    <span class="n">scal_feat</span> <span class="o">=</span> <span class="n">sca1</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">proc_feat</span><span class="p">)</span>
+
+    <span class="c1"># Get PCA</span>
+    <span class="n">pca</span> <span class="o">=</span> <span class="n">PCA</span><span class="p">(</span><span class="n">n_components</span> <span class="o">=</span> <span class="n">n_comp</span><span class="p">)</span>
+    <span class="n">pri_comp</span> <span class="o">=</span> <span class="n">pca</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">scaled_features</span><span class="p">)</span>
+
+    <span class="c1"># Data Frame for Principal Components</span>
+    <span class="n">df_prin</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">pri_comp</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="n">c1</span> <span class="k">for</span> <span class="n">c1</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n_comp</span><span class="o">+</span><span class="mi">1</span><span class="p">)])</span>
+    
+    <span class="c1"># Check Ratio</span>
+    <span class="n">EVR</span> <span class="o">=</span> <span class="n">pca</span><span class="o">.</span><span class="n">explained_variance_ratio_</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Explained Variance Ratio:&quot;</span><span class="p">,</span> <span class="n">EVR</span><span class="p">)</span>
+
+    <span class="c1"># Plot</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">([</span><span class="n">c1</span> <span class="k">for</span> <span class="n">c1</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n_comp</span><span class="o">+</span><span class="mi">1</span><span class="p">)],</span> <span class="n">EVR</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Principal Components&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Explained Variance Ratio (EVR)&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Explained Variance Ratio (EVR) by Principal Component&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+    <span class="k">return</span> <span class="n">df_prin</span>
+
+<span class="n">cat_feat</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;neighbourhood&#39;</span><span class="p">,</span> <span class="s1">&#39;room_type&#39;</span><span class="p">]</span>
+<span class="n">num_feat</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;price&#39;</span><span class="p">,</span> <span class="s1">&#39;minimum_nights&#39;</span><span class="p">,</span> <span class="s1">&#39;number_of_reviews&#39;</span><span class="p">]</span>
+
+<span class="n">df_prin</span> <span class="o">=</span> <span class="n">RunPCA</span><span class="p">(</span><span class="n">df_unique</span><span class="p">,</span> <span class="n">cat_feat</span><span class="p">,</span> <span class="n">num_feat</span><span class="p">,</span> <span class="n">n_comp</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="o">~</span>\<span class="n">AppData</span>\<span class="n">Local</span>\<span class="n">Temp</span>\<span class="n">ipykernel_8836</span>\<span class="mf">736602038.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="g g-Whitespace">     </span><span class="mi">35</span> <span class="n">num_feat</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;price&#39;</span><span class="p">,</span> <span class="s1">&#39;minimum_nights&#39;</span><span class="p">,</span> <span class="s1">&#39;number_of_reviews&#39;</span><span class="p">]</span>
+<span class="g g-Whitespace">     </span><span class="mi">36</span> 
+<span class="ne">---&gt; </span><span class="mi">37</span> <span class="n">df_prin</span> <span class="o">=</span> <span class="n">RunPCA</span><span class="p">(</span><span class="n">df_unique</span><span class="p">,</span> <span class="n">cat_feat</span><span class="p">,</span> <span class="n">num_feat</span><span class="p">,</span> <span class="n">n_comp</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+
+<span class="nn">~\AppData\Local\Temp\ipykernel_8836\736602038.py</span> in <span class="ni">RunPCA</span><span class="nt">(df, cat_feat, num_feat, n_comp)</span>
+<span class="g g-Whitespace">     </span><span class="mi">14</span>     <span class="c1"># Get PCA</span>
+<span class="g g-Whitespace">     </span><span class="mi">15</span>     <span class="n">pca</span> <span class="o">=</span> <span class="n">PCA</span><span class="p">(</span><span class="n">n_components</span> <span class="o">=</span> <span class="n">n_comp</span><span class="p">)</span>
+<span class="ne">---&gt; </span><span class="mi">16</span>     <span class="n">pri_comp</span> <span class="o">=</span> <span class="n">pca</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">scaled_features</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">17</span> 
+<span class="g g-Whitespace">     </span><span class="mi">18</span>     <span class="c1"># Data Frame for Principal Components</span>
+
+<span class="ne">NameError</span>: name &#39;scaled_features&#39; is not defined
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="time-complexity">
+<h3>Time Complexity<a class="headerlink" href="#time-complexity" title="Permalink to this headline">#</a></h3>
+<p>The time complexity of significant steps within this function is summarized as follows:</p>
+<ol class="arabic simple">
+<li><p>One-hot Encoding: O(CM) where C is categories and M is features.</p></li>
+<li><p>Standard Scalar: O(NM) where N is the number of numerical values.</p></li>
+<li><p>PCA Model: O((C+N)*M)</p></li>
+<li><p>Data Frame Creation: O(NC) which is the numerical values times the categories.</p></li>
+<li><p>Variance Ratio: O(P) where P is the principal components returned.</p></li>
+</ol>
+</div>
+<div class="section" id="unsupervised-model-k-means-clustering">
+<h3>Unsupervised Model: K-Means Clustering<a class="headerlink" href="#unsupervised-model-k-means-clustering" title="Permalink to this headline">#</a></h3>
+<p>The following uses K means clustering to determine the groups used for the data. This algorithm will generate clusters for the data and list the members of the group. A one-hot encoder and standard scalar were used to transform the numerical and categorical data. The number of iterations and the cluster value are used as hyperparameters for tuning.</p>
+</div>
+<div class="section" id="id3">
+<h3>Results<a class="headerlink" href="#id3" title="Permalink to this headline">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Function for K-Means Cluster</span>
+<span class="k">def</span> <span class="nf">kmeans_clust</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">num_feat</span><span class="p">,</span> <span class="n">cat_feat</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">max_it</span><span class="p">):</span>
+    <span class="c1"># Apply Transformations</span>
+    <span class="n">prep1</span> <span class="o">=</span> <span class="n">ColumnTransformer</span><span class="p">(</span>
+        <span class="n">transformers</span><span class="o">=</span><span class="p">[</span>
+            <span class="p">(</span><span class="s1">&#39;num&#39;</span><span class="p">,</span> <span class="n">StandardScaler</span><span class="p">(),</span> <span class="n">num_feat</span><span class="p">),</span>
+            <span class="p">(</span><span class="s1">&#39;cat&#39;</span><span class="p">,</span> <span class="n">OneHotEncoder</span><span class="p">(),</span> <span class="n">cat_feat</span><span class="p">)</span>
+        <span class="p">])</span>
+
+    <span class="c1"># Preprocess</span>
+    <span class="n">X</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">num_feat</span> <span class="o">+</span> <span class="n">cat_feat</span><span class="p">]</span>
+    <span class="n">X_proc</span> <span class="o">=</span> <span class="n">prep1</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+
+    <span class="c1"># Apply K-means Clustering</span>
+    <span class="n">start_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+    <span class="n">kmeans</span> <span class="o">=</span> <span class="n">KMeans</span><span class="p">(</span><span class="n">n_clusters</span><span class="o">=</span><span class="n">k</span><span class="p">,</span> <span class="n">init</span><span class="o">=</span><span class="s1">&#39;k-means++&#39;</span><span class="p">,</span> <span class="n">n_init</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">max_iter</span><span class="o">=</span><span class="n">max_it</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+    <span class="n">kmeans</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_proc</span><span class="p">)</span>
+    <span class="n">clustering_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start_time</span>
+
+    <span class="c1"># Add Labels</span>
+    <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Cluster&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">kmeans</span><span class="o">.</span><span class="n">labels_</span>
+
+    <span class="c1"># Get Cluster Count</span>
+    <span class="n">cluster_counts</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Cluster&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Clusters:&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">cluster_counts</span><span class="p">)</span>
+
+    <span class="c1"># Print timing information</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Per Cluster Time:&quot;</span><span class="p">,</span> <span class="n">clustering_time</span><span class="p">,</span> <span class="s2">&quot;seconds&quot;</span><span class="p">)</span>
+
+<span class="c1"># Adjust Cluster Size Holding Iterations Constant</span>
+<span class="k">for</span> <span class="n">kval</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">):</span>
+    <span class="n">kmeans_clust</span><span class="p">(</span><span class="n">df_unique</span><span class="p">,</span> <span class="n">num_feat</span><span class="p">,</span> <span class="n">cat_feat</span><span class="p">,</span> \
+                            <span class="n">kval</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+
+<span class="c1"># Adjust Iterations Holding Cluster Constant</span>
+<span class="k">for</span> <span class="n">max_it</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">50</span><span class="p">):</span>
+    <span class="n">kmeans_clust</span><span class="p">(</span><span class="n">df_unique</span><span class="p">,</span> <span class="n">num_feat</span><span class="p">,</span> <span class="n">cat_feat</span><span class="p">,</span> \
+                            <span class="mi">3</span><span class="p">,</span> <span class="n">max_it</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Clusters:
+0    12040
+Name: Cluster, dtype: int64
+Per Cluster Time: 0.7911324501037598 seconds
+Clusters:
+1    6609
+0    5431
+Name: Cluster, dtype: int64
+Per Cluster Time: 3.226331949234009 seconds
+Clusters:
+2    5361
+1    4514
+0    2165
+Name: Cluster, dtype: int64
+Per Cluster Time: 4.618690729141235 seconds
+Clusters:
+0    4351
+1    3363
+2    2438
+3    1888
+Name: Cluster, dtype: int64
+Per Cluster Time: 5.22634744644165 seconds
+Clusters:
+2    5361
+1    4521
+0    2158
+Name: Cluster, dtype: int64
+Per Cluster Time: 3.862924098968506 seconds
+Clusters:
+2    5361
+1    4514
+0    2165
+Name: Cluster, dtype: int64
+Per Cluster Time: 4.5334312915802 seconds
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="k-means-clustering">
+<h3>K Means Clustering<a class="headerlink" href="#k-means-clustering" title="Permalink to this headline">#</a></h3>
+<p>The time complexity of significant steps within this function is summarized as follows:</p>
+<ol class="arabic simple">
+<li><p>One-hot Encoding: O(CM) where C is categories and F is features.</p></li>
+<li><p>Standard Scalar: O(NM) where N is the number of numerical values and M is features.</p></li>
+<li><p>Splitting Data: O(L) where L is the length of the input data.</p></li>
+<li><p>K-Means Clustering: O(NKIM) where K is the cluster number and I is the iteration value.</p></li>
+</ol>
+</div>
+<div class="section" id="supervised-method-linear-model">
+<h3>Supervised Method: Linear Model<a class="headerlink" href="#supervised-method-linear-model" title="Permalink to this headline">#</a></h3>
+<p>A linear model was created where the numerical and categorical features are run through a standard scalar and one-hot encoder to generate appropriate numeric values for processing. The data is split into test and training at a 80:20 split. The data is preprocessed, the timer starts, and a linear regression model is created. Using the rest of the data, the test data is used and the results are plotted.</p>
+</div>
+<div class="section" id="id4">
+<h3>Results<a class="headerlink" href="#id4" title="Permalink to this headline">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Function for Linear Regression</span>
+<span class="k">def</span> <span class="nf">lin_reg</span><span class="p">(</span><span class="n">num_feat</span><span class="p">,</span> <span class="n">cat_feat</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+
+    <span class="c1"># Apply Tranformation</span>
+    <span class="n">prep1</span> <span class="o">=</span> <span class="n">ColumnTransformer</span><span class="p">(</span>
+        <span class="n">transformers</span><span class="o">=</span><span class="p">[</span>
+            <span class="p">(</span><span class="s1">&#39;num&#39;</span><span class="p">,</span> <span class="n">StandardScaler</span><span class="p">(),</span> <span class="n">num_feat</span><span class="p">),</span>
+            <span class="p">(</span><span class="s1">&#39;cat&#39;</span><span class="p">,</span> <span class="n">OneHotEncoder</span><span class="p">(</span><span class="n">handle_unknown</span><span class="o">=</span><span class="s1">&#39;ignore&#39;</span><span class="p">),</span> <span class="n">cat_feat</span><span class="p">)</span>
+        <span class="p">])</span>
+
+    <span class="c1"># Split Data</span>
+    <span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+
+    <span class="c1"># Preprocess Data</span>
+    <span class="n">start_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+    <span class="n">X_train2</span> <span class="o">=</span> <span class="n">prep1</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
+    <span class="n">X_test2</span> <span class="o">=</span> <span class="n">prep1</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+    <span class="n">time_prep</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start_time</span>
+
+    <span class="c1"># Create Model</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">LinearRegression</span><span class="p">()</span>
+
+    <span class="c1"># Fit Model</span>
+    <span class="n">start_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train2</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+    <span class="n">training_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start_time</span>
+
+    <span class="c1"># Predict with Model</span>
+    <span class="n">start_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+    <span class="n">y_pred</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test2</span><span class="p">)</span>
+    <span class="n">pred_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start_time</span>
+
+    <span class="c1"># Evaluate</span>
+    <span class="n">mse</span> <span class="o">=</span> <span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+    <span class="n">r2</span> <span class="o">=</span> <span class="n">r2_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+
+    <span class="c1"># Print Out Info</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Mean Squared Error:&quot;</span><span class="p">,</span> <span class="n">mse</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;R-squared:&quot;</span><span class="p">,</span> <span class="n">r2</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Preprocessing Time:&quot;</span><span class="p">,</span> <span class="n">time_prep</span><span class="p">,</span> <span class="s2">&quot;seconds&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Training Time:&quot;</span><span class="p">,</span> <span class="n">training_time</span><span class="p">,</span> <span class="s2">&quot;seconds&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Prediction Time:&quot;</span><span class="p">,</span> <span class="n">pred_time</span><span class="p">,</span> <span class="s2">&quot;seconds&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Plot</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Actual Price&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Predicted Price&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Actual vs. Predicted Prices&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="c1"># Define Features and Variables</span>
+<span class="n">num_feat</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;minimum_nights&#39;</span><span class="p">,</span> <span class="s1">&#39;number_of_reviews&#39;</span><span class="p">]</span>
+<span class="n">cat_feat</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;neighbourhood&#39;</span><span class="p">,</span> <span class="s1">&#39;room_type&#39;</span><span class="p">]</span>
+
+<span class="n">X</span> <span class="o">=</span> <span class="n">df_unique</span><span class="p">[</span><span class="n">num_feat</span> <span class="o">+</span> <span class="n">cat_feat</span><span class="p">]</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">df_unique</span><span class="p">[</span><span class="s1">&#39;price&#39;</span><span class="p">]</span>
+
+<span class="c1"># Call the function with the specified hyperparameter and data</span>
+<span class="n">lin_reg</span><span class="p">(</span><span class="n">num_feat</span><span class="p">,</span> <span class="n">cat_feat</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mean Squared Error: 1113.513077185032
+R-squared: 0.4861501876154918
+Preprocessing Time: 0.04028463363647461 seconds
+Training Time: 0.046866655349731445 seconds
+Prediction Time: 0.0 seconds
+</pre></div>
+</div>
+<img alt="../../../_images/408160660deeda48383b6eadee110bd1b8266a49e08fc267d6ddb95ffb6e3e4f.png" src="../../../_images/408160660deeda48383b6eadee110bd1b8266a49e08fc267d6ddb95ffb6e3e4f.png" />
+</div>
+</div>
+</div>
+<div class="section" id="id5">
+<h3>Time Complexity<a class="headerlink" href="#id5" title="Permalink to this headline">#</a></h3>
+<p>The time complexity of significant steps within this function is summarized as follows:</p>
+<ol class="arabic simple">
+<li><p>One-hot Encoding: O(CM) where C is categories and F is features.</p></li>
+<li><p>Standard Scalar: O(NM) where N is the number of numerical values and M is features.</p></li>
+<li><p>Splitting Data: O(L) where L is the length of the input data.</p></li>
+<li><p>Fitting the Model: O(NM)</p></li>
+<li><p>Predictions: O(NM)</p></li>
+<li><p>MSE: O(V) where V is the generated values.</p></li>
+</ol>
+</div>
+<div class="section" id="optimization-methods">
+<h3>Optimization Methods<a class="headerlink" href="#optimization-methods" title="Permalink to this headline">#</a></h3>
+<p>For the models, these can be optimized in several ways:<br></p>
+<p>PCA: Through the cross-validation output, the model can have hyperparameters tuned and adjusted for a better overall model for analysis. <br>
+Clustering: Finding the optimal cluster count can eliminate the need for other iterations and save on time. <br>
+Linear Regression: This can be further optimized through more preprocessing of the data and feature engineering. <br></p>
+</div>
+<div class="section" id="id6">
+<h3>Summary<a class="headerlink" href="#id6" title="Permalink to this headline">#</a></h3>
+<p>There are take away for each of the models. When it comes to the PCA model, the first component was responsible for the most amount of variance. Using multiple hyperparameters to test for different components showed that this was true. As for the clustering, the ideal amount of clusters is three. Any more has diminishing return in improvements and takes up unneeded time. The hyperparameter being adjusted was the number of iterations and the cluster value. The number of iterations can be decreased to ten as the model with the least amount of iterations strongly resembled the final model. The linear regression model fit was not ideal and had an R squared of approximately 0.5. This means that another type of regression should potentially be applied that takes into account the high variance in price. When it comes to PCA, there should be only one component since this could account for the highest amount of variance. When it comes to evaluation metrics, since the EVR values were low, this means that the data should be reduced further for higher values in dimensionality. For the linear regression model, the mean squared error and R squared value both showed that the fit wasn’t the best and that another model should be used. After viewing the plot, one can see this is due to the overlapping data points in the actual price. This could be reduced further.
+In comparison, the clustering was the best method, the linear model the second best, and the PCA the worst. However, the PCA was only at fault due to the data it received and the linear regression model’s problems were inherent to the model itself. Thus, with proper input, the PCA might provide more fruitful results.</p>
+</div>
+<div class="section" id="pipeline-design">
+<h3>Pipeline Design<a class="headerlink" href="#pipeline-design" title="Permalink to this headline">#</a></h3>
+<p>Within a pipeline, the data will first be loaded into a data structure and undergo data preprocessing. Cleaning, handing of NAs, one-hot encoding for categories, and standardization will be used during this step. Next, the dimensionality reduction will be used in the PCA step to determine the number of components to keep depending on variance. This data will be put into a new data frame that will be used for clustering. A k-means clustering algorithm will be used (in this case it was K-means) and clustering labels will be applied post-processing. The clusters will be analyzed for specific features or anomalizes and supervised learning such as linear regression will be used in conjuncture for desired output from selected features.</p>
+</div>
+</div>
+<div class="section" id="discussion-and-conclusion">
+<h2>Discussion and Conclusion<a class="headerlink" href="#discussion-and-conclusion" title="Permalink to this headline">#</a></h2>
+<div class="section" id="lessons-learned">
+<h3>Lessons Learned<a class="headerlink" href="#lessons-learned" title="Permalink to this headline">#</a></h3>
+<p>First, the linear regression model was expected to do a fair job of predicting the actual price. Before spending time creating this model, the variance should have been evaluated for the column itself. The PCA wasn’t able to generate high quality components because of the preprocessing, thus more time should be taken in doing that step.</p>
+</div>
+<div class="section" id="mistakes">
+<h3>Mistakes<a class="headerlink" href="#mistakes" title="Permalink to this headline">#</a></h3>
+<p>Initially, there was an error with generating the EDA model map. The notebook crashed and it was found out that the map tried plotting all of the points. The input data frame was adjusted and as a note for future users to be careful with the GIS code. Originally, the iterations selected for the K-means cluster was too large and thus small iterations are advised to avoid time sinks.</p>
+</div>
+<div class="section" id="future-improvement-opportunities">
+<h3>Future Improvement Opportunities<a class="headerlink" href="#future-improvement-opportunities" title="Permalink to this headline">#</a></h3>
+<p>The linear regression model didn’t fit well and thus another type, perhaps one with a logarithmic function, should be used instead. For clustering, there wasn’t much distribution between the clusters, as in one single cluster held most of the points, and thus subgroups are advised to be looked into for future projects. For the housing, the oneighborhoods should be separated and evaluated.</p>
+</div>
+</div>
+<div class="section" id="apa-citations">
+<h2>APA Citations<a class="headerlink" href="#apa-citations" title="Permalink to this headline">#</a></h2>
+<p>[1] Dhir, R. (2023, April 6). Top 10 most expensive cities in the U.S. Investopedia. <br> <a class="reference external" href="https://www.investopedia.com/articles/personal-finance/080916/top-10-most-expensive-cities-us.asp">https://www.investopedia.com/articles/personal-finance/080916/top-10-most-expensive-cities-us.asp</a> <br>
+[2] DGOMONOV. (2019, June 23). New York City Airbnb Open Data. Kaggle. <br> <a class="reference external" href="https://www.kaggle.com/datasets/dgomonov/new-york-city-airbnb-open-data">https://www.kaggle.com/datasets/dgomonov/new-york-city-airbnb-open-data</a></p>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./Notebooks\DTSA5510\Airbnb"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../../DTSA5509/OlympicAthletes/OlympicAthletes.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">DTSA 5509: Supervised Learning of Olympic Athletes</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../../DTSA5511/DisasterTweets/DisasterTweets.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">DTSA 5511: NLP Disaster Tweets Kaggle Mini-Project</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#unsupervised-algorithms-in-machine-learning">Unsupervised Algorithms in Machine Learning</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topic">Topic</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data">Data</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#install-packages">Install Packages</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#import-libraries">Import Libraries</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#read-files-from-csv">Read Files from CSV</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#space-and-size">Space and Size</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluate-the-data-types-and-column-names">Evaluate the data types and column names.</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-preprocessing">Data Preprocessing</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#removal-of-features">Removal of Features</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#removing-null-values">Removing Null Values</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#remove-duplicates">Remove Duplicates</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Space and Size</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exploratory-data-analysis-eda">Exploratory Data Analysis (EDA)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#purpose">Purpose</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#histograms-and-box-plots">Histograms and Box Plots</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gis-visualization">GIS Visualization</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#difficulties">Difficulties</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary-discussion-and-findings">Summary, Discussion, and Findings</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusions">Conclusions</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#results-and-analysis">Results and Analysis</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#approach">Approach</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#eda-pruning">EDA Pruning</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Histograms and Box Plots</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#drop-columns">Drop Columns</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#unsupervised-model-pca">Unsupervised Model: PCA</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#results">Results</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#time-complexity">Time Complexity</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#unsupervised-model-k-means-clustering">Unsupervised Model: K-Means Clustering</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Results</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#k-means-clustering">K Means Clustering</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#supervised-method-linear-model">Supervised Method: Linear Model</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Results</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">Time Complexity</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#optimization-methods">Optimization Methods</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">Summary</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pipeline-design">Pipeline Design</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#discussion-and-conclusion">Discussion and Conclusion</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#lessons-learned">Lessons Learned</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mistakes">Mistakes</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#future-improvement-opportunities">Future Improvement Opportunities</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#apa-citations">APA Citations</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Stacie Herda
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
