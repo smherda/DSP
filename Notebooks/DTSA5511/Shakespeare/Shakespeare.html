@@ -1,0 +1,1389 @@
+
+
+<!DOCTYPE html>
+
+
+<html >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DTSA 5511: Deep Learning of Shakespeare Quotes &#8212; My Data Science Portfolio</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/clipboard.min.js"></script>
+    <script src="../../../_static/copybutton.js"></script>
+    <script src="../../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../../_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Notebooks/DTSA5511/Shakespeare/Shakespeare';</script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="prev" title="DTSA 5511: GANs for Monet Paintings" href="../Monet/Monet.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="None"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../../../intro.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../_static/logo.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../../../_static/logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../../intro.html">
+                    Welcome to My Portfolio
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../DTSA5509/OlympicAthletes/OlympicAthletes.html">DTSA 5509: Supervised Learning of Olympic Athletes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../DTSA5510/Airbnb/Airbnb.html">DTSA 5510: Unsupervised Algorithms of Airbnbs in New York</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../DisasterTweets/DisasterTweets.html">DTSA 5511: NLP Disaster Tweets Kaggle Mini-Project</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../CancerImages/CancerImages.html">DTSA 5511: CNN Cancer Detection Mini-Project</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Monet/Monet.html">DTSA 5511: GANs for Monet Paintings</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">DTSA 5511: Deep Learning of Shakespeare Quotes</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/smherda/DSP" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/smherda/DSP/issues/new?title=Issue%20on%20page%20%2FNotebooks/DTSA5511/Shakespeare/Shakespeare.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../../_sources/Notebooks/DTSA5511/Shakespeare/Shakespeare.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>DTSA 5511: Deep Learning of Shakespeare Quotes</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction-to-deep-learning">Introduction to Deep Learning</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topic">Topic</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data">Data</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#install-packages">Install Packages</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#import-libraries">Import Libraries</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hide-unneccessary-warnings">Hide Unneccessary Warnings</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#read-files-from-csv">Read Files from CSV</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#space-and-size">Space and Size</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluate-the-data-types-and-column-names">Evaluate the data types and column names.</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-preprocessing-and-cleaning">Data Preprocessing and Cleaning</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#removal-of-features">Removal of Features</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#removal-of-rows-with-na-values">Removal of Rows with NA Values</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#duplicates">Duplicates</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Space and Size</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#discussion-and-conclusions">Discussion and Conclusions</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exploratory-data-analysis-eda">Exploratory Data Analysis (EDA)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#purpose">Purpose</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#histogram">Histogram</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#word-count-table">Word Count Table</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tree-map">Tree Map</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#difficulties">Difficulties</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary-discussion-and-findings">Summary, Discussion, and Findings</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusions">Conclusions</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#results">Results</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Summary</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#model">Model</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Summary</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluation-metrics">Evaluation Metrics</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#model-comparison">Model Comparison</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#discussion-and-conclusion">Discussion and Conclusion</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#lessons-learned">Lessons Learned</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mistakes">Mistakes</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#future-improvement-opportunities">Future Improvement Opportunities</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#apa-citations">APA Citations</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <div class="tex2jax_ignore mathjax_ignore section" id="dtsa-5511-deep-learning-of-shakespeare-quotes">
+<h1>DTSA 5511: Deep Learning of Shakespeare Quotes<a class="headerlink" href="#dtsa-5511-deep-learning-of-shakespeare-quotes" title="Permalink to this headline">#</a></h1>
+<div class="section" id="introduction-to-deep-learning">
+<h2>Introduction to Deep Learning<a class="headerlink" href="#introduction-to-deep-learning" title="Permalink to this headline">#</a></h2>
+</div>
+<div class="section" id="topic">
+<h2>Topic<a class="headerlink" href="#topic" title="Permalink to this headline">#</a></h2>
+<p>The following is going to be a report that takes lines from Shakespeare quotes and attempts to create a RNN or Recurrent Neural Network to generate text that resembles that style of writing. The BLEAU and diversity score will be used to evaluate whether the model is a good fit or not. There will be multiple hyperparameters adjusted to refine the model and a human subject will review the output of the text to see if this matches the Shakespeare format correctly. This line of work is important for those that wish to emulate the speech and writing patterns of Shakespeare or other languages. Such methods can be important when it comes to language preservation and speech emulation.</p>
+</div>
+<div class="section" id="data">
+<h2>Data<a class="headerlink" href="#data" title="Permalink to this headline">#</a></h2>
+<div class="section" id="summary">
+<h3>Summary<a class="headerlink" href="#summary" title="Permalink to this headline">#</a></h3>
+<p>The following data was pulled from a Kaggle CSV file that was available publically. There is APA citation at the end of this report for those who wish to see more information. The CSV file is called “Shakespeare_data” and information about the data types or size is shown below.</p>
+</div>
+<div class="section" id="install-packages">
+<h3>Install Packages<a class="headerlink" href="#install-packages" title="Permalink to this headline">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>squarify
+<span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>wordcloud
+<span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>pillow
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting squarify
+  Using cached squarify-0.4.3-py3-none-any.whl (4.3 kB)
+Installing collected packages: squarify
+Successfully installed squarify-0.4.3
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[notice] A new release of pip is available: 23.1.2 -&gt; 23.2.1
+[notice] To update, run: python.exe -m pip install --upgrade pip
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting wordcloud
+  Downloading wordcloud-1.9.2-cp311-cp311-win_amd64.whl (151 kB)
+     -------------------------------------- 151.4/151.4 kB 8.8 MB/s eta 0:00:00
+Requirement already satisfied: numpy&gt;=1.6.1 in c:\python311\lib\site-packages (from wordcloud) (1.26.0)
+Collecting pillow (from wordcloud)
+  Using cached Pillow-10.0.1-cp311-cp311-win_amd64.whl (2.5 MB)
+Collecting matplotlib (from wordcloud)
+  Using cached matplotlib-3.8.0-cp311-cp311-win_amd64.whl (7.6 MB)
+Collecting contourpy&gt;=1.0.1 (from matplotlib-&gt;wordcloud)
+  Using cached contourpy-1.1.1-cp311-cp311-win_amd64.whl (480 kB)
+Collecting cycler&gt;=0.10 (from matplotlib-&gt;wordcloud)
+  Using cached cycler-0.11.0-py3-none-any.whl (6.4 kB)
+Collecting fonttools&gt;=4.22.0 (from matplotlib-&gt;wordcloud)
+  Using cached fonttools-4.42.1-cp311-cp311-win_amd64.whl (2.1 MB)
+Collecting kiwisolver&gt;=1.0.1 (from matplotlib-&gt;wordcloud)
+  Using cached kiwisolver-1.4.5-cp311-cp311-win_amd64.whl (56 kB)
+Collecting packaging&gt;=20.0 (from matplotlib-&gt;wordcloud)
+  Using cached packaging-23.1-py3-none-any.whl (48 kB)
+Collecting pyparsing&gt;=2.3.1 (from matplotlib-&gt;wordcloud)
+  Using cached pyparsing-3.1.1-py3-none-any.whl (103 kB)
+Requirement already satisfied: python-dateutil&gt;=2.7 in c:\python311\lib\site-packages (from matplotlib-&gt;wordcloud) (2.8.2)
+Requirement already satisfied: six&gt;=1.5 in c:\python311\lib\site-packages (from python-dateutil&gt;=2.7-&gt;matplotlib-&gt;wordcloud) (1.16.0)
+Installing collected packages: pyparsing, pillow, packaging, kiwisolver, fonttools, cycler, contourpy, matplotlib, wordcloud
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ERROR: Could not install packages due to an OSError: [WinError 5] Access is denied: &#39;C:\\Python311\\share&#39;
+Consider using the `--user` option or check the permissions.
+
+
+[notice] A new release of pip is available: 23.1.2 -&gt; 23.2.1
+[notice] To update, run: python.exe -m pip install --upgrade pip
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: pillow in c:\python311\lib\site-packages (10.0.1)
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[notice] A new release of pip is available: 23.1.2 -&gt; 23.2.1
+[notice] To update, run: python.exe -m pip install --upgrade pip
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="import-libraries">
+<h3>Import Libraries<a class="headerlink" href="#import-libraries" title="Permalink to this headline">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">nltk</span>
+<span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
+<span class="kn">from</span> <span class="nn">keras.models</span> <span class="kn">import</span> <span class="n">Sequential</span>
+<span class="kn">from</span> <span class="nn">keras.layers</span> <span class="kn">import</span> <span class="n">LSTM</span><span class="p">,</span> <span class="n">Dense</span>
+<span class="kn">from</span> <span class="nn">keras.callbacks</span> <span class="kn">import</span> <span class="n">LambdaCallback</span>
+<span class="kn">from</span> <span class="nn">nltk.translate.bleu_score</span> <span class="kn">import</span> <span class="n">sentence_bleu</span><span class="p">,</span> <span class="n">SmoothingFunction</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">squarify</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="hide-unneccessary-warnings">
+<h3>Hide Unneccessary Warnings<a class="headerlink" href="#hide-unneccessary-warnings" title="Permalink to this headline">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="read-files-from-csv">
+<h3>Read Files from CSV<a class="headerlink" href="#read-files-from-csv" title="Permalink to this headline">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Read from CSV</span>
+<span class="n">df_csv</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;./Shakespeare_data.csv&#39;</span><span class="p">)</span>
+
+<span class="c1"># Save to Separate Data Frame</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">df_csv</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="space-and-size">
+<h3>Space and Size<a class="headerlink" href="#space-and-size" title="Permalink to this headline">#</a></h3>
+<p>The space and size for the data frame before preprocesesing is shown below. Output is the memory, column size, and row size.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Function for Checking Memory and Size</span>
+<span class="k">def</span> <span class="nf">MemCheck</span><span class="p">(</span><span class="n">df</span><span class="p">):</span>
+    <span class="c1"># Get Data Frame Space</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">df_mem</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">memory_usage</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+        <span class="n">num_row</span><span class="p">,</span> <span class="n">num_col</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">shape</span>
+        
+    <span class="k">except</span><span class="p">:</span>
+        <span class="n">df_mem</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">memory_usage</span><span class="p">()</span>
+        <span class="n">num_row</span><span class="p">,</span> <span class="n">num_col</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">1</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Memory:&quot;</span><span class="p">,</span> <span class="n">df_mem</span><span class="p">,</span> <span class="s2">&quot;bytes&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Rows:&quot;</span><span class="p">,</span> <span class="n">num_row</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Columns:&quot;</span><span class="p">,</span> <span class="n">num_col</span><span class="p">)</span>
+    
+<span class="n">MemCheck</span><span class="p">(</span><span class="n">df_csv</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Memory: 5347136 bytes
+Rows: 111396
+Columns: 6
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="evaluate-the-data-types-and-column-names">
+<h3>Evaluate the data types and column names.<a class="headerlink" href="#evaluate-the-data-types-and-column-names" title="Permalink to this headline">#</a></h3>
+<p>Below is are the columns and the data types for each. There is an integer (in64), strings (object_), and a float (float64).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>  
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&#39;&quot;</span> <span class="o">+</span> <span class="n">col</span> <span class="o">+</span> <span class="s2">&quot;&#39;: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">dtype</span><span class="p">)))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;Dataline&#39;: &lt;class &#39;numpy.dtype[int64]&#39;&gt;
+&#39;Play&#39;: &lt;class &#39;numpy.dtype[object_]&#39;&gt;
+&#39;PlayerLinenumber&#39;: &lt;class &#39;numpy.dtype[float64]&#39;&gt;
+&#39;ActSceneLine&#39;: &lt;class &#39;numpy.dtype[object_]&#39;&gt;
+&#39;Player&#39;: &lt;class &#39;numpy.dtype[object_]&#39;&gt;
+&#39;PlayerLine&#39;: &lt;class &#39;numpy.dtype[object_]&#39;&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Review</span>
+<span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Dataline</th>
+      <th>Play</th>
+      <th>PlayerLinenumber</th>
+      <th>ActSceneLine</th>
+      <th>Player</th>
+      <th>PlayerLine</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>Henry IV</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>ACT I</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>Henry IV</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>SCENE I. London. The palace.</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>Henry IV</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>Enter KING HENRY, LORD JOHN OF LANCASTER, the ...</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4</td>
+      <td>Henry IV</td>
+      <td>1.0</td>
+      <td>1.1.1</td>
+      <td>KING HENRY IV</td>
+      <td>So shaken as we are, so wan with care,</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5</td>
+      <td>Henry IV</td>
+      <td>1.0</td>
+      <td>1.1.2</td>
+      <td>KING HENRY IV</td>
+      <td>Find we a time for frighted peace to pant,</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</div>
+</div>
+<div class="section" id="data-preprocessing-and-cleaning">
+<h2>Data Preprocessing and Cleaning<a class="headerlink" href="#data-preprocessing-and-cleaning" title="Permalink to this headline">#</a></h2>
+<div class="section" id="removal-of-features">
+<h3>Removal of Features<a class="headerlink" href="#removal-of-features" title="Permalink to this headline">#</a></h3>
+<p>Since the speaking patterns are going to be evaluated in this data set, the ‘PlayerLine’ column is the only one that is going to be extracted.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_sing</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;PlayerLine&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="removal-of-rows-with-na-values">
+<h3>Removal of Rows with NA Values<a class="headerlink" href="#removal-of-rows-with-na-values" title="Permalink to this headline">#</a></h3>
+<p>Since the data frame has a significant amount of rows, any NA rows can be dropped. The before and after processing sizes of the data frame will be checked to confirm that there still is enough data for processing. Since this is a single column evaluated, other NAs from different columns interferring with the code below isn’t an issue.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Remove Rows with NA Values</span>
+<span class="n">df_na</span> <span class="o">=</span> <span class="n">df_sing</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="duplicates">
+<h3>Duplicates<a class="headerlink" href="#duplicates" title="Permalink to this headline">#</a></h3>
+<p>The only time there would be a duplicate is if Shakespeare wrote the same line multiple times or there was an issue with the scraping. Thus, these instances are removed from the data frame.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_unique</span> <span class="o">=</span> <span class="n">df_na</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="id1">
+<h3>Space and Size<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h3>
+<p>The space and size for the data frame before and after preprocessing is shown below.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Before&quot;</span><span class="p">)</span>
+<span class="n">MemCheck</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;After&quot;</span><span class="p">)</span>
+<span class="n">MemCheck</span><span class="p">(</span><span class="n">df_unique</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Before
+Memory: 5347136 bytes
+Rows: 111396
+Columns: 6
+
+After
+Memory: 1721280 bytes
+Rows: 107580
+Columns: 1
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="discussion-and-conclusions">
+<h3>Discussion and Conclusions<a class="headerlink" href="#discussion-and-conclusions" title="Permalink to this headline">#</a></h3>
+<p>The memory is shown to shrink by a significan amount. However, this paper isn’t concerned with this because most of the information lost comes from reducing the column count from six to one. The rows are also removed due to the processing, but there is still more than enough for this study.</p>
+</div>
+</div>
+<div class="section" id="exploratory-data-analysis-eda">
+<h2>Exploratory Data Analysis (EDA)<a class="headerlink" href="#exploratory-data-analysis-eda" title="Permalink to this headline">#</a></h2>
+<div class="section" id="purpose">
+<h3>Purpose<a class="headerlink" href="#purpose" title="Permalink to this headline">#</a></h3>
+<p>Due to the sheer amount of size of the data, EDA was necessary. A histogram of the word count and a tree map to show the words present is created in this section.</p>
+</div>
+<div class="section" id="histogram">
+<h3>Histogram<a class="headerlink" href="#histogram" title="Permalink to this headline">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Function to Generate Word Histogram</span>
+<span class="k">def</span> <span class="nf">gen_gram</span><span class="p">(</span><span class="n">df</span><span class="p">):</span>
+    
+    <span class="c1"># Concatenate all the Text, Split, and Get Words</span>
+    <span class="n">all_text</span> <span class="o">=</span> <span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
+    <span class="n">words</span> <span class="o">=</span> <span class="n">all_text</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+    <span class="n">word_filt</span> <span class="o">=</span> <span class="p">[</span><span class="n">word</span> <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">words</span> <span class="k">if</span> <span class="n">word</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="n">w</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">words_to_remove</span><span class="p">]]</span>
+
+    <span class="c1"># Count Occurance</span>
+    <span class="n">word_cnt</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">word_filt</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">word</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">word_cnt</span><span class="p">:</span>
+            <span class="n">word_cnt</span><span class="p">[</span><span class="n">word</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">word_cnt</span><span class="p">[</span><span class="n">word</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="c1"># Sort Words</span>
+    <span class="n">word_sort</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">word_cnt</span><span class="o">.</span><span class="n">items</span><span class="p">(),</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="c1"># Get Top 50 Words</span>
+    <span class="n">word_top</span> <span class="o">=</span> <span class="n">word_sort</span><span class="p">[:</span><span class="mi">50</span><span class="p">]</span>
+
+    <span class="c1"># Define Lists</span>
+    <span class="n">labels</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">counts</span> <span class="o">=</span> <span class="p">[]</span>
+    
+    <span class="c1"># Get Labels and Count</span>
+    <span class="k">for</span> <span class="n">word</span><span class="p">,</span> <span class="n">count</span> <span class="ow">in</span> <span class="n">word_top</span><span class="p">:</span>
+        <span class="n">labels</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">word</span><span class="p">)</span>
+        <span class="n">counts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">count</span><span class="p">)</span>
+
+    <span class="c1"># Plot the histogram</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">labels</span><span class="p">,</span> <span class="n">counts</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Words&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Counts&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Top 50 Words&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">rotation</span><span class="o">=</span><span class="mi">90</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+    
+    <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([</span><span class="n">labels</span><span class="p">,</span> <span class="n">counts</span><span class="p">])</span>
+
+<span class="n">df_hist</span> <span class="o">=</span> <span class="n">gen_gram</span><span class="p">(</span><span class="n">df_unique</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="o">~</span>\<span class="n">AppData</span>\<span class="n">Local</span>\<span class="n">Temp</span>\<span class="n">ipykernel_15512</span>\<span class="mf">1159385978.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="g g-Whitespace">     </span><span class="mi">42</span>     <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([</span><span class="n">labels</span><span class="p">,</span> <span class="n">counts</span><span class="p">])</span>
+<span class="g g-Whitespace">     </span><span class="mi">43</span> 
+<span class="ne">---&gt; </span><span class="mi">44</span> <span class="n">df_hist</span> <span class="o">=</span> <span class="n">gen_gram</span><span class="p">(</span><span class="n">df_unique</span><span class="p">)</span>
+
+<span class="nn">~\AppData\Local\Temp\ipykernel_15512\1159385978.py</span> in <span class="ni">gen_gram</span><span class="nt">(df)</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span>     <span class="n">all_text</span> <span class="o">=</span> <span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">6</span>     <span class="n">words</span> <span class="o">=</span> <span class="n">all_text</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+<span class="ne">----&gt; </span><span class="mi">7</span>     <span class="n">word_filt</span> <span class="o">=</span> <span class="p">[</span><span class="n">word</span> <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">words</span> <span class="k">if</span> <span class="n">word</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="n">w</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">words_to_remove</span><span class="p">]]</span>
+<span class="g g-Whitespace">      </span><span class="mi">8</span> 
+<span class="g g-Whitespace">      </span><span class="mi">9</span>     <span class="c1"># Count Occurance</span>
+
+<span class="nn">~\AppData\Local\Temp\ipykernel_15512\1159385978.py</span> in <span class="ni">&lt;listcomp&gt;</span><span class="nt">(.0)</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span>     <span class="n">all_text</span> <span class="o">=</span> <span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">6</span>     <span class="n">words</span> <span class="o">=</span> <span class="n">all_text</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+<span class="ne">----&gt; </span><span class="mi">7</span>     <span class="n">word_filt</span> <span class="o">=</span> <span class="p">[</span><span class="n">word</span> <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">words</span> <span class="k">if</span> <span class="n">word</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="n">w</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">words_to_remove</span><span class="p">]]</span>
+<span class="g g-Whitespace">      </span><span class="mi">8</span> 
+<span class="g g-Whitespace">      </span><span class="mi">9</span>     <span class="c1"># Count Occurance</span>
+
+<span class="ne">NameError</span>: name &#39;words_to_remove&#39; is not defined
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="word-count-table">
+<h3>Word Count Table<a class="headerlink" href="#word-count-table" title="Permalink to this headline">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_hist</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>0</th>
+      <th>1</th>
+      <th>2</th>
+      <th>3</th>
+      <th>4</th>
+      <th>5</th>
+      <th>6</th>
+      <th>7</th>
+      <th>8</th>
+      <th>9</th>
+      <th>...</th>
+      <th>40</th>
+      <th>41</th>
+      <th>42</th>
+      <th>43</th>
+      <th>44</th>
+      <th>45</th>
+      <th>46</th>
+      <th>47</th>
+      <th>48</th>
+      <th>49</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>the</td>
+      <td>I</td>
+      <td>and</td>
+      <td>to</td>
+      <td>of</td>
+      <td>a</td>
+      <td>my</td>
+      <td>in</td>
+      <td>you</td>
+      <td>is</td>
+      <td>...</td>
+      <td>we</td>
+      <td>no</td>
+      <td>on</td>
+      <td>from</td>
+      <td>what</td>
+      <td>at</td>
+      <td>But</td>
+      <td>if</td>
+      <td>good</td>
+      <td>would</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>23187</td>
+      <td>18834</td>
+      <td>17597</td>
+      <td>14998</td>
+      <td>14621</td>
+      <td>12021</td>
+      <td>10215</td>
+      <td>9185</td>
+      <td>8798</td>
+      <td>7560</td>
+      <td>...</td>
+      <td>2516</td>
+      <td>2375</td>
+      <td>2326</td>
+      <td>2189</td>
+      <td>2167</td>
+      <td>2151</td>
+      <td>2008</td>
+      <td>1988</td>
+      <td>1962</td>
+      <td>1943</td>
+    </tr>
+  </tbody>
+</table>
+<p>2 rows × 50 columns</p>
+</div></div></div>
+</div>
+</div>
+<div class="section" id="tree-map">
+<h3>Tree Map<a class="headerlink" href="#tree-map" title="Permalink to this headline">#</a></h3>
+<p>Next, is a tree map that is used to give a visualization of the proportions of words to one another.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Function for Tree Map</span>
+<span class="k">def</span> <span class="nf">create_treemap</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">50</span><span class="p">):</span>
+    
+    <span class="c1"># Concatenate and Split Text</span>
+    <span class="n">all_text</span> <span class="o">=</span> <span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
+    <span class="n">words</span> <span class="o">=</span> <span class="n">all_text</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+
+    <span class="c1"># Count Words</span>
+    <span class="n">word_counts</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">words</span><span class="p">)</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
+
+    <span class="c1"># Select Top Words</span>
+    <span class="n">top_words</span> <span class="o">=</span> <span class="n">word_counts</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+
+    <span class="c1"># Normalize</span>
+    <span class="n">norm_counts</span> <span class="o">=</span> <span class="n">top_words</span> <span class="o">/</span> <span class="n">top_words</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+
+    <span class="c1"># Create labels for the treemap</span>
+    <span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">word</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="n">count</span><span class="si">}</span><span class="s2">)&quot;</span> <span class="k">for</span> <span class="n">word</span><span class="p">,</span> <span class="n">count</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">top_words</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">top_words</span><span class="o">.</span><span class="n">values</span><span class="p">)]</span>
+
+    <span class="c1"># Generate the treemap</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+    <span class="n">squarify</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">sizes</span><span class="o">=</span><span class="n">norm_counts</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">labels</span><span class="p">,</span> <span class="n">text_kwargs</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;fontsize&#39;</span><span class="p">:</span> <span class="mi">10</span><span class="p">})</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Top 50 Words Treemap&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="c1"># Create Tree Map</span>
+<span class="n">create_treemap</span><span class="p">(</span><span class="n">df_unique</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../_images/6986e730fc9c8ccb8f7144fa0141a953e3b00eb6e2be1e9d3569c945a4ecec49.png" src="../../../_images/6986e730fc9c8ccb8f7144fa0141a953e3b00eb6e2be1e9d3569c945a4ecec49.png" />
+</div>
+</div>
+<p>The most common words are stop words which do not contribute to the sentiment of the text.</p>
+</div>
+<div class="section" id="difficulties">
+<h3>Difficulties<a class="headerlink" href="#difficulties" title="Permalink to this headline">#</a></h3>
+<p>There is an issue with articles, pronouns, and conjunctions being a large part of the data set. This is a natural byproduct of the English language. With more preprocessing and a dictionary of these common filler words, the terms can be removed for a more accurate visualization of word counts specific to the Shakespeare lexicon.|</p>
+</div>
+<div class="section" id="summary-discussion-and-findings">
+<h3>Summary, Discussion, and Findings<a class="headerlink" href="#summary-discussion-and-findings" title="Permalink to this headline">#</a></h3>
+<p>Surprisingly, but with hindesight not completely unexpected, the terms that are dominating the word count and tree map are those that are common to the English language. What might be of slight interest is that the term “I” is the second most common placing an importance on the speaker in Shakespearian writing.</p>
+</div>
+<div class="section" id="conclusions">
+<h3>Conclusions<a class="headerlink" href="#conclusions" title="Permalink to this headline">#</a></h3>
+<p>In future work, a library which has the most common artifacts of the English language which do not help with finding the specifics of a speaker’s language, should be utilized to remove these terms for a more accurate representation of the text’s lexicon.</p>
+</div>
+</div>
+<div class="section" id="results">
+<h2>Results<a class="headerlink" href="#results" title="Permalink to this headline">#</a></h2>
+<div class="section" id="id2">
+<h3>Summary<a class="headerlink" href="#id2" title="Permalink to this headline">#</a></h3>
+<p>The following is the RNN with the sample text and evaluation metrics as output. The RNN first converts the characters to integers and vice-versa to map these to mathematical values the layers can process. Next, the input values are cut into sequences that run through the neural net. The RNN is composed of a LSTM model, ReLU dense layer, and a softmax layer. The layer is compiled and ran through multiple hyperparameters such as the epochs and temperature values to produce text and find optimal values. The output text is evaluated through the BLEU and diversity metric. RNN are known for having a specialty in analyzing text being sequential, able to have long-term dependencies, and able to infer information based on values surrounding others. That is why this model was chosen compared to a GAN or CNN. When it comes to model specifics, the values were fine-tuned to input the first 100 lines from the Shakespeare CSV file. Any longer and the code would take too long to run. The batch size was ran and determined to be a multiple of 5 times 128. Originally, this number was 128 and was also changed to have the model produce an output within a reasonable amount of time.</p>
+</div>
+<div class="section" id="model">
+<h3>Model<a class="headerlink" href="#model" title="Permalink to this headline">#</a></h3>
+<p>Below is the code to create the model with comments stating what each text block does.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Declare Training Data Parameters</span>
+<span class="n">seq_len</span> <span class="o">=</span> <span class="mi">40</span>
+<span class="n">data_X</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">data_y</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="c1"># Load and preprocess the text data</span>
+<span class="n">df_RNN</span> <span class="o">=</span> <span class="n">df_unique</span><span class="p">[:</span><span class="mi">100</span><span class="p">]</span>
+<span class="n">text</span> <span class="o">=</span> <span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">df_RNN</span><span class="o">.</span><span class="n">values</span><span class="p">)</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>  
+
+<span class="c1"># Create Vocab</span>
+<span class="n">chars</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">text</span><span class="p">)))</span>
+<span class="n">num_chars</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">chars</span><span class="p">)</span>
+
+<span class="c1"># Map Char to Int and Int to Char</span>
+<span class="n">char_to_int</span> <span class="o">=</span> <span class="p">{</span><span class="n">char</span><span class="p">:</span> <span class="n">c1</span> <span class="k">for</span> <span class="n">c1</span><span class="p">,</span> <span class="n">char</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">chars</span><span class="p">)}</span>
+<span class="n">int_to_char</span> <span class="o">=</span> <span class="p">{</span><span class="n">c1</span><span class="p">:</span> <span class="n">char</span> <span class="k">for</span> <span class="n">c1</span><span class="p">,</span> <span class="n">char</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">chars</span><span class="p">)}</span>
+
+<span class="c1"># Get Sequence for X and Y</span>
+<span class="k">for</span> <span class="n">c1</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">text</span><span class="p">)</span> <span class="o">-</span> <span class="n">seq_len</span><span class="p">):</span>
+    <span class="n">seq_in</span> <span class="o">=</span> <span class="n">text</span><span class="p">[</span><span class="n">c1</span><span class="p">:</span><span class="n">c1</span> <span class="o">+</span> <span class="n">seq_len</span><span class="p">]</span>
+    <span class="n">seq_out</span> <span class="o">=</span> <span class="n">text</span><span class="p">[</span><span class="n">c1</span> <span class="o">+</span> <span class="n">seq_len</span><span class="p">]</span>
+    <span class="n">data_X</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">char_to_int</span><span class="p">[</span><span class="n">char</span><span class="p">]</span> <span class="k">for</span> <span class="n">char</span> <span class="ow">in</span> <span class="n">seq_in</span><span class="p">])</span>
+    <span class="n">data_y</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">char_to_int</span><span class="p">[</span><span class="n">seq_out</span><span class="p">])</span>
+
+<span class="c1"># Normalize and One-hot encode</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">data_X</span><span class="p">,</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">data_X</span><span class="p">),</span> <span class="n">seq_len</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">X</span> <span class="o">/</span> <span class="nb">float</span><span class="p">(</span><span class="n">num_chars</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">num_chars</span><span class="p">)[</span><span class="n">data_y</span><span class="p">]</span>
+
+<span class="c1"># Build RNN model with Multiple Layers</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">Sequential</span><span class="p">([</span>
+    <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">LSTM</span><span class="p">(</span><span class="mi">256</span><span class="p">,</span> <span class="n">input_shape</span><span class="o">=</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">2</span><span class="p">])),</span>
+    <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Dense</span><span class="p">(</span><span class="mi">128</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;relu&#39;</span><span class="p">),</span>
+    <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Dense</span><span class="p">(</span><span class="n">num_chars</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;softmax&#39;</span><span class="p">)</span>
+<span class="p">])</span>
+
+<span class="c1"># Compile the Model, loss Selected Based On Single Class and Optimizer Because Text Input</span>
+<span class="n">model</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">loss</span><span class="o">=</span><span class="s1">&#39;categorical_crossentropy&#39;</span><span class="p">,</span> <span class="n">optimizer</span><span class="o">=</span><span class="s1">&#39;adam&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Next is the function that is used to generate text from the model as well as calculate diversity metrics and the BLEU score.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Function for Text Generation</span>
+<span class="k">def</span> <span class="nf">generate_text</span><span class="p">(</span><span class="n">epoch</span><span class="p">,</span> <span class="n">temp</span><span class="p">):</span>
+    
+    <span class="c1"># Function to Get Next Character</span>
+    <span class="k">def</span> <span class="nf">next_char_func</span><span class="p">(</span><span class="n">pred</span><span class="p">,</span> <span class="n">temp</span><span class="p">):</span>
+        <span class="n">pred</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">pred</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;float64&#39;</span><span class="p">)</span>
+        <span class="n">pred</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">pred</span><span class="p">)</span> <span class="o">/</span> <span class="n">temp</span>
+        <span class="n">exp_preds</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">pred</span><span class="p">)</span>
+        <span class="n">pred</span> <span class="o">=</span> <span class="n">exp_preds</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">exp_preds</span><span class="p">)</span>
+        <span class="n">prob</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">multinomial</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">pred</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">prob</span><span class="p">)</span>
+
+    <span class="c1"># Generate Characters</span>
+    <span class="k">if</span> <span class="n">epoch</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">start_index</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">data_X</span><span class="p">)</span> <span class="o">-</span> <span class="n">seq_len</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">text_gen</span> <span class="o">=</span> <span class="n">text</span><span class="p">[</span><span class="n">start_index</span><span class="p">:</span><span class="n">start_index</span> <span class="o">+</span> <span class="n">seq_len</span><span class="p">]</span>
+        <span class="n">text_out</span> <span class="o">=</span> <span class="n">text_gen</span>
+
+        <span class="c1"># Create Characters</span>
+        <span class="k">for</span> <span class="n">c1</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">40</span><span class="p">):</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">([</span><span class="n">char_to_int</span><span class="p">[</span><span class="n">char</span><span class="p">]</span> <span class="k">for</span> <span class="n">char</span> <span class="ow">in</span> <span class="n">text_gen</span><span class="p">],</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">seq_len</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="n">x</span> <span class="o">/</span> <span class="nb">float</span><span class="p">(</span><span class="n">num_chars</span><span class="p">)</span>
+            <span class="n">pred</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">0</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">next_index</span> <span class="o">=</span> <span class="n">next_char_func</span><span class="p">(</span><span class="n">pred</span><span class="p">,</span> <span class="n">temp</span><span class="p">)</span>
+            <span class="n">next_char</span> <span class="o">=</span> <span class="n">int_to_char</span><span class="p">[</span><span class="n">next_index</span><span class="p">]</span>
+            <span class="n">text_out</span> <span class="o">+=</span> <span class="n">next_char</span>
+            <span class="n">text_gen</span> <span class="o">=</span> <span class="n">text_gen</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span> <span class="o">+</span> <span class="n">next_char</span>
+            
+        <span class="nb">print</span><span class="p">()</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">text_out</span><span class="p">)</span>
+
+        <span class="c1"># Get Diversity Metrics Function</span>
+        <span class="k">def</span> <span class="nf">div_met</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
+            <span class="n">tkns</span> <span class="o">=</span> <span class="n">nltk</span><span class="o">.</span><span class="n">word_tokenize</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+            <span class="n">tkns_cnt</span> <span class="o">=</span> <span class="n">nltk</span><span class="o">.</span><span class="n">FreqDist</span><span class="p">(</span><span class="n">tkns</span><span class="p">)</span>
+            <span class="n">total_count</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">tkns</span><span class="p">)</span>
+            <span class="n">prob</span> <span class="o">=</span> <span class="p">[</span><span class="n">count</span> <span class="o">/</span> <span class="n">total_count</span> <span class="k">for</span> <span class="n">count</span> <span class="ow">in</span> <span class="n">tkns_cnt</span><span class="o">.</span><span class="n">values</span><span class="p">()]</span>
+            <span class="n">entropy</span> <span class="o">=</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">([</span><span class="n">p</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log2</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">prob</span><span class="p">])</span>
+            <span class="n">diversity_metric</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="n">entropy</span> <span class="o">+</span> <span class="mf">1e-7</span><span class="p">)</span>  
+            <span class="k">return</span> <span class="n">diversity_metric</span>
+
+        <span class="c1"># Calculate BLEU score</span>
+        <span class="n">ref</span> <span class="o">=</span> <span class="p">[</span><span class="n">text_gen</span><span class="o">.</span><span class="n">split</span><span class="p">()]</span>  
+        <span class="n">cand</span> <span class="o">=</span> <span class="n">text_out</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>  
+        <span class="n">bleu_score</span> <span class="o">=</span> <span class="n">sentence_bleu</span><span class="p">(</span><span class="n">ref</span><span class="p">,</span> <span class="n">cand</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;BLEU score:&quot;</span><span class="p">,</span> <span class="n">bleu_score</span><span class="p">)</span>
+
+        <span class="c1"># Calculate diversity metric</span>
+        <span class="n">diversity</span> <span class="o">=</span> <span class="n">div_met</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">cand</span><span class="p">))</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Diversity metric:&quot;</span><span class="p">,</span> <span class="n">diversity</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Finally, here is where the code generates an ouput using temperature as an adjustable input.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">temp</span> <span class="ow">in</span> <span class="p">[</span><span class="mf">0.5</span><span class="p">,</span> <span class="mi">1</span><span class="p">]:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Temperature Value:&quot;</span><span class="p">,</span> <span class="n">temp</span><span class="p">)</span>
+    <span class="n">text_generation_callback</span> <span class="o">=</span> <span class="n">LambdaCallback</span><span class="p">(</span><span class="n">on_epoch_end</span><span class="o">=</span><span class="k">lambda</span> <span class="n">epoch</span><span class="p">,</span> <span class="n">logs</span><span class="p">:</span> <span class="n">generate_text</span><span class="p">(</span><span class="n">epoch</span><span class="p">,</span> <span class="n">temp</span><span class="p">))</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">epochs</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">128</span><span class="o">*</span><span class="mi">5</span><span class="p">,</span> <span class="n">callbacks</span><span class="o">=</span><span class="p">[</span><span class="n">text_generation_callback</span><span class="p">])</span>
+    <span class="nb">print</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Temperature Value: 0.5
+Epoch 1/10
+7/7 [==============================] - ETA: 0s - loss: 3.4251
+, and breathe short-winded accents of ne   s      n wn   n n  :  est    h    :qi
+BLEU score: 0.5129497107827519
+Diversity metric: 0.2709941456137781
+7/7 [==============================] - 24s 3s/step - loss: 3.4251
+Epoch 2/10
+7/7 [==============================] - 14s 2s/step - loss: 3.0931
+Epoch 3/10
+7/7 [==============================] - ETA: 0s - loss: 2.9912
+ld, that ever-valiant and approved scot, t e   ie  t  rehrn nrslndell  i  lee t 
+BLEU score: 0.5512003357447272
+Diversity metric: 0.2709941456137781
+7/7 [==============================] - 19s 3s/step - loss: 2.9912
+Epoch 4/10
+7/7 [==============================] - 14s 2s/step - loss: 2.9477
+Epoch 5/10
+7/7 [==============================] - ETA: 0s - loss: 2.9280
+ in cradle-clothes our children where th t t  e   llia esteenrdhe   emn ef  e e 
+BLEU score: 0.5512003357447272
+Diversity metric: 0.28930456678411803
+7/7 [==============================] - 18s 3s/step - loss: 2.9280
+Epoch 6/10
+7/7 [==============================] - 13s 2s/step - loss: 2.9210
+Epoch 7/10
+7/7 [==============================] - ETA: 0s - loss: 2.9196
+like the meteors of a troubled heaven, ae h  a  ndter weo       tr i  eoeu on i 
+BLEU score: 0.479676449968321
+Diversity metric: 0.2533118703699303
+7/7 [==============================] - 17s 2s/step - loss: 2.9196
+Epoch 8/10
+7/7 [==============================] - 14s 2s/step - loss: 2.9177
+Epoch 9/10
+7/7 [==============================] - ETA: 0s - loss: 2.9178
+est a son, a son who is the theme of honifnseeeee h ment ei esc   oonol oe ls  r
+BLEU score: 0.3665882729601239
+Diversity metric: 0.2426049054518589
+7/7 [==============================] - 17s 3s/step - loss: 2.9178
+Epoch 10/10
+7/7 [==============================] - 13s 2s/step - loss: 2.9154
+
+Temperature Value: 1
+Epoch 1/10
+7/7 [==============================] - ETA: 0s - loss: 2.9167
+ is sweet fortune&#39;s minion and her prides&#39;&#39; tntdhfpaosco e ,r dheerl terorhn ler
+BLEU score: 0.3805803001674946
+Diversity metric: 0.24999999375000015
+7/7 [==============================] - 17s 3s/step - loss: 2.9167
+Epoch 2/10
+7/7 [==============================] - 13s 2s/step - loss: 2.9163
+Epoch 3/10
+7/7 [==============================] - ETA: 0s - loss: 2.9140
+ makest me sad and makest me sin in envyln dnatnahs e dlno nhcedhriinig   td o  
+BLEU score: 0.3237722713145643
+Diversity metric: 0.27470836741075033
+7/7 [==============================] - 17s 3s/step - loss: 2.9140
+Epoch 4/10
+7/7 [==============================] - 14s 2s/step - loss: 2.9136
+Epoch 5/10
+7/7 [==============================] - ETA: 0s - loss: 2.9164
+ for he that brought them, in the very ho eao,bt  gklf   utlnoamits f n    feil 
+BLEU score: 0.3237722713145643
+Diversity metric: 0.24637739063238012
+7/7 [==============================] - 17s 2s/step - loss: 2.9164
+Epoch 6/10
+7/7 [==============================] - 13s 2s/step - loss: 2.9144
+Epoch 7/10
+7/7 [==============================] - ETA: 0s - loss: 2.9124
+ gentle cousin westmoreland, what yesterloeai eeu h  s , o tronshieehf hdbhfoea 
+BLEU score: 0.5156626918239822
+Diversity metric: 0.281960690920819
+7/7 [==============================] - 15s 2s/step - loss: 2.9124
+Epoch 8/10
+7/7 [==============================] - 13s 2s/step - loss: 2.9145
+Epoch 9/10
+7/7 [==============================] - ETA: 0s - loss: 2.9126
+oody hour, as by discharge of their arti  yyhshitydn etas wfgtlool iie ae ieob w
+BLEU score: 0.40016016019225
+Diversity metric: 0.24999999375000015
+7/7 [==============================] - 17s 2s/step - loss: 2.9126
+Epoch 10/10
+7/7 [==============================] - 14s 2s/step - loss: 2.9116
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="id3">
+<h3>Summary<a class="headerlink" href="#id3" title="Permalink to this headline">#</a></h3>
+<p>The model is able to produce text that isn’t as coherent as regular text. There are several reasons why this might be: the data might be cluttered due to the prevalance of the articles, conjunctions, pronouns, and other artifacts that are signature of the English language, more layers need to be added, a higher epoch number, smaller batch size, or a different model should be used. There are multiple areas that can be fine-tuned when it comes to producing a more high quality Shakespeare text generator.</p>
+</div>
+<div class="section" id="evaluation-metrics">
+<h3>Evaluation Metrics<a class="headerlink" href="#evaluation-metrics" title="Permalink to this headline">#</a></h3>
+<p>With more epocs, the BLEU score slightly rises which means that the generated text is looks more human. The BLEU score is also higher when the temperature is set at 0.5. As for the diversity metric, this remains the same with each evaluation regardless of the number of epochs or temperature. These are both areas of improvement that is addressed in the Future Improvement Opportunities Section.</p>
+</div>
+<div class="section" id="model-comparison">
+<h3>Model Comparison<a class="headerlink" href="#model-comparison" title="Permalink to this headline">#</a></h3>
+<p>Since the BLEAU score seemed to max out at approximately 0.50, this meant that more epochs weren’t necessary. Thus, the model could be stopped around approximately 5 epochs in this case. As for the diversity metric, the epoch value was found to have no effect. When it comes to temperature, a lower value was shown to have a higher BLEU score. This means that the temperature should be 0.5 or perhaps lower.</p>
+</div>
+</div>
+<div class="section" id="discussion-and-conclusion">
+<h2>Discussion and Conclusion<a class="headerlink" href="#discussion-and-conclusion" title="Permalink to this headline">#</a></h2>
+<div class="section" id="lessons-learned">
+<h3>Lessons Learned<a class="headerlink" href="#lessons-learned" title="Permalink to this headline">#</a></h3>
+<p>The data set was also not resized earlier and having problems running through the RNN which took a large amount of time to rectify. Thus, dimensions would be evaluated and fine-tuned before the rest of the model. Before breaking up the code into multiple functions, the RNN was in an entire block which made debugging difficult. Thus, if this project were done again, sectioning the code would be implemented first. Before settling on Shakespeare, images of Pokemon were consulted as a part of a CNN. This was deemed to be too complicated  and thus text was settled on.</p>
+</div>
+<div class="section" id="mistakes">
+<h3>Mistakes<a class="headerlink" href="#mistakes" title="Permalink to this headline">#</a></h3>
+<p>The epochs, batch size, and training set were originally set to time-consuming values and the model had trouble compiling within an adequate time frame.</p>
+</div>
+<div class="section" id="future-improvement-opportunities">
+<h3>Future Improvement Opportunities<a class="headerlink" href="#future-improvement-opportunities" title="Permalink to this headline">#</a></h3>
+<p>With more devices or computers available, a smaller batch size, larger epoch count, more layers, and more of the data frame (instead of the first 100 rows) could be used to evaluate the model. There would also be an opportunity to test the addition of more intermediate layers to the model and with more hyperparameters.</p>
+</div>
+</div>
+<div class="section" id="apa-citations">
+<h2>APA Citations<a class="headerlink" href="#apa-citations" title="Permalink to this headline">#</a></h2>
+<p>[1] Larsen, Liam. (2017 June 22). Shakespeare Plays. Kaggle. <a class="reference external" href="https://www.kaggle.com/datasets/kingburrito666/shakespeare-plays">https://www.kaggle.com/datasets/kingburrito666/shakespeare-plays</a></p>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./Notebooks\DTSA5511\Shakespeare"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../Monet/Monet.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">DTSA 5511: GANs for Monet Paintings</p>
+      </div>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction-to-deep-learning">Introduction to Deep Learning</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#topic">Topic</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data">Data</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#install-packages">Install Packages</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#import-libraries">Import Libraries</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hide-unneccessary-warnings">Hide Unneccessary Warnings</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#read-files-from-csv">Read Files from CSV</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#space-and-size">Space and Size</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluate-the-data-types-and-column-names">Evaluate the data types and column names.</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-preprocessing-and-cleaning">Data Preprocessing and Cleaning</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#removal-of-features">Removal of Features</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#removal-of-rows-with-na-values">Removal of Rows with NA Values</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#duplicates">Duplicates</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Space and Size</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#discussion-and-conclusions">Discussion and Conclusions</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exploratory-data-analysis-eda">Exploratory Data Analysis (EDA)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#purpose">Purpose</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#histogram">Histogram</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#word-count-table">Word Count Table</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tree-map">Tree Map</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#difficulties">Difficulties</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary-discussion-and-findings">Summary, Discussion, and Findings</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusions">Conclusions</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#results">Results</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Summary</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#model">Model</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Summary</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluation-metrics">Evaluation Metrics</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#model-comparison">Model Comparison</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#discussion-and-conclusion">Discussion and Conclusion</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#lessons-learned">Lessons Learned</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mistakes">Mistakes</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#future-improvement-opportunities">Future Improvement Opportunities</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#apa-citations">APA Citations</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Stacie Herda
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
